@@ -1,0 +1,84 @@
+/* Styles for every page. Everything else is Tailwind classes in the markup (theme in /js/tailwind.config.js). */
+
+/* Palette (light theme):
+   1 white   #ffffff  page background, cards
+   2 navy    #14213d  headings, text, buttons, dark sections (the colour of an executive uniform)
+   3 lemon   #f4d35e  accent: highlights, badges, the quote-list counter, hover underline
+   4 cream   #faf7ee  soft sections
+   5 slate   #5d6880  secondary text
+   Fonts: DM Serif Display (headings) · DM Sans (text) */
+:root {
+    --white: #ffffff;
+    --navy: #14213d;
+    --navy-700: #22325a;
+    --lemon: #f4d35e;
+    --lemon-50: #fffbea;
+    --cream: #faf7ee;
+    --slate: #5d6880;
+    --line: #e4e6ec;
+    color-scheme: light;
+}
+
+html { background-color: var(--white); scroll-behavior: smooth; }
+
+body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background-color: var(--white);
+    color: var(--navy);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .font-display { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
+
+::selection { background: var(--lemon); color: var(--navy); }
+:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+
+.kicker { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
+
+/* Lemon underline highlight for a word inside a heading */
+.mark { background: linear-gradient(transparent 62%, var(--lemon) 62%, var(--lemon) 92%, transparent 92%); padding: 0 .08em; }
+
+.btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+    padding: .9rem 1.6rem; border-radius: .5rem;
+    font-size: .9rem; font-weight: 600;
+    transition: background-color .2s, color .2s, border-color .2s, box-shadow .2s;
+    cursor: pointer;
+}
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn-navy { background: var(--navy); color: var(--white); border: 1px solid var(--navy); }
+.btn-navy:hover:not(:disabled) { background: var(--navy-700); }
+.btn-lemon { background: var(--lemon); color: var(--navy); border: 1px solid var(--lemon); }
+.btn-lemon:hover:not(:disabled) { box-shadow: 0 6px 18px -8px rgba(201, 167, 42, .8); }
+.btn-line { background: transparent; color: var(--navy); border: 1px solid var(--navy); }
+.btn-line:hover:not(:disabled) { background: var(--navy); color: var(--white); }
+
+.field {
+    width: 100%; background: var(--white);
+    border: 1px solid var(--line); border-radius: .5rem;
+    padding: .75rem .9rem; font-size: .95rem; color: var(--navy);
+}
+.field:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(244, 211, 94, .55); }
+
+/* Fine pinstripe (suit fabric) for dark sections */
+.pinstripe {
+    background-color: var(--navy);
+    background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0 1px, transparent 1px 14px);
+}
+
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.is-in { opacity: 1; transform: none; }
+
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes rise-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.animate-fade-in { animation: fade-in .3s ease both; }
+.animate-rise-in { animation: rise-in .45s ease both; }
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    .reveal { opacity: 1; transform: none; }
+}

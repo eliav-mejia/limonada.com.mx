@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empresa · Limonada uniformes ejecutivos</title>
+    <meta name="description" content="Desde 1997 diseñamos y confeccionamos uniformes ejecutivos. Telas, garantía de 1 año o 70 lavadas, guía de tallas y medición.">
+    <link rel="canonical" href="https://limonada.com.mx/pages/empresa/">
+    <meta property="og:title" content="Empresa · Limonada uniformes ejecutivos">
+    <meta property="og:description" content="Desde 1997 diseñamos y confeccionamos uniformes ejecutivos. Telas, garantía de 1 año o 70 lavadas, guía de tallas y medición.">
+    <meta property="og:url" content="https://limonada.com.mx/pages/empresa/">
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#14213d">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/tailwind.config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel" src="/js/layout.jsx"></script>
+    <script type="text/babel" src="/js/catalogo.jsx"></script>
+    <script type="text/babel">
+        const MILESTONES = [
+            { year: '1997', text: 'Nace Limonada como taller de uniformes ejecutivos para empresas.' },
+            { year: '[año]', text: '[Hito: primera red de distribuidores]' },
+            { year: '[año]', text: '[Hito: nueva línea o certificación]' },
+            { year: '2026', text: 'Catálogo en línea y solicitud de cotización digital.' },
+        ];
+
+        // How to measure. Values in the size table are orientative until the client sends its official pattern chart.
+        const HOW_TO_MEASURE = [
+            { part: 'Pecho / busto', how: 'Alrededor de la parte más amplia, con la cinta horizontal y los brazos relajados.' },
+            { part: 'Cintura', how: 'En la parte más estrecha del torso, sin apretar.' },
+            { part: 'Cadera', how: 'Alrededor de la parte más amplia, con los pies juntos.' },
+            { part: 'Largo de manga', how: 'Del hueso del hombro a la muñeca, con el brazo ligeramente doblado.' },
+            { part: 'Largo de pantalón', how: 'Por el costado, de la cintura al piso, con el calzado que usará.' },
+        ];
+        const SIZE_TABLE = {
+            dama: { head: ['Talla', 'Busto', 'Cintura', 'Cadera'], rows: [['5', 86, 68, 92], ['7', 90, 72, 96], ['9', 94, 76, 100], ['11', 98, 80, 104], ['13', 103, 85, 109], ['15', 108, 90, 114]] },
+            caballero: { head: ['Talla', 'Pecho', 'Cintura', 'Cadera'], rows: [['36', 92, 78, 94], ['38', 97, 83, 99], ['40', 102, 88, 104], ['42', 107, 93, 109], ['44', 112, 98, 114], ['46', 117, 103, 119]] },
+        };
+
+        const CompanyPage = () => {
+            const catalog = useCatalog();
+            const [tab, setTab] = useState('dama');
+            useEffect(() => { if (catalog.status === 'ready' && location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView(); }, [catalog.status]);
+            const table = SIZE_TABLE[tab];
+
+            return (
+                <>
+                    <PageHero kicker={`Desde ${BRAND.since}`} title="Vestimos equipos que" mark="representan a su empresa"
+                        intro="Diseñamos con tendencias actuales, elegimos telas de calidad y reforzamos cada prenda en los puntos de mayor uso. Así un uniforme dura cinco años de trabajo diario." />
+
+                    <section className="max-w-6xl mx-auto px-4 md:px-8 py-16 grid md:grid-cols-2 gap-12">
+                        <div className="reveal">
+                            <h2 className="text-4xl">Nuestra historia</h2>
+                            <p className="text-navy-500 mt-4 leading-relaxed">[Texto de historia por confirmar con el cliente.] Empezamos en {BRAND.since} con una idea sencilla: que un uniforme sea tan cómodo y duradero como elegante. Hoy vestimos a equipos de todo México a través de nuestra red de distribuidores.</p>
+                        </div>
+                        <ol className="reveal border-l-2 border-lemon-400 pl-6 space-y-6">
+                            {MILESTONES.map((m, i) => <li key={i}><p className="font-display text-2xl">{m.year}</p><p className="text-navy-500">{m.text}</p></li>)}
+                        </ol>
+                    </section>
+
+                    <section id="telas" className="bg-cream py-16 scroll-mt-24">
+                        <div className="max-w-6xl mx-auto px-4 md:px-8">
+                            <SectionTitle kicker="Telas de calidad" mark="cada jornada">Elegidas para</SectionTitle>
+                            <div className="grid md:grid-cols-2 gap-5">
+                                {catalog.fabrics.map(f => (
+                                    <article key={f.id} className="reveal bg-white rounded-xl p-6">
+                                        <div className="flex justify-between gap-4"><h3 className="text-2xl">{f.name}</h3><span className="text-sm text-navy-400">{f.weight}</span></div>
+                                        <p className="text-sm text-navy-500 mt-1">{f.composition}</p>
+                                        <p className="mt-3">{f.feel}</p>
+                                        <p className="text-sm text-navy-400 mt-2">{f.care}</p>
+                                        <div className="flex gap-2 mt-4">{f.colors.map(c => <span key={c.id} title={c.name} className="w-6 h-6 rounded-full border border-navy-line" style={{ background: c.hex }} />)}</div>
+                                    </article>
+                                ))}
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="garantia" className="max-w-6xl mx-auto px-4 md:px-8 py-16 scroll-mt-24">
+                        <div className="reveal rounded-2xl pinstripe text-white p-10 md:p-14 grid md:grid-cols-3 gap-8 items-center">
+                            <p className="font-display text-7xl text-lemon-300">1 año<span className="block text-3xl text-white mt-2">o 70 lavadas</span></p>
+                            <div className="md:col-span-2">
+                                <h2 className="text-3xl">Garantía Limonada</h2>
+                                <p className="text-white/75 mt-3">Cubre costuras, cierres, botones y defectos de tela durante un año o 70 lavadas en casa, lo que ocurra primero, siguiendo las indicaciones de cada tela. <a href="/pages/terminos/#garantia" className="underline">Condiciones</a></p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="tallas" className="max-w-6xl mx-auto px-4 md:px-8 py-16 scroll-mt-24">
+                        <SectionTitle kicker="Tallas y medición" mark="primera vez">Que le quede bien a la</SectionTitle>
+                        <div className="grid md:grid-cols-2 gap-12">
+                            <div>
+                                <h3 className="text-2xl mb-4">Cómo medir</h3>
+                                <ol className="space-y-4">{HOW_TO_MEASURE.map((m, i) => (
+                                    <li key={m.part} className="flex gap-4"><span className="w-8 h-8 shrink-0 rounded-full bg-lemon-400 flex items-center justify-center font-medium">{i + 1}</span>
+                                        <div><p className="font-medium">{m.part}</p><p className="text-sm text-navy-500">{m.how}</p></div></li>
+                                ))}</ol>
+                                <p className="text-sm text-navy-500 mt-6">Para pedidos de más de [20] colaboradores, un asesor mide a tu equipo en tus oficinas sin costo. <a href="/pages/cotizacion/" className="underline">Solicítalo en tu cotización</a>.</p>
+                            </div>
+                            <div>
+                                <div className="flex gap-2 mb-4" role="tablist">
+                                    {['dama', 'caballero'].map(t => <button key={t} role="tab" aria-selected={tab === t} onClick={() => setTab(t)} className={`px-4 py-2 rounded-full text-sm border ${tab === t ? 'bg-navy text-white border-navy' : 'border-navy-line'}`}>{t === 'dama' ? 'Dama' : 'Caballero'}</button>)}
+                                </div>
+                                <table className="w-full text-sm">
+                                    <thead><tr className="border-b-2 border-navy">{table.head.map(h => <th key={h} className="text-left py-2 font-medium">{h}{h !== 'Talla' && ' (cm)'}</th>)}</tr></thead>
+                                    <tbody>{table.rows.map(r => <tr key={r[0]} className="border-b border-navy-line">{r.map((c, i) => <td key={i} className={`py-2 ${i === 0 ? 'font-medium' : 'text-navy-500'}`}>{c}</td>)}</tr>)}</tbody>
+                                </table>
+                                <p className="text-xs text-navy-400 mt-3">Tabla orientativa. [Sustituir por la tabla oficial de patronaje.]</p>
+                            </div>
+                        </div>
+                    </section>
+                </>
+            );
+        };
+
+        renderPage(CompanyPage);
+    </script>
+</body>
+</html>

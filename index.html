@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limonada · Uniformes ejecutivos para empresas desde 1997</title>
+    <meta name="description" content="Uniformes ejecutivos y empresariales para dama y caballero, a la medida, reforzados para 5 años de uso diario. Garantía de 1 año o 70 lavadas. Distribuidores en todo México.">
+    <link rel="canonical" href="https://limonada.com.mx/">
+    <meta property="og:title" content="Limonada · Uniformes ejecutivos para empresas desde 1997">
+    <meta property="og:description" content="Uniformes ejecutivos y empresariales para dama y caballero, a la medida, reforzados para 5 años de uso diario. Garantía de 1 año o 70 lavadas. Distribuidores en todo México.">
+    <meta property="og:url" content="https://limonada.com.mx/">
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#14213d">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/tailwind.config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel" src="/js/layout.jsx"></script>
+    <script type="text/babel" src="/js/catalogo.jsx"></script>
+    <script type="text/babel">
+        const DIFFERENTIATORS = [
+            { n: '5', unit: 'años', title: 'Hechos para durar', text: 'Refuerzos en hombro, sisa y entrepierna para resistir el trabajo diario durante cinco años.' },
+            { n: '70', unit: 'lavadas', title: 'Garantía real', text: 'Un año o 70 lavadas en casa, siguiendo las indicaciones de cada tela.' },
+            { n: '1:1', unit: 'medición', title: 'A la medida', text: 'Medimos a cada colaborador en tu empresa o por videollamada para que cada prenda le quede bien.' },
+            { n: '1997', unit: 'desde', title: 'Experiencia', text: 'Casi tres décadas vistiendo equipos de banca, hotelería, salud, educación y corporativos.' },
+        ];
+
+        const STEPS = [
+            { n: '01', title: 'Elige', text: 'Arma tu lista de cotización con prendas, telas y colores.' },
+            { n: '02', title: 'Cotiza', text: 'Te enviamos precio por volumen, bordado de logotipo y tiempos en 24 h hábiles.' },
+            { n: '03', title: 'Medimos', text: 'Tomamos medidas a tu equipo en sitio o con nuestra guía de medición.' },
+            { n: '04', title: 'Entregamos', text: 'Confección y entrega por colaborador, etiquetada con su nombre.' },
+        ];
+
+        const SECTORS = ['Banca y finanzas', 'Hotelería', 'Salud', 'Educación', 'Corporativos', 'Gobierno', 'Aerolíneas y turismo', 'Retail'];
+
+        const Hero = () => (
+            <section className="bg-cream overflow-hidden">
+                <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+                    <div className="animate-rise-in">
+                        <p className="kicker text-navy-500 mb-6">Uniformes ejecutivos · Desde 1997</p>
+                        <h1 className="text-5xl md:text-7xl leading-[1.02]">Tu equipo, <span className="mark">impecable</span> todos los días.</h1>
+                        <p className="mt-6 text-lg text-navy-500 max-w-lg leading-relaxed">Uniformes ejecutivos y empresariales para dama y caballero, diseñados con tendencias actuales y confeccionados a la medida de cada colaborador.</p>
+                        <div className="flex flex-wrap gap-3 mt-9">
+                            <a href="/pages/colecciones/" className="btn btn-navy">Ver colecciones <IconArrow className="w-4 h-4" /></a>
+                            <a href="/pages/cotizacion/" className="btn btn-line">Solicitar cotización</a>
+                        </div>
+                    </div>
+                    <HeroDuo />
+                </div>
+            </section>
+        );
+
+        // Dama + caballero side by side, in navy and grey.
+        const HeroDuo = () => {
+            const catalog = useCatalog();
+            const dama = catalog.bySlug['saco-dama-entallado'];
+            const caballero = catalog.bySlug['traje-caballero-dos-botones'];
+            return (
+                <div className="relative aspect-square max-w-lg mx-auto w-full">
+                    <div className="absolute inset-[6%] rounded-full bg-lemon-300/60" />
+                    <div className="absolute inset-[6%] rounded-full pinstripe opacity-[.07]" />
+                    {dama && <a href={`/pages/colecciones/${dama.slug}/`} className="absolute left-[4%] bottom-[8%] w-[50%]"><Garment garment={dama} color={catalog.colors.marino} /></a>}
+                    {caballero && <a href={`/pages/colecciones/${caballero.slug}/`} className="absolute right-[4%] bottom-[4%] w-[54%]"><Garment garment={caballero} color={catalog.colors.carbon} /></a>}
+                </div>
+            );
+        };
+
+        const Differentiators = () => (
+            <section className="max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-28">
+                <SectionTitle kicker="Por qué Limonada" mark="te diferencia">Calidad que</SectionTitle>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {DIFFERENTIATORS.map(d => (
+                        <div key={d.title} className="reveal rounded-xl border border-navy-line p-7">
+                            <p className="font-display text-5xl">{d.n} <span className="text-base font-sans text-navy-400">{d.unit}</span></p>
+                            <h3 className="text-2xl mt-5">{d.title}</h3>
+                            <p className="text-sm text-navy-500 mt-2 leading-relaxed">{d.text}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+        );
+
+        const Lines = () => {
+            const catalog = useCatalog();
+            return (
+                <section className="pinstripe text-white py-20 md:py-28">
+                    <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-6">
+                        {catalog.lines.map(l => {
+                            const first = catalog.garments.find(g => g.line_id === l.id && g.featured);
+                            return (
+                                <a key={l.id} href={`/pages/colecciones/?linea=${l.id}`} className="reveal group relative rounded-2xl bg-white/[.04] border border-white/10 p-8 md:p-10 overflow-hidden min-h-[22rem] flex flex-col justify-end hover:bg-white/[.07] transition-colors">
+                                    {first && <div className="absolute -right-6 -top-4 w-56 opacity-90 group-hover:-translate-y-1 transition-transform"><Garment garment={first} color={catalog.colors[l.id === 'dama' ? 'gris-perla' : 'oxford'] || catalog.colors.oxford} /></div>}
+                                    <p className="kicker text-lemon-300">Colección</p>
+                                    <h2 className="text-5xl mt-2">{l.label}</h2>
+                                    <p className="text-white/70 mt-3 max-w-sm">{l.description}</p>
+                                    <p className="mt-6 font-medium flex items-center gap-2">Ver prendas <IconArrow className="w-4 h-4" /></p>
+                                </a>
+                            );
+                        })}
+                    </div>
+                </section>
+            );
+        };
+
+        const Featured = () => {
+            const catalog = useCatalog();
+            return (
+                <section className="max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-28">
+                    <SectionTitle kicker="Lo más pedido" mark="favoritas">Prendas</SectionTitle>
+                    {catalog.status === 'loading' && <GridSkeleton />}
+                    {catalog.status === 'error' && <LoadError />}
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
+                        {catalog.garments.filter(g => g.featured).map(g => <GarmentCard key={g.id} garment={g} catalog={catalog} />)}
+                    </div>
+                </section>
+            );
+        };
+
+        const Process = () => (
+            <section className="bg-cream py-20 md:py-28">
+                <div className="max-w-7xl mx-auto px-4 md:px-8">
+                    <SectionTitle kicker="Cómo trabajamos" mark="cuatro pasos">Uniformar a tu equipo en</SectionTitle>
+                    <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {STEPS.map(s => (
+                            <li key={s.n} className="reveal border-t-2 border-navy pt-5">
+                                <p className="kicker text-navy-400">{s.n}</p>
+                                <h3 className="text-3xl mt-2">{s.title}</h3>
+                                <p className="text-navy-500 mt-2">{s.text}</p>
+                            </li>
+                        ))}
+                    </ol>
+                    <div className="mt-12 flex flex-wrap gap-3">
+                        <a href="/pages/cotizacion/" className="btn btn-navy">Empezar mi cotización</a>
+                        <a href="/pages/empresa/#tallas" className="btn btn-line">Guía de medición</a>
+                    </div>
+                </div>
+            </section>
+        );
+
+        const Sectors = () => (
+            <section className="max-w-7xl mx-auto px-4 md:px-8 py-20">
+                <SectionTitle kicker="Vestimos a" center>Equipos de todos los <span className="mark">sectores</span></SectionTitle>
+                <ul className="flex flex-wrap justify-center gap-3 reveal">
+                    {SECTORS.map(s => <li key={s} className="px-5 py-2.5 rounded-full border border-navy-line">{s}</li>)}
+                </ul>
+            </section>
+        );
+
+        const DistributorsCta = () => (
+            <section className="max-w-7xl mx-auto px-4 md:px-8">
+                <div className="reveal rounded-2xl bg-lemon-400 p-10 md:p-14 grid md:grid-cols-3 gap-8 items-center">
+                    <div className="md:col-span-2">
+                        <h2 className="text-4xl md:text-5xl">Distribuidores en 7 estados</h2>
+                        <p className="mt-3 text-navy-700">Baja California Sur, Chihuahua, Guanajuato, Sinaloa, Sonora, Tamaulipas y Yucatán. En el resto del país te atendemos directamente.</p>
+                    </div>
+                    <a href="/pages/distribuidores/" className="btn btn-navy md:justify-self-end">Encuentra el tuyo</a>
+                </div>
+            </section>
+        );
+
+        renderPage(() => <><Hero /><Differentiators /><Lines /><Featured /><Process /><Sectors /><DistributorsCta /></>);
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "_schema": "fabrics: id, name, composition, weight, feel, care, washes, colors[{ id, name, hex }]",
+  "_note": "Telas y colores de ejemplo: confirmar con el cliente. washes = lavadas en casa cubiertas por la garantía.",
+  "updated_at": "2026-10-07",
+  "fabrics": [
+    { "id": "gabardina-stretch", "name": "Gabardina stretch", "composition": "64% poliéster · 33% rayón · 3% elastano", "weight": "260 g/m²",
+      "feel": "Estructura firme con elasticidad; no se arruga en la jornada.", "care": "Lavadora en frío, ciclo delicado, secar a la sombra.", "washes": 70,
+      "colors": [ { "id": "marino", "name": "Azul marino", "hex": "#1c2a4a" }, { "id": "oxford", "name": "Gris Oxford", "hex": "#4a4f57" }, { "id": "negro", "name": "Negro", "hex": "#1b1b1d" }, { "id": "arena", "name": "Arena", "hex": "#c9b79c" } ] },
+    { "id": "casimir-ligero", "name": "Casimir ligero", "composition": "70% poliéster · 30% lana", "weight": "230 g/m²",
+      "feel": "Caída elegante y transpirable para climas cálidos.", "care": "Tintorería recomendada; lavadora en frío ciclo lana.", "washes": 70,
+      "colors": [ { "id": "marino", "name": "Azul marino", "hex": "#1c2a4a" }, { "id": "carbon", "name": "Carbón", "hex": "#33363b" }, { "id": "gris-perla", "name": "Gris perla", "hex": "#a6a9ae" } ] },
+    { "id": "popelina", "name": "Popelina antiarrugas", "composition": "60% algodón · 40% poliéster", "weight": "115 g/m²",
+      "feel": "Fresca, suave y fácil de planchar.", "care": "Lavadora a 30 °C, planchado ligero.", "washes": 70,
+      "colors": [ { "id": "blanco", "name": "Blanco", "hex": "#fbfbf8" }, { "id": "celeste", "name": "Celeste", "hex": "#bcd4ea" }, { "id": "rosa-palo", "name": "Rosa palo", "hex": "#ecc9c6" }, { "id": "limon", "name": "Limón", "hex": "#f3e3a0" } ] },
+    { "id": "crepe", "name": "Crepé fluido", "composition": "100% poliéster", "weight": "140 g/m²",
+      "feel": "Ligero y con movimiento; no transparenta.", "care": "Lavadora en frío, sin secadora.", "washes": 70,
+      "colors": [ { "id": "blanco", "name": "Blanco", "hex": "#fbfbf8" }, { "id": "marfil", "name": "Marfil", "hex": "#f1ead9" }, { "id": "vino", "name": "Vino", "hex": "#6b2433" }, { "id": "marino", "name": "Azul marino", "hex": "#1c2a4a" } ] }
+  ]
+}

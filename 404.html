@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página no encontrada · Limonada</title>
+    <meta name="description" content="Página no encontrada.">
+    <link rel="canonical" href="https://limonada.com.mx/404.html">
+    <meta property="og:title" content="Página no encontrada · Limonada">
+    <meta property="og:description" content="Página no encontrada.">
+    <meta property="og:url" content="https://limonada.com.mx/404.html">
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#14213d">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/tailwind.config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel" src="/js/layout.jsx"></script>
+
+    <script type="text/babel">
+        // Old URL → new URL (e.g. pages from the previous limonada.com.mx). Add one entry per moved page.
+        const MOVED = {};
+        const target = MOVED[location.pathname];
+        if (target) location.replace(target + location.search + location.hash);
+
+        renderPage(() => (
+            <PageHero kicker="404" title="Esta página" mark="no existe" intro="Puede que el enlace haya cambiado.">
+                <div className="flex flex-wrap gap-3 mt-8">
+                    <a href="/" className="btn btn-navy">Inicio</a>
+                    <a href="/pages/colecciones/" className="btn btn-line">Colecciones</a>
+                    <a href="/pages/contacto/" className="btn btn-line">Contacto</a>
+                </div>
+            </PageHero>
+        ));
+    </script>
+</body>
+</html>

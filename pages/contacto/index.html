@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto · Limonada</title>
+    <meta name="description" content="Habla con un asesor de uniformes ejecutivos: cotizaciones, diseños especiales, distribuidores y garantía.">
+    <link rel="canonical" href="https://limonada.com.mx/pages/contacto/">
+    <meta property="og:title" content="Contacto · Limonada">
+    <meta property="og:description" content="Habla con un asesor de uniformes ejecutivos: cotizaciones, diseños especiales, distribuidores y garantía.">
+    <meta property="og:url" content="https://limonada.com.mx/pages/contacto/">
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#14213d">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/tailwind.config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel" src="/js/layout.jsx"></script>
+
+    <script type="text/babel">
+        const SUBJECTS = [
+            { id: 'cotizacion', label: 'Cotización de uniformes' },
+            { id: 'diseno', label: 'Diseño especial con mi imagen' },
+            { id: 'distribuidor', label: 'Quiero ser distribuidor' },
+            { id: 'garantia', label: 'Garantía o ajuste de una prenda' },
+            { id: 'otro', label: 'Otro' },
+        ];
+
+        const ContactPage = () => {
+            const initial = new URLSearchParams(location.search).get('asunto');
+            const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', subject: SUBJECTS.some(s => s.id === initial) ? initial : 'cotizacion', message: '' });
+            const f = (key) => ({ value: form[key], onChange: (e) => setForm({ ...form, [key]: e.target.value }) });
+            const subject = SUBJECTS.find(s => s.id === form.subject).label;
+            const body = `${form.message}\n\n${form.name} · ${form.company}\n${form.email} · ${form.phone}`;
+
+            const sendWhatsApp = (e) => { e.preventDefault(); window.open(waLink(`${subject}\n\n${body}`), '_blank', 'noopener,noreferrer'); };
+
+            return (
+                <>
+                    <PageHero kicker="Contacto" title="Hablemos de tu" mark="equipo" intro="Un asesor te responde en horario laboral, normalmente el mismo día." />
+                    <section className="max-w-6xl mx-auto px-4 md:px-8 py-14 grid md:grid-cols-5 gap-12">
+                        <form onSubmit={sendWhatsApp} className="md:col-span-3 space-y-4">
+                            <div className="grid sm:grid-cols-2 gap-4">
+                                <input className="field" placeholder="Nombre" required autoComplete="name" {...f('name')} />
+                                <input className="field" placeholder="Empresa" autoComplete="organization" {...f('company')} />
+                                <input className="field" type="email" placeholder="Email" required autoComplete="email" {...f('email')} />
+                                <input className="field" type="tel" placeholder="Teléfono" autoComplete="tel" {...f('phone')} />
+                            </div>
+                            <select className="field" {...f('subject')}>{SUBJECTS.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}</select>
+                            <textarea className="field" rows="6" required maxLength={1500} placeholder="¿En qué te ayudamos?" {...f('message')} />
+                            <div className="flex flex-wrap gap-3">
+                                <button className="btn btn-navy"><IconWhatsApp className="w-5 h-5" /> Enviar por WhatsApp</button>
+                                <a className="btn btn-line" href={`mailto:${BRAND.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`}>Enviar por email</a>
+                            </div>
+                            <p className="text-xs text-navy-400">Al enviar aceptas el <a href="/pages/privacidad/" className="underline">aviso de privacidad</a>.</p>
+                        </form>
+                        <aside className="md:col-span-2 space-y-6">
+                            {[['Teléfono', BRAND.phone], ['Email', BRAND.email], ['Horario', BRAND.hours], ['Showroom', BRAND.address]].map(([k, v]) => (
+                                <div key={k} className="border-b border-navy-line pb-4"><p className="kicker text-navy-400">{k}</p><p className="mt-1">{v}</p></div>
+                            ))}
+                            <a href="/pages/distribuidores/" className="btn btn-lemon">Ver distribuidores</a>
+                        </aside>
+                    </section>
+                </>
+            );
+        };
+
+        renderPage(ContactPage);
+    </script>
+</body>
+</html>

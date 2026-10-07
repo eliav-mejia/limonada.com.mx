@@ -1,0 +1,18 @@
+{
+  "_schema": "lines: id, label, description · types: id, label, sort_order",
+  "_note": "Base de datos simulada (Etapa 1). Ver public/db/README.md. Pública: sin datos privados.",
+  "updated_at": "2026-10-07",
+  "lines": [
+    { "id": "dama", "label": "Dama", "description": "Sacos, faldas, pantalones, blusas y vestidos con corte contemporáneo y movimiento cómodo." },
+    { "id": "caballero", "label": "Caballero", "description": "Trajes, camisas y chalecos de líneas limpias, reforzados para el uso diario." }
+  ],
+  "types": [
+    { "id": "sacos", "label": "Sacos", "sort_order": 1 },
+    { "id": "pantalones", "label": "Pantalones", "sort_order": 2 },
+    { "id": "faldas", "label": "Faldas", "sort_order": 3 },
+    { "id": "vestidos", "label": "Vestidos", "sort_order": 4 },
+    { "id": "blusas", "label": "Blusas", "sort_order": 5 },
+    { "id": "camisas", "label": "Camisas", "sort_order": 6 },
+    { "id": "chalecos", "label": "Chalecos", "sort_order": 7 }
+  ]
+}

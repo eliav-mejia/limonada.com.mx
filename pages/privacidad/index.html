@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aviso de privacidad · Limonada</title>
+    <meta name="description" content="Aviso de privacidad conforme a la LFPDPPP.">
+    <link rel="canonical" href="https://limonada.com.mx/pages/privacidad/">
+    <meta property="og:title" content="Aviso de privacidad · Limonada">
+    <meta property="og:description" content="Aviso de privacidad conforme a la LFPDPPP.">
+    <meta property="og:url" content="https://limonada.com.mx/pages/privacidad/">
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#14213d">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/tailwind.config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel" src="/js/layout.jsx"></script>
+
+    <script type="text/babel">
+        // Values in [corchetes] are placeholders, highlighted until filled in. Pending legal review.
+        const Mark = ({ children }) => String(children).split(/(\[[^\]]+\])/g).map((p, i) => p.startsWith("[") ? <mark key={i} className="bg-lemon-100 px-1 rounded">{p}</mark> : p);
+        const LegalPage = ({ kicker, title, mark, updated, sections }) => (
+            <>
+                <PageHero kicker={kicker} title={title} mark={mark} intro={`Última actualización: ${updated}`} />
+                <section className="max-w-6xl mx-auto px-4 md:px-8 py-14 grid md:grid-cols-4 gap-12">
+                    <nav className="hidden md:block md:sticky md:top-28 self-start text-sm space-y-3" aria-label="Índice">
+                        {sections.map(s => <a key={s.id} href={`#${s.id}`} className="block text-navy-400 hover:text-navy">{s.title}</a>)}
+                    </nav>
+                    <div className="md:col-span-3 space-y-12">
+                        {sections.map(s => (
+                            <article key={s.id} id={s.id} className="scroll-mt-28">
+                                <h2 className="text-3xl mb-3">{s.title}</h2>
+                                <div className="space-y-3 text-navy-500 leading-relaxed">{s.body.map((p, i) => <p key={i}><Mark>{p}</Mark></p>)}</div>
+                            </article>
+                        ))}
+                    </div>
+                </section>
+            </>
+        );
+        const SECTIONS = [
+            { id: 'responsable', title: 'Responsable', body: [`[Razón social] («${BRAND.name}»), con domicilio en ${BRAND.address}, es responsable del tratamiento de tus datos conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP).`] },
+            { id: 'datos', title: 'Datos que recabamos', body: [
+                'Del contacto de la empresa: nombre, empresa, email, teléfono y estado.',
+                'De los colaboradores, solo si nos los entregas para la confección: nombre y medidas corporales. Los usamos únicamente para fabricar y etiquetar sus prendas.' ] },
+            { id: 'finalidades', title: 'Finalidades', body: [
+                'Primarias: responder cotizaciones, fabricar y entregar pedidos, y atender garantías.',
+                'Secundarias (puedes oponerte): enviarte novedades de colecciones. Escríbenos a ' + BRAND.email + ' si no deseas recibirlas.' ] },
+            { id: 'transferencias', title: 'Encargados', body: ['Compartimos los datos necesarios con nuestros distribuidores autorizados de tu estado y con la paquetería. No vendemos tus datos. [Lista de encargados por confirmar.]'] },
+            { id: 'arco', title: 'Derechos ARCO', body: ['Puedes acceder, rectificar, cancelar u oponerte al tratamiento de tus datos escribiendo a ' + BRAND.email + '. Respondemos en un máximo de 20 días hábiles.'] },
+            { id: 'almacenamiento', title: 'Almacenamiento local', body: ['El sitio guarda en tu navegador tu lista de cotización y tu elección de cookies. Las cookies de medición solo se activan si eliges «Aceptar».'] },
+        ];
+        renderPage(() => <LegalPage kicker="Legal · México" title="Aviso de" mark="privacidad" updated="7 de octubre de 2026" sections={SECTIONS} />);
+    </script>
+</body>
+</html>

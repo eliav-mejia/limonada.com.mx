@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribuidores · Limonada</title>
+    <meta name="description" content="Distribuidores de uniformes ejecutivos Limonada en Baja California Sur, Chihuahua, Guanajuato, Sinaloa, Sonora, Tamaulipas y Yucatán.">
+    <link rel="canonical" href="https://limonada.com.mx/pages/distribuidores/">
+    <meta property="og:title" content="Distribuidores · Limonada">
+    <meta property="og:description" content="Distribuidores de uniformes ejecutivos Limonada en Baja California Sur, Chihuahua, Guanajuato, Sinaloa, Sonora, Tamaulipas y Yucatán.">
+    <meta property="og:url" content="https://limonada.com.mx/pages/distribuidores/">
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#14213d">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/tailwind.config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel" src="/js/layout.jsx"></script>
+    <script type="text/babel" src="/js/catalogo.jsx"></script>
+    <script type="text/babel">
+        // Values in [corchetes] are placeholders, highlighted until the client sends real data (public/db/distribuidores.json).
+        const Placeholder = ({ children }) => /^\[.*\]$/.test(children || '') ? <mark className="bg-lemon-100 px-1 rounded">{children}</mark> : <>{children}</>;
+
+        const DistributorsPage = () => {
+            const [list, setList] = useState(null);
+            useEffect(() => { db.distributors().then(setList).catch(() => setList([])); }, []);
+
+            return (
+                <>
+                    <PageHero kicker="Red de distribución" title="Distribuidores en" mark="7 estados"
+                        intro="Atención local, medición en sitio y entregas más rápidas. Si tu estado no aparece, te atendemos directamente desde la fábrica." />
+                    <section className="max-w-6xl mx-auto px-4 md:px-8 py-12">
+                        {!list && <div className="h-40 rounded-xl bg-cream animate-pulse" />}
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                            {(list || []).map(d => (
+                                <article key={d.id} className="reveal rounded-xl border border-navy-line p-6">
+                                    <p className="kicker text-navy-400">{d.state}</p>
+                                    <h2 className="text-2xl mt-2"><Placeholder>{d.name}</Placeholder></h2>
+                                    <p className="text-sm text-navy-500 mt-2"><Placeholder>{d.city}</Placeholder> · <Placeholder>{d.address}</Placeholder></p>
+                                    <p className="text-sm mt-3"><Placeholder>{d.phone}</Placeholder></p>
+                                    <a href={waLink(`Hola, busco al distribuidor de Limonada en ${d.state}.`)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm font-medium mt-4 underline decoration-lemon-400 decoration-2 underline-offset-4">
+                                        <IconWhatsApp className="w-4 h-4" /> Contactar
+                                    </a>
+                                </article>
+                            ))}
+                            <article className="reveal rounded-xl bg-navy text-white p-6 flex flex-col">
+                                <p className="kicker text-lemon-300">Resto del país</p>
+                                <h2 className="text-2xl mt-2">Atención directa</h2>
+                                <p className="text-sm text-white/70 mt-2 flex-1">Enviamos a toda la República y medimos por videollamada.</p>
+                                <a href="/pages/cotizacion/" className="btn btn-lemon mt-5 self-start">Cotizar</a>
+                            </article>
+                        </div>
+                    </section>
+                    <section className="max-w-4xl mx-auto px-4 md:px-8 py-10 text-center">
+                        <h2 className="text-3xl">¿Quieres ser distribuidor?</h2>
+                        <p className="text-navy-500 mt-3">Buscamos aliados en estados sin cobertura. Te damos muestrario, capacitación de medición y precios de distribuidor.</p>
+                        <a href="/pages/contacto/?asunto=distribuidor" className="btn btn-navy mt-6">Quiero ser distribuidor</a>
+                    </section>
+                </>
+            );
+        };
+
+        renderPage(DistributorsPage);
+    </script>
+</body>
+</html>

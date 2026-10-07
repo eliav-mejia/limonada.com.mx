@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi cotización · Limonada</title>
+    <meta name="description" content="Revisa tu lista de prendas y envía tu solicitud de cotización de uniformes.">
+    <link rel="canonical" href="https://limonada.com.mx/pages/cotizacion/">
+    <meta property="og:title" content="Mi cotización · Limonada">
+    <meta property="og:description" content="Revisa tu lista de prendas y envía tu solicitud de cotización de uniformes.">
+    <meta property="og:url" content="https://limonada.com.mx/pages/cotizacion/">
+    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#14213d">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/tailwind.config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site.css">
+
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel" src="/js/layout.jsx"></script>
+    <script type="text/babel" src="/js/catalogo.jsx"></script>
+    <script type="text/babel">
+        // Etapa 1: the request is saved in this browser and sent by WhatsApp (and to QUOTE_ENDPOINT when configured).
+        // Etapa 2: company accounts, saved quotes and orders in Supabase; this page becomes the cart.
+        const STATES = ['Aguascalientes', 'Baja California', 'Baja California Sur', 'Campeche', 'Chiapas', 'Chihuahua', 'Ciudad de México', 'Coahuila', 'Colima', 'Durango', 'Estado de México', 'Guanajuato', 'Guerrero', 'Hidalgo', 'Jalisco', 'Michoacán', 'Morelos', 'Nayarit', 'Nuevo León', 'Oaxaca', 'Puebla', 'Querétaro', 'Quintana Roo', 'San Luis Potosí', 'Sinaloa', 'Sonora', 'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas'];
+        const EMPTY = { company: '', contact: '', email: '', phone: '', state: '', staff: '', logo: 'bordado', measuring: 'sitio', needed_by: '', notes: '', consent: false };
+
+        const QuotePage = () => {
+            const catalog = useCatalog();
+            const lines = useQuoteLines(catalog);
+            const [form, setForm] = useState(EMPTY);
+            const [sent, setSent] = useState(null);
+            const total = lines.reduce((a, l) => a + l.qty, 0);
+            const estimate = lines.reduce((a, l) => a + (l.garment.price_from_mxn ? l.qty * l.garment.price_from_mxn : 0), 0);
+            const f = (key) => ({ value: form[key], onChange: (e) => setForm({ ...form, [key]: e.target.value }) });
+
+            const submit = async (e) => {
+                e.preventDefault();
+                const request = { ...form, lines: lines.map(l => ({ sku: l.garment.sku, name: l.garment.name, color: l.color?.name, qty: l.qty })), total_pieces: total };
+                const saved = await db.submitQuote(request);
+                const text = [
+                    `Hola, solicito cotización ${saved.id}`,
+                    `Empresa: ${form.company} (${form.staff} colaboradores, ${form.state})`,
+                    `Contacto: ${form.contact} · ${form.email} · ${form.phone}`,
+                    '',
+                    ...request.lines.map(l => `• ${l.qty} × ${l.name} (${l.sku}) — ${l.color}`),
+                    '',
+                    `Logotipo: ${form.logo} · Medición: ${form.measuring}${form.needed_by ? ` · Para: ${form.needed_by}` : ''}`,
+                    form.notes && `Notas: ${form.notes}`,
+                ].filter(x => x !== false && x !== '').join('\n');
+                window.open(waLink(text), '_blank', 'noopener,noreferrer');
+                quote.clear();
+                setSent(saved);
+            };
+
+            if (sent) return (
+                <PageHero kicker={`Solicitud ${sent.id}`} title="¡Gracias! Te respondemos en" mark="24 h hábiles"
+                    intro={`Abrimos WhatsApp con tu solicitud. Si no se abrió, escríbenos a ${BRAND.email} con la referencia ${sent.id}.`}>
+                    <div className="flex flex-wrap gap-3 mt-8"><a href="/pages/colecciones/" className="btn btn-navy">Seguir viendo prendas</a><a href="/" className="btn btn-line">Inicio</a></div>
+                </PageHero>
+            );
+
+            return (
+                <>
+                    <PageHero kicker="Cotización" title="Tu lista de" mark="uniformes"
+                        intro="Revisa prendas, colores y piezas. Indica las tallas al medir a tu equipo; aquí solo necesitamos el total por prenda." />
+                    <section className="max-w-7xl mx-auto px-4 md:px-8 py-12">
+                        {catalog.status === 'loading' && <div className="h-40 rounded-xl bg-cream animate-pulse" />}
+                        {catalog.status === 'ready' && lines.length === 0 && (
+                            <div className="text-center py-12">
+                                <p className="text-navy-500">Tu lista está vacía.</p>
+                                <a href="/pages/colecciones/" className="btn btn-navy mt-6">Ver colecciones</a>
+                                <p className="text-sm text-navy-400 mt-6">¿Prefieres hablar directo? <a href="/pages/contacto/" className="underline">Escríbenos</a>.</p>
+                            </div>
+                        )}
+                        {lines.length > 0 && (
+                            <form onSubmit={submit} className="grid lg:grid-cols-5 gap-10">
+                                <div className="lg:col-span-3">
+                                    <ul className="divide-y divide-navy-line border-y border-navy-line">
+                                        {lines.map(l => (
+                                            <li key={l.key} className="py-5 flex gap-4 items-center">
+                                                <a href={`/pages/colecciones/${l.garment.slug}/?color=${l.colorId}`} className="w-20 h-24 shrink-0 rounded-lg bg-cream"><Garment garment={l.garment} color={l.color} className="w-full h-full p-1.5" /></a>
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="font-display text-xl">{l.garment.name}</p>
+                                                    <p className="text-sm text-navy-500">{catalog.line[l.garment.line_id].label} · {l.color?.name} · {l.garment.sku}</p>
+                                                    {l.qty < l.garment.min_qty && <p className="text-xs text-lemon-600 mt-1">Mínimo {l.garment.min_qty} piezas</p>}
+                                                </div>
+                                                <input type="number" min="0" value={l.qty} onChange={e => quote.set(l.key, Math.max(0, parseInt(e.target.value, 10) || 0))}
+                                                    className="field !w-20 text-center" aria-label={`Piezas de ${l.garment.name}`} />
+                                                <button type="button" className="text-sm text-navy-400 hover:text-navy" onClick={() => quote.set(l.key, 0)} aria-label={`Quitar ${l.garment.name}`}><IconClose className="w-4 h-4" /></button>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <div className="flex justify-between mt-4 text-sm">
+                                        <a href="/pages/colecciones/" className="underline">+ Agregar más prendas</a>
+                                        <p><strong>{total}</strong> piezas{estimate > 0 && <> · estimado desde <strong>{formatMXN(estimate)}</strong> + IVA</>}</p>
+                                    </div>
+                                </div>
+
+                                <div className="lg:col-span-2 rounded-2xl bg-cream p-6 md:p-8 space-y-4 self-start">
+                                    <p className="kicker text-navy-500">Datos de tu empresa</p>
+                                    <input className="field" placeholder="Empresa" required autoComplete="organization" {...f('company')} />
+                                    <input className="field" placeholder="Nombre de contacto" required autoComplete="name" {...f('contact')} />
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <input className="field" type="email" placeholder="Email" required autoComplete="email" {...f('email')} />
+                                        <input className="field" type="tel" placeholder="Teléfono" required autoComplete="tel" {...f('phone')} />
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-3">
+                                        <select className="field" required {...f('state')}><option value="">Estado</option>{STATES.map(s => <option key={s}>{s}</option>)}</select>
+                                        <input className="field" type="number" min="1" placeholder="Nº de colaboradores" required {...f('staff')} />
+                                    </div>
+                                    <label className="block text-sm">Logotipo
+                                        <select className="field mt-1" {...f('logo')}><option value="bordado">Bordado</option><option value="sin logotipo">Sin logotipo</option><option value="por definir">Por definir</option></select></label>
+                                    <label className="block text-sm">Medición
+                                        <select className="field mt-1" {...f('measuring')}><option value="sitio">En nuestras oficinas (asesor en sitio)</option><option value="videollamada">Por videollamada</option><option value="guía">Nosotros medimos con su guía</option></select></label>
+                                    <label className="block text-sm">¿Para cuándo los necesitas? (opcional)
+                                        <input className="field mt-1" type="date" {...f('needed_by')} /></label>
+                                    <textarea className="field" rows="3" maxLength={800} placeholder="Notas: colores institucionales, tallas especiales, prendas adicionales…" {...f('notes')} />
+                                    <label className="flex gap-3 text-sm text-navy-500">
+                                        <input type="checkbox" required checked={form.consent} onChange={e => setForm({ ...form, consent: e.target.checked })} className="mt-1 accent-[#14213d]" />
+                                        <span>Acepto el <a href="/pages/privacidad/" className="underline">aviso de privacidad</a>.</span>
+                                    </label>
+                                    <button className="btn btn-navy w-full"><IconWhatsApp className="w-5 h-5" /> Enviar solicitud</button>
+                                    <p className="text-xs text-navy-400 text-center">Se abre WhatsApp con tu solicitud lista para enviar.</p>
+                                </div>
+                            </form>
+                        )}
+                    </section>
+                </>
+            );
+        };
+
+        renderPage(QuotePage);
+    </script>
+</body>
+</html>

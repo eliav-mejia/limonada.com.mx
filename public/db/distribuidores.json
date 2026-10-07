@@ -1,0 +1,14 @@
+{
+  "_schema": "distributors: id, state, city, name, phone, email, whatsapp, address, active",
+  "_note": "Estados confirmados en limonada.com.mx. Nombres y datos de contacto son marcadores [..] hasta que el cliente los entregue.",
+  "updated_at": "2026-10-07",
+  "distributors": [
+    { "id": "bcs", "state": "Baja California Sur", "city": "[Ciudad]", "name": "[Nombre del distribuidor]", "phone": "[Teléfono]", "email": null, "whatsapp": null, "address": "[Dirección]", "active": true },
+    { "id": "chih", "state": "Chihuahua", "city": "[Ciudad]", "name": "[Nombre del distribuidor]", "phone": "[Teléfono]", "email": null, "whatsapp": null, "address": "[Dirección]", "active": true },
+    { "id": "gto", "state": "Guanajuato", "city": "[Ciudad]", "name": "[Nombre del distribuidor]", "phone": "[Teléfono]", "email": null, "whatsapp": null, "address": "[Dirección]", "active": true },
+    { "id": "sin", "state": "Sinaloa", "city": "[Ciudad]", "name": "[Nombre del distribuidor]", "phone": "[Teléfono]", "email": null, "whatsapp": null, "address": "[Dirección]", "active": true },
+    { "id": "son", "state": "Sonora", "city": "[Ciudad]", "name": "[Nombre del distribuidor]", "phone": "[Teléfono]", "email": null, "whatsapp": null, "address": "[Dirección]", "active": true },
+    { "id": "tamps", "state": "Tamaulipas", "city": "[Ciudad]", "name": "[Nombre del distribuidor]", "phone": "[Teléfono]", "email": null, "whatsapp": null, "address": "[Dirección]", "active": true },
+    { "id": "yuc", "state": "Yucatán", "city": "[Ciudad]", "name": "[Nombre del distribuidor]", "phone": "[Teléfono]", "email": null, "whatsapp": null, "address": "[Dirección]", "active": true }
+  ]
+}
