@@ -1,0 +1,23 @@
+# Limonada — https://limonada.com.mx/robots.txt
+# Los buscadores pueden indexar el sitio. Los rastreadores de entrenamiento de IA no pueden usar sus textos ni láminas.
+# robots.txt es una petición, no un candado.
+
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: anthropic-ai
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Bytespider
+User-agent: Meta-ExternalAgent
+User-agent: PerplexityBot
+User-agent: cohere-ai
+User-agent: img2dataset
+Disallow: /
+
+User-agent: *
+Disallow: /tools/
+Disallow: /_docs/
+Allow: /
+
+Sitemap: https://limonada.com.mx/sitemap.xml

@@ -1,177 +1,315 @@
 <!DOCTYPE html>
-<html lang="es-MX">
+<html lang="es-MX" class="no-js">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Limonada · Uniformes ejecutivos para empresas desde 1997</title>
-    <meta name="description" content="Uniformes ejecutivos y empresariales para dama y caballero, a la medida, reforzados para 5 años de uso diario. Garantía de 1 año o 70 lavadas. Distribuidores en todo México.">
-    <link rel="canonical" href="https://limonada.com.mx/">
-    <meta property="og:title" content="Limonada · Uniformes ejecutivos para empresas desde 1997">
-    <meta property="og:description" content="Uniformes ejecutivos y empresariales para dama y caballero, a la medida, reforzados para 5 años de uso diario. Garantía de 1 año o 70 lavadas. Distribuidores en todo México.">
-    <meta property="og:url" content="https://limonada.com.mx/">
-    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
-    <meta name="theme-color" content="#14213d">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="/js/tailwind.config.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/site.css">
-
-    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Limonada · Trajes a la medida y uniformes ejecutivos desde 1997</title>
+  <meta name="description" content="Sastrería ejecutiva en la Ciudad de México desde 1997: trajes a la medida para caballero y dama y uniformes ejecutivos para empresas, con corte industrial, medidas exactas y garantía de durabilidad.">
+  <link rel="canonical" href="https://limonada.com.mx/">
+  <meta property="og:title" content="Limonada · Trajes a la medida desde 1997">
+  <meta property="og:description" content="Trajes a la medida para caballero y dama y uniformes ejecutivos para empresas. Ciudad de México.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  <meta name="theme-color" content="#14213d">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/brand.css">
+  <script src="js/main.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ClothingStore",
+    "name": "Limonada",
+    "url": "https://limonada.com.mx/",
+    "foundingDate": "1997",
+    "email": "ventas@limonada.com.mx",
+    "telephone": "+52 55 9012 7903",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Fray Servando Teresa de Mier 277, Piso 8, Interior 801, Col. Tránsito",
+      "postalCode": "06820",
+      "addressLocality": "Cuauhtémoc",
+      "addressRegion": "CDMX",
+      "addressCountry": "MX"
+    }
+  }
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
 
-    <div id="root"></div>
+  <div class="topline">
+    <div class="container">
+      <span>Est. 1997 · Ciudad de México</span>
+      <span>Sastrería ejecutiva · Caballero &amp; Dama</span>
+      <a href="mailto:ventas@limonada.com.mx">ventas@limonada.com.mx</a>
+    </div>
+  </div>
 
-    <script type="text/babel" src="/js/layout.jsx"></script>
-    <script type="text/babel" src="/js/catalogo.jsx"></script>
-    <script type="text/babel">
-        const DIFFERENTIATORS = [
-            { n: '5', unit: 'años', title: 'Hechos para durar', text: 'Refuerzos en hombro, sisa y entrepierna para resistir el trabajo diario durante cinco años.' },
-            { n: '70', unit: 'lavadas', title: 'Garantía real', text: 'Un año o 70 lavadas en casa, siguiendo las indicaciones de cada tela.' },
-            { n: '1:1', unit: 'medición', title: 'A la medida', text: 'Medimos a cada colaborador en tu empresa o por videollamada para que cada prenda le quede bien.' },
-            { n: '1997', unit: 'desde', title: 'Experiencia', text: 'Casi tres décadas vistiendo equipos de banca, hotelería, salud, educación y corporativos.' },
-        ];
+  <header class="site-header">
+    <nav class="container nav" aria-label="Principal">
+      <a class="logo" href="./" aria-label="Limonada, inicio">
+        <svg class="logo__mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="#14213d"/><circle cx="32" cy="32" r="25" fill="none" stroke="#f4d35e" stroke-width="1.5"/><g stroke="#f4d35e" opacity=".55"><path d="M32 9v46M9 32h46M15.7 15.7l32.6 32.6M48.3 15.7L15.7 48.3"/></g><circle cx="32" cy="32" r="15" fill="#14213d"/><text x="32" y="43" text-anchor="middle" font-family="DM Serif Display,Georgia,serif" font-size="30" font-style="italic" fill="#f4d35e">L</text></svg>
+        <span><span class="logo__name">Limonada<i>.</i></span><span class="logo__tag">Sastrería · 1997</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="portafolio/">Portafolio</a></li>
+        <li><a href="#oficio">Oficio</a></li>
+        <li><a href="#garantias">Garantías</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
 
-        const STEPS = [
-            { n: '01', title: 'Elige', text: 'Arma tu lista de cotización con prendas, telas y colores.' },
-            { n: '02', title: 'Cotiza', text: 'Te enviamos precio por volumen, bordado de logotipo y tiempos en 24 h hábiles.' },
-            { n: '03', title: 'Medimos', text: 'Tomamos medidas a tu equipo en sitio o con nuestra guía de medición.' },
-            { n: '04', title: 'Entregamos', text: 'Confección y entrega por colaborador, etiquetada con su nombre.' },
-        ];
+  <main id="main">
+    <!-- Héroe -->
+    <section class="hero">
+      <div class="container">
+        <div class="folio"><span>Gaceta Nº 29</span><span>Otoño · Invierno 2026</span><span>Caballero &amp; Dama</span></div>
+        <div class="hero__grid">
+          <div class="hero__copy">
+            <p class="eyebrow">Trajes a la medida · Uniformes ejecutivos</p>
+            <h1 class="display" style="margin-top:20px">Líneas y formas para la <em>fuerza ejecutiva</em>.</h1>
+            <p class="lede">Desde 1997 ofrecemos un servicio de alta calidad y personalizado de uniformes ejecutivos para empresas y organizaciones. Diseñamos constantemente nuevas tendencias para su <span class="hl">fino gusto</span>.</p>
+            <div class="actions">
+              <a class="btn btn--lemon" href="portafolio/">Ver el portafolio <span class="arrow" aria-hidden="true">→</span></a>
+              <a class="btn" href="#contacto">Agendar medición</a>
+            </div>
+            <div class="hero__meta">
+              <div><b>1997</b><span>Desde</span></div>
+              <div><b>5 años</b><span>De uso diario</span></div>
+              <div><b>70</b><span>Lavadas en casa</span></div>
+            </div>
+          </div>
+          <a class="plate" href="portafolio/#ejecutivo">
+            <span class="plate__num">Lámina I</span>
+            <div class="plate__frame"><img src="img/laminas/01-ejecutivo.svg" alt="Figurín: saco de dos botones y pantalón en raya diplomática azul marino" width="600" height="540"></div>
+            <figcaption><h3>El Ejecutivo</h3><span>Raya diplomática<br>Caballero</span></figcaption>
+            <span class="stamp" aria-hidden="true"><span><b>’97</b>Hecho<br>a la medida</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
 
-        const SECTORS = ['Banca y finanzas', 'Hotelería', 'Salud', 'Educación', 'Corporativos', 'Gobierno', 'Aerolíneas y turismo', 'Retail'];
+    <!-- Cinta -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>Corte industrial</span><span>Medidas exactas</span><span>Reforzado</span><span>Etiquetas personalizadas</span><span>Arreglos sin deformar</span><span>Caballero &amp; Dama</span>
+        <span>Corte industrial</span><span>Medidas exactas</span><span>Reforzado</span><span>Etiquetas personalizadas</span><span>Arreglos sin deformar</span><span>Caballero &amp; Dama</span>
+      </div>
+    </div>
 
-        const Hero = () => (
-            <section className="bg-cream overflow-hidden">
-                <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
-                    <div className="animate-rise-in">
-                        <p className="kicker text-navy-500 mb-6">Uniformes ejecutivos · Desde 1997</p>
-                        <h1 className="text-5xl md:text-7xl leading-[1.02]">Tu equipo, <span className="mark">impecable</span> todos los días.</h1>
-                        <p className="mt-6 text-lg text-navy-500 max-w-lg leading-relaxed">Uniformes ejecutivos y empresariales para dama y caballero, diseñados con tendencias actuales y confeccionados a la medida de cada colaborador.</p>
-                        <div className="flex flex-wrap gap-3 mt-9">
-                            <a href="/pages/colecciones/" className="btn btn-navy">Ver colecciones <IconArrow className="w-4 h-4" /></a>
-                            <a href="/pages/cotizacion/" className="btn btn-line">Solicitar cotización</a>
-                        </div>
-                    </div>
-                    <HeroDuo />
-                </div>
-            </section>
-        );
+    <!-- Portafolio (adelanto) -->
+    <section class="section" id="portafolio" aria-labelledby="portafolio-titulo">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Portafolio editorial</p>
+            <h2 class="h2" id="portafolio-titulo" style="margin-top:18px">Ocho láminas, <em>dos siluetas</em>.</h2>
+          </div>
+          <p class="lede">Figurines de la temporada para caballero y dama: del dos botones de consejo al vestido funda de recepción. Cada lámina se corta a tu medida y en la tela de tu empresa.</p>
+        </div>
+        <div class="gallery">
+          <a class="plate reveal" href="portafolio/#consejo">
+            <span class="plate__num">Lámina II</span>
+            <div class="plate__frame"><img src="img/laminas/02-consejo.svg" alt="Figurín: saco cruzado de solapa en pico y pantalón en espiga gris carbón" width="600" height="540" loading="lazy"></div>
+            <figcaption><h3>El Consejo</h3><span>Cruzado · espiga<br>Caballero</span></figcaption>
+          </a>
+          <a class="plate reveal" href="portafolio/#directora">
+            <span class="plate__num">Lámina V</span>
+            <div class="plate__frame"><img src="img/laminas/05-directora.svg" alt="Figurín: saco entallado de un botón y pantalón recto azul marino" width="600" height="540" loading="lazy"></div>
+            <figcaption><h3>La Directora</h3><span>Entallado · marino<br>Dama</span></figcaption>
+          </a>
+          <a class="plate reveal" href="portafolio/#tres-piezas">
+            <span class="plate__num">Lámina III</span>
+            <div class="plate__frame"><img src="img/laminas/03-tres-piezas.svg" alt="Figurín: saco de tres botones y chaleco de cinco botones en tweed" width="600" height="540" loading="lazy"></div>
+            <figcaption><h3>Tres Piezas</h3><span>Tweed · chaleco<br>Caballero</span></figcaption>
+          </a>
+          <a class="plate reveal" href="portafolio/#junta">
+            <span class="plate__num">Lámina VI</span>
+            <div class="plate__frame"><img src="img/laminas/06-junta.svg" alt="Figurín: saco entallado de dos botones y falda lápiz en Príncipe de Gales" width="600" height="540" loading="lazy"></div>
+            <figcaption><h3>La Junta</h3><span>Príncipe de Gales<br>Dama</span></figcaption>
+          </a>
+        </div>
+        <div class="actions" style="justify-content:center;margin-top:80px">
+          <a class="btn" href="portafolio/">Ver las ocho láminas <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
 
-        // Dama + caballero side by side, in navy and grey.
-        const HeroDuo = () => {
-            const catalog = useCatalog();
-            const dama = catalog.bySlug['saco-dama-entallado'];
-            const caballero = catalog.bySlug['traje-caballero-dos-botones'];
-            return (
-                <div className="relative aspect-square max-w-lg mx-auto w-full">
-                    <div className="absolute inset-[6%] rounded-full bg-lemon-300/60" />
-                    <div className="absolute inset-[6%] rounded-full pinstripe opacity-[.07]" />
-                    {dama && <a href={`/pages/colecciones/${dama.slug}/`} className="absolute left-[4%] bottom-[8%] w-[50%]"><Garment garment={dama} color={catalog.colors.marino} /></a>}
-                    {caballero && <a href={`/pages/colecciones/${caballero.slug}/`} className="absolute right-[4%] bottom-[4%] w-[54%]"><Garment garment={caballero} color={catalog.colors.carbon} /></a>}
-                </div>
-            );
-        };
+    <!-- Manifiesto -->
+    <section class="section manifesto" aria-labelledby="manifiesto-titulo">
+      <div class="container">
+        <p class="eyebrow" id="manifiesto-titulo">Manifiesto</p>
+        <blockquote>Diseñamos constantemente nuevas tendencias inspiradas en <em>líneas y formas</em>.</blockquote>
+        <div class="manifesto__cols">
+          <p class="dropcap">Desde 1997 nos hemos dedicado a ofrecer un servicio de alta calidad y personalizado de uniformes ejecutivos para empresas y organizaciones. Vestimos a la fuerza ejecutiva con el mismo cuidado con el que se corta un traje a la medida.</p>
+          <p>Cada prenda se mide con exactitud y se refuerza estratégicamente. El resultado es un guardarropa corporativo que se ve impecable el primer día y sigue igual años después: elegante por fuera, resistente por dentro.</p>
+        </div>
+      </div>
+      <span class="manifesto__year" aria-hidden="true">1997</span>
+    </section>
 
-        const Differentiators = () => (
-            <section className="max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-28">
-                <SectionTitle kicker="Por qué Limonada" mark="te diferencia">Calidad que</SectionTitle>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {DIFFERENTIATORS.map(d => (
-                        <div key={d.title} className="reveal rounded-xl border border-navy-line p-7">
-                            <p className="font-display text-5xl">{d.n} <span className="text-base font-sans text-navy-400">{d.unit}</span></p>
-                            <h3 className="text-2xl mt-5">{d.title}</h3>
-                            <p className="text-sm text-navy-500 mt-2 leading-relaxed">{d.text}</p>
-                        </div>
-                    ))}
-                </div>
-            </section>
-        );
+    <!-- Garantías -->
+    <section class="section" id="garantias" aria-labelledby="garantias-titulo">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Garantías</p>
+            <h2 class="h2" id="garantias-titulo" style="margin-top:18px">Hechos para <em>durar</em>.</h2>
+          </div>
+          <p class="lede">Dos compromisos por escrito para que el uniforme de tu equipo sea una inversión, no un gasto de cada temporada.</p>
+        </div>
+        <div class="warranty">
+          <article class="warranty__card reveal">
+            <div class="warranty__big">5<small>años de<br>trabajo diario</small></div>
+            <h3 class="h3">Uniformes de alta durabilidad</h3>
+            <p>Cada prenda medida con exactitud y reforzada estratégicamente para resistir el trabajo diario durante 5 años sin sufrir daños.</p>
+          </article>
+          <article class="warranty__card reveal">
+            <div class="warranty__big">70<small>lavadas<br>en casa</small></div>
+            <h3 class="h3">Uniforme ejecutivo lavable</h3>
+            <p>Con garantía a 1 año o 70 lavadas en casa siguiendo las instrucciones de lavado para cada tipo de tela.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-        const Lines = () => {
-            const catalog = useCatalog();
-            return (
-                <section className="pinstripe text-white py-20 md:py-28">
-                    <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-6">
-                        {catalog.lines.map(l => {
-                            const first = catalog.garments.find(g => g.line_id === l.id && g.featured);
-                            return (
-                                <a key={l.id} href={`/pages/colecciones/?linea=${l.id}`} className="reveal group relative rounded-2xl bg-white/[.04] border border-white/10 p-8 md:p-10 overflow-hidden min-h-[22rem] flex flex-col justify-end hover:bg-white/[.07] transition-colors">
-                                    {first && <div className="absolute -right-6 -top-4 w-56 opacity-90 group-hover:-translate-y-1 transition-transform"><Garment garment={first} color={catalog.colors[l.id === 'dama' ? 'gris-perla' : 'oxford'] || catalog.colors.oxford} /></div>}
-                                    <p className="kicker text-lemon-300">Colección</p>
-                                    <h2 className="text-5xl mt-2">{l.label}</h2>
-                                    <p className="text-white/70 mt-3 max-w-sm">{l.description}</p>
-                                    <p className="mt-6 font-medium flex items-center gap-2">Ver prendas <IconArrow className="w-4 h-4" /></p>
-                                </a>
-                            );
-                        })}
-                    </div>
-                </section>
-            );
-        };
+    <!-- Oficio -->
+    <section class="section" id="oficio" aria-labelledby="oficio-titulo" style="padding-top:0">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">El oficio</p>
+            <h2 class="h2" id="oficio-titulo" style="margin-top:18px">Precisión de <em>taller</em>, escala de <em>empresa</em>.</h2>
+          </div>
+          <p class="lede">Tradición sastre y maquinaria especializada: así un equipo de cien personas viste con la misma exactitud que un traje individual.</p>
+        </div>
+        <ol class="craft">
+          <li class="reveal"><h3>Corte industrial</h3><p>Cortes precisos con maquinaria, ensamble perfecto y exactitud de tallas.</p></li>
+          <li class="reveal"><h3>Medidas exactas</h3><p>Sistema de diseño, graduación y trazo computarizado.</p></li>
+          <li class="reveal"><h3>Reforzado</h3><p>Una excelente fusión entre tejidos delanteros.</p></li>
+          <li class="reveal"><h3>Un servicio único</h3><p>Diseñado con maquinaria especializada para eliminar márgenes de error.</p></li>
+        </ol>
+      </div>
+    </section>
 
-        const Featured = () => {
-            const catalog = useCatalog();
-            return (
-                <section className="max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-28">
-                    <SectionTitle kicker="Lo más pedido" mark="favoritas">Prendas</SectionTitle>
-                    {catalog.status === 'loading' && <GridSkeleton />}
-                    {catalog.status === 'error' && <LoadError />}
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-                        {catalog.garments.filter(g => g.featured).map(g => <GarmentCard key={g.id} garment={g} catalog={catalog} />)}
-                    </div>
-                </section>
-            );
-        };
+    <!-- Servicios -->
+    <section class="section" id="servicios" aria-labelledby="servicios-titulo" style="background:var(--paper-2);border-top:1px solid var(--ink)">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Servicios</p>
+            <h2 class="h2" id="servicios-titulo" style="margin-top:18px">La prenda <em>crece</em> con quien la lleva.</h2>
+          </div>
+          <p class="lede">Ajustes, márgenes y etiquetas pensados para equipos que cambian: una prenda Limonada se adapta sin perder su línea.</p>
+        </div>
+        <div class="grid-12">
+          <div class="span-12 md-7">
+            <div class="services">
+              <article class="service reveal">
+                <span class="mono">01 · Arreglos</span>
+                <h3 class="h3">Arreglos</h3>
+                <p>Aumenta y disminuye tallas sin deformar la prenda. No incluye blusas.</p>
+              </article>
+              <article class="service reveal">
+                <span class="mono">02 · Márgenes</span>
+                <h3 class="h3">Anchos de costura</h3>
+                <p>Diseñados para aumentar hasta dos tallas.</p>
+              </article>
+              <article class="service reveal">
+                <span class="mono">03 · A la medida</span>
+                <h3 class="h3">Arreglos personalizados</h3>
+                <ul><li>Largo de manga</li><li>Pantalón</li><li>Falda</li><li>Cadera</li><li>Cintura</li><li>Busto / pecho</li></ul>
+              </article>
+              <article class="service reveal">
+                <span class="mono">04 · Identidad</span>
+                <h3 class="h3">Etiquetas personalizadas</h3>
+                <ul><li>Nombre</li><li>Departamento</li><li>Sucursal</li><li>Talla</li><li>Medida</li></ul>
+              </article>
+            </div>
+          </div>
+          <div class="span-12 md-5" style="display:grid;align-items:center;padding-block:32px">
+            <div class="label-tag reveal" role="img" aria-label="Ejemplo de etiqueta personalizada con nombre, departamento, sucursal, talla y medida">
+              <p class="label-tag__brand">Limonada<span style="color:var(--lemon-600)">.</span></p>
+              <dl>
+                <dt>Nombre</dt><dd>A. Hernández</dd>
+                <dt>Depto.</dt><dd>Dirección Comercial</dd>
+                <dt>Sucursal</dt><dd>Polanco</dd>
+                <dt>Talla</dt><dd>38 R</dd>
+                <dt>Medida</dt><dd>Manga 63 · Cintura 84</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        const Process = () => (
-            <section className="bg-cream py-20 md:py-28">
-                <div className="max-w-7xl mx-auto px-4 md:px-8">
-                    <SectionTitle kicker="Cómo trabajamos" mark="cuatro pasos">Uniformar a tu equipo en</SectionTitle>
-                    <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {STEPS.map(s => (
-                            <li key={s.n} className="reveal border-t-2 border-navy pt-5">
-                                <p className="kicker text-navy-400">{s.n}</p>
-                                <h3 className="text-3xl mt-2">{s.title}</h3>
-                                <p className="text-navy-500 mt-2">{s.text}</p>
-                            </li>
-                        ))}
-                    </ol>
-                    <div className="mt-12 flex flex-wrap gap-3">
-                        <a href="/pages/cotizacion/" className="btn btn-navy">Empezar mi cotización</a>
-                        <a href="/pages/empresa/#tallas" className="btn btn-line">Guía de medición</a>
-                    </div>
-                </div>
-            </section>
-        );
+    <!-- Contacto -->
+    <section class="section contact" id="contacto" aria-labelledby="contacto-titulo">
+      <div class="container grid-2" style="align-items:start">
+        <div>
+          <p class="eyebrow">Contacto</p>
+          <h2 class="h2" id="contacto-titulo" style="margin-top:18px">Agenda una <em>medición</em>.</h2>
+          <p class="lede" style="margin-top:20px">Visítanos en el taller o cuéntanos de tu equipo: vamos a tu empresa a tomar medidas y te presentamos telas y cortes.</p>
+          <ul class="contact-list">
+            <li><span class="mono">Correo</span><a href="mailto:ventas@limonada.com.mx">ventas@limonada.com.mx</a></li>
+            <li><span class="mono">Teléfono</span><a href="tel:+525590127903">+55 9012 7903</a></li>
+            <li><span class="mono">Taller</span><address><a href="https://www.google.com/maps/search/?api=1&amp;query=Fray+Servando+Teresa+de+Mier+277+Col.+Tr%C3%A1nsito+06820+CDMX" target="_blank" rel="noopener">Fray Servando Teresa de Mier #277, Piso 8, Interior 801, Col. Tránsito, 06820, México, CDMX</a></address></li>
+          </ul>
+        </div>
+        <form class="form" data-mailto="ventas@limonada.com.mx" novalidate>
+          <div class="row">
+            <div class="field"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" autocomplete="name" required></div>
+            <div class="field"><label for="f-empresa">Empresa</label><input id="f-empresa" name="empresa" autocomplete="organization"></div>
+          </div>
+          <div class="row">
+            <div class="field"><label for="f-tel">Teléfono</label><input id="f-tel" name="telefono" type="tel" autocomplete="tel"></div>
+            <div class="field"><label for="f-cantidad">Prendas aprox.</label><input id="f-cantidad" name="cantidad" inputmode="numeric" placeholder="p. ej. 40"></div>
+          </div>
+          <div class="field">
+            <label for="f-servicio">Me interesa</label>
+            <select id="f-servicio" name="servicio" required>
+              <option>Uniformes ejecutivos para empresa</option>
+              <option>Traje a la medida · caballero</option>
+              <option>Traje a la medida · dama</option>
+              <option>Arreglos y ajustes de talla</option>
+              <option>Etiquetas personalizadas</option>
+            </select>
+          </div>
+          <div class="field"><label for="f-msg">Mensaje</label><textarea id="f-msg" name="mensaje" placeholder="Fechas, número de personas, telas que te gustan…"></textarea></div>
+          <button class="btn btn--lemon" type="submit" style="justify-self:start">Enviar solicitud <span class="arrow" aria-hidden="true">→</span></button>
+          <small data-note aria-live="polite">Se abrirá tu correo con el mensaje listo para enviar a ventas@limonada.com.mx.</small>
+        </form>
+      </div>
+    </section>
+  </main>
 
-        const Sectors = () => (
-            <section className="max-w-7xl mx-auto px-4 md:px-8 py-20">
-                <SectionTitle kicker="Vestimos a" center>Equipos de todos los <span className="mark">sectores</span></SectionTitle>
-                <ul className="flex flex-wrap justify-center gap-3 reveal">
-                    {SECTORS.map(s => <li key={s} className="px-5 py-2.5 rounded-full border border-navy-line">{s}</li>)}
-                </ul>
-            </section>
-        );
-
-        const DistributorsCta = () => (
-            <section className="max-w-7xl mx-auto px-4 md:px-8">
-                <div className="reveal rounded-2xl bg-lemon-400 p-10 md:p-14 grid md:grid-cols-3 gap-8 items-center">
-                    <div className="md:col-span-2">
-                        <h2 className="text-4xl md:text-5xl">Distribuidores en 7 estados</h2>
-                        <p className="mt-3 text-navy-700">Baja California Sur, Chihuahua, Guanajuato, Sinaloa, Sonora, Tamaulipas y Yucatán. En el resto del país te atendemos directamente.</p>
-                    </div>
-                    <a href="/pages/distribuidores/" className="btn btn-navy md:justify-self-end">Encuentra el tuyo</a>
-                </div>
-            </section>
-        );
-
-        renderPage(() => <><Hero /><Differentiators /><Lines /><Featured /><Process /><Sectors /><DistributorsCta /></>);
-    </script>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="./"><span><span class="logo__name">Limonada<i>.</i></span><span class="logo__tag">Sastrería · 1997</span></span></a>
+          <p style="margin-top:20px;max-width:40ch;opacity:.8">Trajes a la medida para caballero y dama y uniformes ejecutivos para empresas y organizaciones.</p>
+        </div>
+        <div>
+          <h4>Sitio</h4>
+          <ul><li><a href="portafolio/">Portafolio</a></li><li><a href="#oficio">Oficio</a></li><li><a href="#garantias">Garantías</a></li><li><a href="#servicios">Servicios</a></li><li><a href="privacidad/">Aviso de privacidad</a></li></ul>
+        </div>
+        <div>
+          <h4>Taller</h4>
+          <ul><li><a href="mailto:ventas@limonada.com.mx">ventas@limonada.com.mx</a></li><li><a href="tel:+525590127903">+55 9012 7903</a></li><li>Fray Servando Teresa de Mier #277, Piso 8, Int. 801, Col. Tránsito, 06820, CDMX</li></ul>
+        </div>
+      </div>
+      <p class="footer-sign">Hecho a la <em>medida</em>.</p>
+      <div class="footer-base"><span>© <span data-year>2026</span> Limonada · limonada.com.mx</span><span>Desde 1997 · Ciudad de México</span></div>
+    </div>
+  </footer>
 </body>
 </html>

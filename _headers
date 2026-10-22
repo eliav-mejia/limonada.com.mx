@@ -1,0 +1,12 @@
+# Cabeceras de seguridad y derechos. Las aplica Cloudflare Pages (o Netlify). GitHub Pages IGNORA este archivo:
+# mientras el sitio viva en GitHub Pages, replicarlas con una Transform Rule de Cloudflare (ver README §Seguridad).
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:
+
+/img/*
+  X-Robots-Tag: noai, noimageai
+  tdm-reservation: 1
