@@ -175,3 +175,10 @@ a.plate { text-decoration: none; display: block; }
 /* ── Aparición al desplazar ───────────────────────────── */
 .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
 .js .reveal.is-in { opacity: 1; transform: none; }
+
+/* ── Video (Tecnología) ───────────────────────────────── */
+.video { margin: 0; }
+.video__frame { position: relative; aspect-ratio: 16 / 9; background: var(--ink); border: 1px solid var(--ink); box-shadow: 10px 10px 0 var(--lemon); }
+.video__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video figcaption { display: flex; justify-content: space-between; gap: 16px; margin-top: 22px; }
+.video figcaption .mono { color: var(--ink-500); }

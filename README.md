@@ -23,7 +23,7 @@ calcula su `<base>` con un script porque GitHub Pages lo sirve en cualquier URL.
 ## Estructura
 
 ```
-index.html                  inicio: héroe + lámina I, cinta, adelanto del portafolio, manifiesto, garantías,
+index.html                  inicio: héroe + lámina I, cinta, adelanto del portafolio, manifiesto, garantías, tecnología (video),
                             oficio, servicios (etiqueta personalizada), contacto (formulario → correo a ventas@)
 portafolio/index.html       8 láminas con ficha (piezas, tela, corte, ocasión) y filtro ?linea=caballero|dama
 privacidad/index.html       aviso de privacidad (texto base: revisar con asesoría legal)
