@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Limonada · Uniformes ejecutivos para empresas desde 1997</title>
-    <meta name="description" content="Uniformes ejecutivos y empresariales para dama y caballero, a la medida, reforzados para 5 años de uso diario. Garantía de 1 año o 70 lavadas. Distribuidores en todo México.">
+    <title>Limonada · Trajes a la medida en CDMX</title>
+    <meta name="description" content="Diseña tu traje a la medida en línea: tela, solapa, botones, forro y monograma. Cortado y cosido a mano en la Ciudad de México. Desde $7,900.">
     <link rel="canonical" href="https://limonada.com.mx/">
-    <meta property="og:title" content="Limonada · Uniformes ejecutivos para empresas desde 1997">
-    <meta property="og:description" content="Uniformes ejecutivos y empresariales para dama y caballero, a la medida, reforzados para 5 años de uso diario. Garantía de 1 año o 70 lavadas. Distribuidores en todo México.">
+    <meta property="og:title" content="Limonada · Trajes a la medida en CDMX">
+    <meta property="og:description" content="Diseña tu traje a la medida en línea: tela, solapa, botones, forro y monograma. Cortado y cosido a mano en la Ciudad de México. Desde $7,900.">
     <meta property="og:url" content="https://limonada.com.mx/">
-    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
-    <meta name="theme-color" content="#14213d">
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#171614">
 
+    <!-- arranque.js first: sets LI_ROOT for every link and shows a message instead of a blank page if loading fails -->
+    <script src="js/arranque.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="/js/tailwind.config.js"></script>
+    <script src="js/tailwind.config.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/site.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/site.css">
 
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
@@ -26,90 +28,112 @@
 <body>
 
     <div id="root"></div>
+    <noscript><p style="padding:2rem;font-family:sans-serif">Limonada necesita JavaScript para mostrar la tienda. Escríbenos a hola@limonada.com.mx.</p></noscript>
 
-    <script type="text/babel" src="/js/layout.jsx"></script>
-    <script type="text/babel" src="/js/catalogo.jsx"></script>
+    <script type="text/babel" src="js/layout.jsx"></script>
+    <script type="text/babel" src="js/tienda.jsx"></script>
     <script type="text/babel">
-        const DIFFERENTIATORS = [
-            { n: '5', unit: 'años', title: 'Hechos para durar', text: 'Refuerzos en hombro, sisa y entrepierna para resistir el trabajo diario durante cinco años.' },
-            { n: '70', unit: 'lavadas', title: 'Garantía real', text: 'Un año o 70 lavadas en casa, siguiendo las indicaciones de cada tela.' },
-            { n: '1:1', unit: 'medición', title: 'A la medida', text: 'Medimos a cada colaborador en tu empresa o por videollamada para que cada prenda le quede bien.' },
-            { n: '1997', unit: 'desde', title: 'Experiencia', text: 'Casi tres décadas vistiendo equipos de banca, hotelería, salud, educación y corporativos.' },
+        // Hero suit cycles through a few looks every few seconds (stops with reduced motion).
+        const LOOKS = [
+            { fabric: 'lana-fria', color: 'marino', lapel: 'muesca', buttons: 'dos', vest: 'no', square: 'si' },
+            { fabric: 'pana', color: 'mostaza', lapel: 'muesca', buttons: 'dos', vest: 'no', square: 'no' },
+            { fabric: 'lana-raya', color: 'carbon', lapel: 'pico', buttons: 'dos', vest: 'si', square: 'si' },
+            { fabric: 'lino', color: 'salvia', lapel: 'muesca', buttons: 'dos', vest: 'no', square: 'no' },
+            { fabric: 'lana-fria', color: 'negro', lapel: 'chal', buttons: 'uno', vest: 'no', square: 'si' },
+            { fabric: 'tweed', color: 'tabaco', lapel: 'muesca', buttons: 'tres', vest: 'si', square: 'no' },
         ];
 
-        const STEPS = [
-            { n: '01', title: 'Elige', text: 'Arma tu lista de cotización con prendas, telas y colores.' },
-            { n: '02', title: 'Cotiza', text: 'Te enviamos precio por volumen, bordado de logotipo y tiempos en 24 h hábiles.' },
-            { n: '03', title: 'Medimos', text: 'Tomamos medidas a tu equipo en sitio o con nuestra guía de medición.' },
-            { n: '04', title: 'Entregamos', text: 'Confección y entrega por colaborador, etiquetada con su nombre.' },
-        ];
-
-        const SECTORS = ['Banca y finanzas', 'Hotelería', 'Salud', 'Educación', 'Corporativos', 'Gobierno', 'Aerolíneas y turismo', 'Retail'];
-
-        const Hero = () => (
-            <section className="bg-cream overflow-hidden">
-                <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
-                    <div className="animate-rise-in">
-                        <p className="kicker text-navy-500 mb-6">Uniformes ejecutivos · Desde 1997</p>
-                        <h1 className="text-5xl md:text-7xl leading-[1.02]">Tu equipo, <span className="mark">impecable</span> todos los días.</h1>
-                        <p className="mt-6 text-lg text-navy-500 max-w-lg leading-relaxed">Uniformes ejecutivos y empresariales para dama y caballero, diseñados con tendencias actuales y confeccionados a la medida de cada colaborador.</p>
-                        <div className="flex flex-wrap gap-3 mt-9">
-                            <a href="/pages/colecciones/" className="btn btn-navy">Ver colecciones <IconArrow className="w-4 h-4" /></a>
-                            <a href="/pages/cotizacion/" className="btn btn-line">Solicitar cotización</a>
+        const Hero = () => {
+            const catalog = useCatalog();
+            const [i, setI] = useState(0);
+            useEffect(() => {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+                const t = setInterval(() => setI(n => (n + 1) % LOOKS.length), 2600);
+                return () => clearInterval(t);
+            }, []);
+            const base = catalog.bySlug['el-clasico'];
+            const config = base ? normalizeConfig(catalog, base, LOOKS[i]) : null;
+            return (
+                <section className="overflow-hidden border-b-[1.5px] border-ink">
+                    <div className="max-w-7xl mx-auto px-4 md:px-8 pt-12 pb-16 md:py-20 grid lg:grid-cols-[1.15fr_1fr] gap-12 items-center">
+                        <div className="animate-rise-in">
+                            <span className="sticker sticker-clay">Nuevo · El Cruzado</span>
+                            <h1 className="text-[3.4rem] sm:text-7xl xl:text-[6.2rem] leading-[0.92] mt-6">Trajes a tu medida, <span className="italic-soft hl">con todo el jugo.</span></h1>
+                            <p className="mt-7 text-lg text-ink-2 max-w-xl leading-relaxed">Diseña tu traje en línea —tela, solapa, botones, forro— y nosotros lo cortamos y cosemos a mano para ti en la Ciudad de México. Sin tallas, sin maniquíes, sin prisas.</p>
+                            <div className="flex flex-wrap gap-3 mt-9">
+                                <a href={url('/pages/trajes/')} className="btn btn-ink">Diseña tu traje <IconArrow className="w-4 h-4" /></a>
+                                <a href={url('/pages/medidas/#cita')} className="btn btn-ghost">Agenda tu cita</a>
+                            </div>
+                            <dl className="grid grid-cols-3 gap-4 mt-12 max-w-lg">
+                                {[['desde', '$7,900'], ['entrega', '3–6 sem'], ['pruebas', '1 incluida']].map(([k, v]) => (
+                                    <div key={k} className="border-t-[1.5px] border-ink pt-3"><dt className="kicker text-ink-2">{k}</dt><dd className="font-display text-3xl mt-1">{v}</dd></div>
+                                ))}
+                            </dl>
+                        </div>
+                        <div className="relative aspect-square max-w-xl w-full mx-auto">
+                            <div className="absolute inset-[4%] rounded-full bg-lemon border-[1.5px] border-ink" />
+                            <div className="absolute inset-[4%] rounded-full" style={{ background: 'repeating-linear-gradient(90deg, rgba(23,22,20,.07) 0 1px, transparent 1px 12px)' }} />
+                            {config && <a href={suitHref(base)} aria-label="Ver El Clásico"><Traje catalog={catalog} config={config} className="absolute inset-0 w-full h-full p-[9%] drop-shadow-[0_18px_18px_rgba(0,0,0,.18)]" /></a>}
+                            <SpinBadge className="absolute -top-2 -left-2 w-28 h-28 md:w-36 md:h-36" text={`sastrería · desde ${BRAND.since} · cdmx · `} />
+                            {config && <div className="absolute bottom-[6%] right-0 bg-paper border-[1.5px] border-ink rounded-2xl px-4 py-3 rotate-[4deg] shadow-[4px_4px_0_#171614]">
+                                <p className="kicker text-ink-2">Look {String(i + 1).padStart(2, '0')}</p>
+                                <p className="font-display text-xl">{catalog.fabric[config.fabric].name}</p>
+                                <p className="mono text-xs">{catalog.colors[config.color].name}</p>
+                            </div>}
                         </div>
                     </div>
-                    <HeroDuo />
-                </div>
-            </section>
-        );
-
-        // Dama + caballero side by side, in navy and grey.
-        const HeroDuo = () => {
-            const catalog = useCatalog();
-            const dama = catalog.bySlug['saco-dama-entallado'];
-            const caballero = catalog.bySlug['traje-caballero-dos-botones'];
-            return (
-                <div className="relative aspect-square max-w-lg mx-auto w-full">
-                    <div className="absolute inset-[6%] rounded-full bg-lemon-300/60" />
-                    <div className="absolute inset-[6%] rounded-full pinstripe opacity-[.07]" />
-                    {dama && <a href={`/pages/colecciones/${dama.slug}/`} className="absolute left-[4%] bottom-[8%] w-[50%]"><Garment garment={dama} color={catalog.colors.marino} /></a>}
-                    {caballero && <a href={`/pages/colecciones/${caballero.slug}/`} className="absolute right-[4%] bottom-[4%] w-[54%]"><Garment garment={caballero} color={catalog.colors.carbon} /></a>}
-                </div>
+                </section>
             );
         };
 
-        const Differentiators = () => (
-            <section className="max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-28">
-                <SectionTitle kicker="Por qué Limonada" mark="te diferencia">Calidad que</SectionTitle>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {DIFFERENTIATORS.map(d => (
-                        <div key={d.title} className="reveal rounded-xl border border-navy-line p-7">
-                            <p className="font-display text-5xl">{d.n} <span className="text-base font-sans text-navy-400">{d.unit}</span></p>
-                            <h3 className="text-2xl mt-5">{d.title}</h3>
-                            <p className="text-sm text-navy-500 mt-2 leading-relaxed">{d.text}</p>
-                        </div>
-                    ))}
-                </div>
-            </section>
+        const FabricTicker = () => (
+            <div className="bg-lemon border-b-[1.5px] border-ink py-5 font-display italic-soft text-3xl md:text-5xl">
+                <Marquee items={['Lana fría de Biella', 'Lino irlandés', 'Tweed escocés', 'Pana portuguesa', 'Forro color limón', 'Ojales hechos a mano']} />
+            </div>
         );
 
-        const Lines = () => {
+        // Mini configurator: the lapel, buttons and fabric change the drawing live.
+        const Playground = () => {
             const catalog = useCatalog();
+            const suit = catalog.bySlug['el-clasico'];
+            const [cfg, setCfg] = useState({ fabric: 'lana-fria', color: 'oliva', lapel: 'pico', buttons: 'dos', vest: 'no', square: 'si' });
+            if (!suit) return null;
+            const config = normalizeConfig(catalog, suit, cfg);
+            const set = (patch) => setCfg(c => ({ ...c, ...patch }));
+            const fabric = catalog.fabric[config.fabric];
             return (
-                <section className="pinstripe text-white py-20 md:py-28">
-                    <div className="max-w-7xl mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-6">
-                        {catalog.lines.map(l => {
-                            const first = catalog.garments.find(g => g.line_id === l.id && g.featured);
-                            return (
-                                <a key={l.id} href={`/pages/colecciones/?linea=${l.id}`} className="reveal group relative rounded-2xl bg-white/[.04] border border-white/10 p-8 md:p-10 overflow-hidden min-h-[22rem] flex flex-col justify-end hover:bg-white/[.07] transition-colors">
-                                    {first && <div className="absolute -right-6 -top-4 w-56 opacity-90 group-hover:-translate-y-1 transition-transform"><Garment garment={first} color={catalog.colors[l.id === 'dama' ? 'gris-perla' : 'oxford'] || catalog.colors.oxford} /></div>}
-                                    <p className="kicker text-lemon-300">Colección</p>
-                                    <h2 className="text-5xl mt-2">{l.label}</h2>
-                                    <p className="text-white/70 mt-3 max-w-sm">{l.description}</p>
-                                    <p className="mt-6 font-medium flex items-center gap-2">Ver prendas <IconArrow className="w-4 h-4" /></p>
-                                </a>
-                            );
-                        })}
+                <section className="max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-28 grid lg:grid-cols-2 gap-12 items-center">
+                    <div className="reveal order-2 lg:order-1 rounded-[2rem] bg-paper-2 border-[1.5px] border-ink aspect-square relative overflow-hidden">
+                        <div className="absolute inset-[14%] rounded-full border-[1.5px] border-dashed border-ink/40" />
+                        <Traje catalog={catalog} config={config} className="absolute inset-0 w-full h-full p-10" />
+                        <p className="absolute bottom-5 left-5 mono text-sm bg-paper rounded-full border-[1.5px] border-ink px-4 py-1.5">{formatMXN(priceOf(catalog, suit, config))}</p>
+                    </div>
+                    <div className="reveal order-1 lg:order-2">
+                        <p className="kicker text-ink-2 mb-3">Pruébalo aquí mismo</p>
+                        <h2 className="text-4xl md:text-6xl leading-[1]">Juega con la <span className="italic-soft hl">solapa.</span></h2>
+                        <p className="text-ink-2 mt-5 max-w-md">Cada detalle cambia el carácter del traje. Mueve las piezas y mira qué te dice.</p>
+                        <div className="space-y-6 mt-9">
+                            <div>
+                                <p className="kicker mb-2">Solapa</p>
+                                <div className="flex flex-wrap gap-2">{catalog.group.lapel.options.map(o => <button key={o.id} className="chip" aria-pressed={config.lapel === o.id} onClick={() => set({ lapel: o.id })}>{o.label}</button>)}</div>
+                            </div>
+                            <div>
+                                <p className="kicker mb-2">Botones</p>
+                                <div className="flex flex-wrap gap-2">{catalog.group.buttons.options.map(o => <button key={o.id} className="chip" aria-pressed={config.buttons === o.id} onClick={() => set({ buttons: o.id })}>{o.label}</button>)}</div>
+                            </div>
+                            <div>
+                                <p className="kicker mb-2">Tela · {fabric.name}</p>
+                                <div className="flex flex-wrap gap-2">{catalog.fabrics.map(f => (
+                                    <button key={f.id} onClick={() => set({ fabric: f.id, color: f.colors[0].id })} aria-pressed={config.fabric === f.id} title={f.name}
+                                        className={`rounded-full p-0.5 border-[1.5px] ${config.fabric === f.id ? 'border-ink' : 'border-transparent'}`}><FabricSwatch catalog={catalog} fabricId={f.id} colorId={f.colors[0].id} /></button>
+                                ))}</div>
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                                <button className="chip" aria-pressed={config.vest === 'si'} onClick={() => set({ vest: config.vest === 'si' ? 'no' : 'si' })}>+ Chaleco</button>
+                                <button className="chip" aria-pressed={config.square === 'si'} onClick={() => set({ square: config.square === 'si' ? 'no' : 'si' })}>+ Pañuelo limón</button>
+                            </div>
+                        </div>
+                        <a href={suitHref(suit, { tela: config.fabric, color: config.color })} className="btn btn-ink mt-10">Termina de diseñarlo <IconArrow className="w-4 h-4" /></a>
                     </div>
                 </section>
             );
@@ -118,60 +142,81 @@
         const Featured = () => {
             const catalog = useCatalog();
             return (
-                <section className="max-w-7xl mx-auto px-4 md:px-8 py-20 md:py-28">
-                    <SectionTitle kicker="Lo más pedido" mark="favoritas">Prendas</SectionTitle>
+                <section className="max-w-7xl mx-auto px-4 md:px-8 pb-24">
+                    <SectionTitle kicker="La colección" mark="de la casa." aside={<a href={url('/pages/trajes/')} className="btn btn-ghost">Ver los {catalog.suits.length || 8} trajes <IconArrow className="w-4 h-4" /></a>}>Los favoritos</SectionTitle>
                     {catalog.status === 'loading' && <GridSkeleton />}
                     {catalog.status === 'error' && <LoadError />}
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-                        {catalog.garments.filter(g => g.featured).map(g => <GarmentCard key={g.id} garment={g} catalog={catalog} />)}
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
+                        {catalog.suits.filter(s => s.featured).slice(0, 6).map((s, i) => <SuitCard key={s.id} suit={s} catalog={catalog} index={catalog.suits.indexOf(s)} />)}
                     </div>
                 </section>
             );
         };
 
-        const Process = () => (
-            <section className="bg-cream py-20 md:py-28">
-                <div className="max-w-7xl mx-auto px-4 md:px-8">
-                    <SectionTitle kicker="Cómo trabajamos" mark="cuatro pasos">Uniformar a tu equipo en</SectionTitle>
-                    <ol className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {STEPS.map(s => (
-                            <li key={s.n} className="reveal border-t-2 border-navy pt-5">
-                                <p className="kicker text-navy-400">{s.n}</p>
-                                <h3 className="text-3xl mt-2">{s.title}</h3>
-                                <p className="text-navy-500 mt-2">{s.text}</p>
-                            </li>
-                        ))}
-                    </ol>
-                    <div className="mt-12 flex flex-wrap gap-3">
-                        <a href="/pages/cotizacion/" className="btn btn-navy">Empezar mi cotización</a>
-                        <a href="/pages/empresa/#tallas" className="btn btn-line">Guía de medición</a>
-                    </div>
-                </div>
-            </section>
-        );
+        const Occasions = () => {
+            const catalog = useCatalog();
+            return (
+                <section className="max-w-7xl mx-auto px-4 md:px-8 py-24">
+                    <SectionTitle kicker="¿Para qué lo quieres?" mark="ocasión.">Un traje por</SectionTitle>
+                    <ul className="border-t-[1.5px] border-ink">
+                        {catalog.occasions.map((o, i) => {
+                            const n = catalog.suits.filter(s => s.occasions.includes(o.id)).length;
+                            return (
+                                <li key={o.id} className="reveal border-b-[1.5px] border-ink">
+                                    <a href={url(`/pages/trajes/?ocasion=${o.id}`)} className="group flex items-center gap-6 py-6 md:py-8 px-2 hover:bg-lemon transition-colors">
+                                        <span className="mono text-sm w-10">0{i + 1}</span>
+                                        <span className="font-display text-4xl md:text-6xl flex-1 group-hover:italic-soft">{o.label}</span>
+                                        <span className="mono text-sm hidden sm:block">{n} trajes</span>
+                                        <IconArrow className="w-8 h-8 -rotate-45 group-hover:rotate-0 transition-transform" />
+                                    </a>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </section>
+            );
+        };
 
-        const Sectors = () => (
-            <section className="max-w-7xl mx-auto px-4 md:px-8 py-20">
-                <SectionTitle kicker="Vestimos a" center>Equipos de todos los <span className="mark">sectores</span></SectionTitle>
-                <ul className="flex flex-wrap justify-center gap-3 reveal">
-                    {SECTORS.map(s => <li key={s} className="px-5 py-2.5 rounded-full border border-navy-line">{s}</li>)}
-                </ul>
-            </section>
-        );
+        const PROMISES = [
+            { t: 'Una prueba incluida', d: 'Te lo pruebas con el sastre a mitad del proceso y ajustamos lo que haga falta.' },
+            { t: 'Ajuste gratis 30 días', d: 'Si después de estrenarlo algo no cae como debe, lo arreglamos sin costo.' },
+            { t: 'Hecho en CDMX', d: 'Cortamos y cosemos en nuestro taller. Puedes venir a ver cómo va tu traje.' },
+        ];
 
-        const DistributorsCta = () => (
+        const Promises = () => (
             <section className="max-w-7xl mx-auto px-4 md:px-8">
-                <div className="reveal rounded-2xl bg-lemon-400 p-10 md:p-14 grid md:grid-cols-3 gap-8 items-center">
-                    <div className="md:col-span-2">
-                        <h2 className="text-4xl md:text-5xl">Distribuidores en 7 estados</h2>
-                        <p className="mt-3 text-navy-700">Baja California Sur, Chihuahua, Guanajuato, Sinaloa, Sonora, Tamaulipas y Yucatán. En el resto del país te atendemos directamente.</p>
-                    </div>
-                    <a href="/pages/distribuidores/" className="btn btn-navy md:justify-self-end">Encuentra el tuyo</a>
+                <div className="grid md:grid-cols-3 gap-6">
+                    {PROMISES.map((p, i) => (
+                        <div key={p.t} className={`reveal rounded-[1.75rem] border-[1.5px] border-ink p-8 ${i === 1 ? 'bg-lemon md:-rotate-1' : 'bg-paper-2'}`}>
+                            <p className="mono text-xs">✺ 0{i + 1}</p>
+                            <h3 className="text-3xl mt-4">{p.t}</h3>
+                            <p className="text-ink-2 mt-3">{p.d}</p>
+                        </div>
+                    ))}
                 </div>
             </section>
         );
 
-        renderPage(() => <><Hero /><Differentiators /><Lines /><Featured /><Process /><Sectors /><DistributorsCta /></>);
+        const Appointment = () => (
+            <section className="max-w-7xl mx-auto px-4 md:px-8 pt-24">
+                <div className="reveal rounded-[2rem] bg-ink text-paper overflow-hidden border-[1.5px] border-ink">
+                    <div className="tape" />
+                    <div className="p-10 md:p-16 grid md:grid-cols-[1.4fr_1fr] gap-10 items-center">
+                        <div>
+                            <p className="kicker text-lemon">Medidas</p>
+                            <h2 className="text-4xl md:text-6xl mt-3 leading-[1]">¿Prefieres que te <span className="italic-soft text-lemon">midamos?</span></h2>
+                            <p className="text-paper/70 mt-5 max-w-lg">Ven al estudio, te visitamos en casa o lo hacemos por videollamada. Tráete los zapatos que vas a usar.</p>
+                        </div>
+                        <div className="flex flex-col gap-3 md:items-end">
+                            <a href={url('/pages/medidas/#cita')} className="btn btn-lemon">Agenda tu cita <IconArrow className="w-4 h-4" /></a>
+                            <a href={url('/pages/medidas/')} className="btn !border-paper/40 !text-paper btn-ghost">Cómo medirme yo</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+
+        renderPage(() => <><Hero /><FabricTicker /><Playground /><Featured /><HowItWorks /><Occasions /><Promises /><Appointment /></>);
     </script>
 </body>
 </html>

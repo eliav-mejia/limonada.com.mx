@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medidas y citas · Limonada</title>
+    <meta name="description" content="Cómo tomar tus medidas para un traje a la medida y cómo agendar tu cita en el estudio, a domicilio o por videollamada.">
+    <link rel="canonical" href="https://limonada.com.mx/pages/medidas/">
+    <meta property="og:title" content="Medidas y citas · Limonada">
+    <meta property="og:description" content="Cómo tomar tus medidas para un traje a la medida y cómo agendar tu cita en el estudio, a domicilio o por videollamada.">
+    <meta property="og:url" content="https://limonada.com.mx/pages/medidas/">
+    <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#171614">
+
+    <!-- arranque.js first: sets LI_ROOT for every link and shows a message instead of a blank page if loading fails -->
+    <script src="../../js/arranque.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../js/tailwind.config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/site.css">
+
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+</head>
+<body>
+
+    <div id="root"></div>
+    <noscript><p style="padding:2rem;font-family:sans-serif">Limonada necesita JavaScript para mostrar la tienda. Escríbenos a hola@limonada.com.mx.</p></noscript>
+
+    <script type="text/babel" src="../../js/layout.jsx"></script>
+    <script type="text/babel" src="../../js/tienda.jsx"></script>
+    <script type="text/babel">
+        // Measurement guide (MEASURES in js/tienda.jsx) + appointment request by WhatsApp.
+        // Numbered points on the figure follow the order of MEASURES.
+        const POINTS = [[100, 10], [100, 46], [100, 74], [100, 108], [100, 134], [70, 52], [44, 110], [138, 86], [112, 200]];
+
+        const Figure = () => (
+            <svg viewBox="0 0 200 300" className="w-full h-full" aria-hidden="true">
+                <g fill="none" stroke="#171614" strokeWidth="1.6" strokeLinejoin="round">
+                    <circle cx="100" cy="26" r="14" />
+                    <path d="M92 40v8h16v-8M70 52q30-8 60 0l12 6 8 70-12 2-8-52-2 40q4 22 0 38l-6 126h-16l-6-110-6 110H76l-6-126q-4-16 0-38l-2-40-8 52-12-2 8-70z" />
+                </g>
+                <g stroke="#ecdf3f" strokeWidth="3" strokeLinecap="round">
+                    <path d="M76 74h48M78 108h44M74 134h52M70 52h60" />
+                    <path d="M46 62l-4 66M112 154v132" strokeDasharray="2 4" />
+                </g>
+                {POINTS.map(([x, y], i) => (
+                    <g key={i}><circle cx={x} cy={y} r="7" fill="#171614" /><text x={x} y={y + 3} textAnchor="middle" fill="#f4f0e6" style={{ font: '600 8px JetBrains Mono, monospace' }}>{i + 1}</text></g>
+                ))}
+            </svg>
+        );
+
+        const Booking = () => {
+            const [form, setForm] = useState({ name: '', phone: '', type: 'estudio', date: '', time: 'tarde', suit: '', notes: '' });
+            const f = (key) => ({ value: form[key], onChange: (e) => setForm({ ...form, [key]: e.target.value }) });
+            const type = MEASURE_METHODS.find(x => x.id === form.type) || MEASURE_METHODS[0];
+            const send = (e) => {
+                e.preventDefault();
+                window.open(waLink([
+                    `Hola Limonada, quiero agendar una cita de medidas (${type.label.toLowerCase()}).`,
+                    `Fecha preferida: ${form.date || 'flexible'} · ${form.time}`,
+                    form.suit && `Me interesa: ${form.suit}`, form.notes && `Notas: ${form.notes}`,
+                    `${form.name} · ${form.phone}`,
+                ].filter(Boolean).join('\n')), '_blank', 'noopener,noreferrer');
+            };
+            return (
+                <section id="cita" className="max-w-7xl mx-auto px-4 md:px-8 pt-24 scroll-mt-24">
+                    <div className="rounded-[2rem] bg-lemon border-[1.5px] border-ink overflow-hidden">
+                        <div className="tape !bg-paper" />
+                        <div className="p-8 md:p-14 grid lg:grid-cols-[1fr_1.2fr] gap-10">
+                            <div>
+                                <p className="kicker">Agenda</p>
+                                <h2 className="text-4xl md:text-6xl mt-3 leading-[1]">Aparta tu <span className="italic-soft">cita.</span></h2>
+                                <p className="mt-5 text-ink-2 max-w-sm">40 minutos. Te medimos, vemos telas en persona y resolvemos dudas. Sin compromiso de compra.</p>
+                                <p className="mono text-sm mt-8">{BRAND.address}<br />{BRAND.hours}</p>
+                            </div>
+                            <form onSubmit={send} className="grid sm:grid-cols-2 gap-3">
+                                <select className="field sm:col-span-2" {...f('type')}>{MEASURE_METHODS.filter(x => x.id !== 'propias').map(x => <option key={x.id} value={x.id}>{x.label} — {x.note}</option>)}</select>
+                                <input className="field" placeholder="Nombre" required autoComplete="name" {...f('name')} />
+                                <input className="field" type="tel" placeholder="WhatsApp" required autoComplete="tel" {...f('phone')} />
+                                <input className="field" type="date" aria-label="Fecha preferida" {...f('date')} />
+                                <select className="field" aria-label="Horario" {...f('time')}><option value="mañana">Mañana</option><option value="tarde">Tarde</option><option value="sábado">Sábado</option></select>
+                                <input className="field sm:col-span-2" placeholder="¿Qué traje te interesa? (opcional)" {...f('suit')} />
+                                <textarea className="field sm:col-span-2" rows="3" maxLength={600} placeholder="Notas (opcional)" {...f('notes')} />
+                                <button className="btn btn-ink sm:col-span-2"><IconWhatsApp className="w-5 h-5" /> Pedir cita por WhatsApp</button>
+                                <p className="text-xs text-ink-2 sm:col-span-2">Al enviar aceptas el <a href={url('/pages/privacidad/')} className="underline">aviso de privacidad</a>.</p>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const MeasuresPage = () => (
+            <>
+                <PageHero kicker="Medidas" title="Nueve números" mark="y una cinta." intro="Así de simple empieza un traje a la medida. Elige cómo prefieres que te midamos, o mídete tú con esta guía y lo revisamos juntos por videollamada." />
+
+                <section className="max-w-7xl mx-auto px-4 md:px-8 py-16">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+                        {MEASURE_METHODS.map((m, i) => (
+                            <div key={m.id} className={`reveal rounded-[1.5rem] border-[1.5px] border-ink p-6 ${i === 0 ? 'bg-ink text-paper' : 'bg-paper-2'}`}>
+                                <p className="mono text-xs">0{i + 1}</p>
+                                <h2 className="text-3xl mt-3">{m.label}</h2>
+                                <p className={`mt-2 text-sm ${i === 0 ? 'text-paper/70' : 'text-ink-2'}`}>{m.note}</p>
+                                <p className="mono text-sm mt-4">{m.price_delta_mxn ? `+${formatMXN(m.price_delta_mxn)}` : 'Gratis'}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                <section className="max-w-7xl mx-auto px-4 md:px-8 grid lg:grid-cols-[1fr_1.3fr] gap-12 items-start">
+                    <div className="lg:sticky lg:top-28 rounded-[2rem] bg-paper-2 border-[1.5px] border-ink p-8 aspect-[2/3] max-w-md w-full mx-auto"><Figure /></div>
+                    <div>
+                        <SectionTitle kicker="Guía para medirte" mark="en casa.">Mídete</SectionTitle>
+                        <ul className="mb-8 space-y-2 text-ink-2">
+                            <li className="flex gap-3"><IconTape className="w-5 h-5 text-ink shrink-0" />Cinta métrica de costura (no la de ferretería) y alguien que te ayude.</li>
+                            <li className="flex gap-3"><IconTape className="w-5 h-5 text-ink shrink-0" />Ropa ligera, postura natural, sin meter el abdomen.</li>
+                            <li className="flex gap-3"><IconTape className="w-5 h-5 text-ink shrink-0" />Mide dos veces. Si dudas entre dos números, anota el mayor.</li>
+                        </ul>
+                        <ol className="border-t-[1.5px] border-ink">
+                            {MEASURES.map((m, i) => (
+                                <li key={m.id} className="reveal py-5 border-b-[1.5px] border-ink grid grid-cols-[2.5rem_1fr] gap-4">
+                                    <span className="w-8 h-8 rounded-full bg-ink text-paper mono text-sm flex items-center justify-center">{i + 1}</span>
+                                    <div><h3 className="text-2xl">{m.label}</h3><p className="text-ink-2 mt-1">{m.how}</p></div>
+                                </li>
+                            ))}
+                        </ol>
+                        <a href={url('/pages/trajes/')} className="btn btn-ink mt-10">Ya me medí: elegir traje <IconArrow className="w-4 h-4" /></a>
+                    </div>
+                </section>
+
+                <Booking />
+            </>
+        );
+
+        renderPage(MeasuresPage);
+    </script>
+</body>
+</html>

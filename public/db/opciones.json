@@ -1,0 +1,47 @@
+{
+  "_schema": "groups: id, label, hint, options[{ id, label, note, price_delta_mxn }] · linings: id, label, hex, price_delta_mxn",
+  "_note": "Opciones del configurador (Etapa 1). price_delta_mxn se suma al precio del traje. Revisar con el cliente.",
+  "updated_at": "2026-10-11",
+  "groups": [
+    { "id": "fit", "label": "Corte", "hint": "Cómo cae el saco sobre el cuerpo.", "options": [
+      { "id": "slim", "label": "Slim", "note": "Entallado, cintura marcada", "price_delta_mxn": 0 },
+      { "id": "clasico", "label": "Clásico", "note": "Recto, con aire", "price_delta_mxn": 0 },
+      { "id": "relajado", "label": "Relajado", "note": "Hombro suave, holgado", "price_delta_mxn": 0 } ] },
+    { "id": "lapel", "label": "Solapa", "hint": "La firma del saco.", "options": [
+      { "id": "muesca", "label": "Muesca", "note": "La de siempre", "price_delta_mxn": 0 },
+      { "id": "pico", "label": "Pico", "note": "Más formal, apunta arriba", "price_delta_mxn": 300 },
+      { "id": "chal", "label": "Chal", "note": "Curva continua, de etiqueta", "price_delta_mxn": 500 } ] },
+    { "id": "buttons", "label": "Botones", "hint": "Botonadura del frente.", "options": [
+      { "id": "uno", "label": "Uno", "note": "Escote profundo", "price_delta_mxn": 0 },
+      { "id": "dos", "label": "Dos", "note": "Se abrocha el de arriba", "price_delta_mxn": 0 },
+      { "id": "tres", "label": "Tres", "note": "Se abrocha el de en medio", "price_delta_mxn": 0 },
+      { "id": "cruzado", "label": "Cruzado 6×2", "note": "Doble botonadura", "price_delta_mxn": 900 } ] },
+    { "id": "vents", "label": "Aberturas", "hint": "En la espalda del saco.", "options": [
+      { "id": "laterales", "label": "Laterales", "note": "Dos, se mueven contigo", "price_delta_mxn": 0 },
+      { "id": "central", "label": "Central", "note": "Una, clásica americana", "price_delta_mxn": 0 },
+      { "id": "sin", "label": "Sin abertura", "note": "Línea limpia de etiqueta", "price_delta_mxn": 0 } ] },
+    { "id": "pants", "label": "Pantalón", "hint": "Frente del pantalón.", "options": [
+      { "id": "sin-pinzas", "label": "Sin pinzas", "note": "Frente plano", "price_delta_mxn": 0 },
+      { "id": "una-pinza", "label": "Una pinza", "note": "Un poco de amplitud", "price_delta_mxn": 0 },
+      { "id": "dos-pinzas", "label": "Dos pinzas", "note": "Tiro alto, holgado", "price_delta_mxn": 300 } ] },
+    { "id": "vest", "label": "Chaleco", "hint": "Convierte el traje en tres piezas.", "options": [
+      { "id": "no", "label": "Sin chaleco", "note": "Dos piezas", "price_delta_mxn": 0 },
+      { "id": "si", "label": "Con chaleco", "note": "Cinco botones, a juego", "price_delta_mxn": 2400 } ] },
+    { "id": "square", "label": "Pañuelo", "hint": "Para la bolsa del pecho.", "options": [
+      { "id": "no", "label": "Sin pañuelo", "note": "", "price_delta_mxn": 0 },
+      { "id": "si", "label": "Pañuelo limón", "note": "Seda, enrollado a mano", "price_delta_mxn": 450 } ] }
+  ],
+  "linings": [
+    { "id": "limon", "label": "Limón de la casa", "hex": "#ecdf3f", "price_delta_mxn": 0 },
+    { "id": "vino", "label": "Vino", "hex": "#5b1f2b", "price_delta_mxn": 0 },
+    { "id": "oliva", "label": "Oliva", "hex": "#4a5236", "price_delta_mxn": 0 },
+    { "id": "negro", "label": "Negro", "hex": "#151515", "price_delta_mxn": 0 },
+    { "id": "paisley", "label": "Paisley estampado", "hex": "#7a3b52", "price_delta_mxn": 650 },
+    { "id": "sin-forro", "label": "Sin forro", "hex": "#e7dfcc", "price_delta_mxn": -400 }
+  ],
+  "monogram": { "price_delta_mxn": 350, "max_length": 3 },
+  "delivery": [
+    { "id": "estandar", "label": "Estándar", "note": "Según el traje (3–6 semanas)", "price_delta_mxn": 0 },
+    { "id": "express", "label": "Express", "note": "2 semanas, sujeto a agenda", "price_delta_mxn": 1800 }
+  ]
+}

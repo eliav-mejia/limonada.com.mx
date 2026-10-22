@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El estudio · Sastrería desde 1997 · Limonada</title>
+    <meta name="description" content="Un taller pequeño en la Ciudad de México que corta y cose cada traje para una sola persona desde 1997.">
+    <link rel="canonical" href="https://limonada.com.mx/pages/estudio/">
+    <meta property="og:title" content="El estudio · Sastrería desde 1997 · Limonada">
+    <meta property="og:description" content="Un taller pequeño en la Ciudad de México que corta y cose cada traje para una sola persona desde 1997.">
+    <meta property="og:url" content="https://limonada.com.mx/pages/estudio/">
+    <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#171614">
+
+    <!-- arranque.js first: sets LI_ROOT for every link and shows a message instead of a blank page if loading fails -->
+    <script src="../../js/arranque.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../js/tailwind.config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/site.css">
+
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+</head>
+<body>
+
+    <div id="root"></div>
+    <noscript><p style="padding:2rem;font-family:sans-serif">Limonada necesita JavaScript para mostrar la tienda. Escríbenos a hola@limonada.com.mx.</p></noscript>
+
+    <script type="text/babel" src="../../js/layout.jsx"></script>
+    <script type="text/babel" src="../../js/tienda.jsx"></script>
+    <script type="text/babel">
+        // 1997 y los sectores vienen del sitio anterior (uniformes ejecutivos). [verificar] con el cliente antes de publicar.
+        const MILESTONES = [
+            { y: '1997', t: 'Primer taller', d: 'Empezamos cosiendo uniformes ejecutivos a la medida para empresas.' },
+            { y: '+25', t: 'Años vistiendo equipos', d: 'Banca, hotelería, salud, educación: miles de colaboradores medidos uno por uno.' },
+            { y: '2026', t: 'Diseña en línea', d: 'Lo aprendido, para una sola persona: eliges todo aquí y nos vemos para medir y probar.' },
+        ];
+
+        const CRAFT = [
+            { t: 'Entretela flotante', d: 'Cosida, no pegada: el saco toma la forma de tu pecho con el uso y no hace burbujas en la tintorería.' },
+            { t: 'Ojales a mano', d: 'En la solapa y, si quieres, en la manga. Se notan de cerca, y de cerca es donde importan.' },
+            { t: 'Margen para crecer', d: 'Dejamos tela extra en cintura y largo para que el traje te acompañe años, no temporadas.' },
+            { t: 'Patrón propio', d: 'Guardamos tu patrón. Tu segundo traje se pide en línea, sin volver a medir.' },
+        ];
+
+        const Studio = () => (
+            <>
+                <PageHero kicker="El estudio" title="Sastres desde 1997." mark="Hípsters desde ayer."
+                    intro="Somos un taller pequeño en la Ciudad de México. Cortamos y cosemos cada traje para una sola persona, con telas que elegimos de molino en molino y un forro color limón que es nuestra firma." />
+
+                <section className="max-w-7xl mx-auto px-4 md:px-8 py-20">
+                    <SectionTitle kicker="Casi tres décadas" mark="hilo.">Una historia con mucho</SectionTitle>
+                    <ol className="grid md:grid-cols-3 gap-6">
+                        {MILESTONES.map(m => (
+                            <li key={m.y} className="reveal border-t-[1.5px] border-ink pt-5">
+                                <p className="font-display italic-soft text-6xl">{m.y}</p>
+                                <h3 className="text-2xl mt-3">{m.t}</h3>
+                                <p className="text-ink-2 mt-2 text-sm leading-relaxed">{m.d}</p>
+                            </li>
+                        ))}
+                    </ol>
+                </section>
+
+                <section className="bg-ink text-paper py-20 md:py-28">
+                    <div className="max-w-7xl mx-auto px-4 md:px-8">
+                        <div className="mb-12 reveal">
+                            <p className="kicker text-lemon mb-3">Lo que no se ve</p>
+                            <h2 className="text-4xl md:text-6xl leading-[1]">Detalles de <span className="italic-soft text-lemon">sastre.</span></h2>
+                        </div>
+                        <div className="grid sm:grid-cols-2 gap-px bg-paper/20 border border-paper/20 rounded-[1.5rem] overflow-hidden">
+                            {CRAFT.map((c, i) => (
+                                <div key={c.t} className="reveal bg-ink p-8">
+                                    <p className="mono text-lemon text-xs">✺ 0{i + 1}</p>
+                                    <h3 className="text-3xl mt-3">{c.t}</h3>
+                                    <p className="text-paper/70 mt-2">{c.d}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                <section id="garantia" className="max-w-5xl mx-auto px-4 md:px-8 py-20 scroll-mt-24">
+                    <div className="reveal grid md:grid-cols-[auto_1fr] gap-8 items-center">
+                        <SpinBadge className="w-32 h-32 md:w-40 md:h-40" text="garantía limonada · un año · " />
+                        <div>
+                            <h2 className="text-4xl md:text-5xl">Un año de garantía en costuras, botones y tela.</h2>
+                            <p className="text-ink-2 mt-4">Y 30 días de ajuste gratis después de la entrega. Si algo no cae como debe, lo arreglamos. <a href={url('/pages/terminos/#garantia')} className="underline">Letra pequeña</a>.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="empresas" className="max-w-7xl mx-auto px-4 md:px-8 scroll-mt-24">
+                    <div className="reveal rounded-[2rem] bg-lemon border-[1.5px] border-ink p-10 md:p-14 grid md:grid-cols-[1.5fr_1fr] gap-8 items-center">
+                        <div>
+                            <p className="kicker">Bodas, equipos y empresas</p>
+                            <h2 className="text-4xl md:text-5xl mt-3">¿Vistes a varios? Hablemos de <span className="italic-soft">grupo.</span></h2>
+                            <p className="mt-4 text-ink-2 max-w-xl">Novio y padrinos, equipos de ventas, uniformes ejecutivos: medimos a todos en una sola visita y coordinamos las entregas. Precio especial desde 5 trajes.</p>
+                        </div>
+                        <a href={url('/pages/contacto/?asunto=grupos')} className="btn btn-ink md:justify-self-end">Cotizar grupo <IconArrow className="w-4 h-4" /></a>
+                    </div>
+                </section>
+            </>
+        );
+
+        renderPage(Studio);
+    </script>
+</body>
+</html>

@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Términos y garantía · Limonada</title>
-    <meta name="description" content="Términos de cotización, pedido, entrega y garantía de uniformes Limonada.">
+    <meta name="description" content="Precios, anticipo, medidas, entregas, garantía y devoluciones de los trajes a la medida Limonada.">
     <link rel="canonical" href="https://limonada.com.mx/pages/terminos/">
     <meta property="og:title" content="Términos y garantía · Limonada">
-    <meta property="og:description" content="Términos de cotización, pedido, entrega y garantía de uniformes Limonada.">
+    <meta property="og:description" content="Precios, anticipo, medidas, entregas, garantía y devoluciones de los trajes a la medida Limonada.">
     <meta property="og:url" content="https://limonada.com.mx/pages/terminos/">
-    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
-    <meta name="theme-color" content="#14213d">
+    <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#171614">
 
+    <!-- arranque.js first: sets LI_ROOT for every link and shows a message instead of a blank page if loading fails -->
+    <script src="../../js/arranque.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="/js/tailwind.config.js"></script>
+    <script src="../../js/tailwind.config.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/site.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/site.css">
 
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
@@ -26,49 +28,52 @@
 <body>
 
     <div id="root"></div>
+    <noscript><p style="padding:2rem;font-family:sans-serif">Limonada necesita JavaScript para mostrar la tienda. Escríbenos a hola@limonada.com.mx.</p></noscript>
 
-    <script type="text/babel" src="/js/layout.jsx"></script>
-
+    <script type="text/babel" src="../../js/layout.jsx"></script>
     <script type="text/babel">
         // Values in [corchetes] are placeholders, highlighted until filled in. Pending legal review.
-        const Mark = ({ children }) => String(children).split(/(\[[^\]]+\])/g).map((p, i) => p.startsWith("[") ? <mark key={i} className="bg-lemon-100 px-1 rounded">{p}</mark> : p);
+        const Mark = ({ children }) => String(children).split(/(\[[^\]]+\])/g).map((p, i) => p.startsWith('[') ? <mark key={i} className="bg-lemon px-1 rounded">{p}</mark> : p);
         const LegalPage = ({ kicker, title, mark, updated, sections }) => (
             <>
                 <PageHero kicker={kicker} title={title} mark={mark} intro={`Última actualización: ${updated}`} />
                 <section className="max-w-6xl mx-auto px-4 md:px-8 py-14 grid md:grid-cols-4 gap-12">
-                    <nav className="hidden md:block md:sticky md:top-28 self-start text-sm space-y-3" aria-label="Índice">
-                        {sections.map(s => <a key={s.id} href={`#${s.id}`} className="block text-navy-400 hover:text-navy">{s.title}</a>)}
+                    <nav className="hidden md:block md:sticky md:top-28 self-start text-sm space-y-3 mono" aria-label="Índice">
+                        {sections.map(s => <a key={s.id} href={`#${s.id}`} className="block text-ink-2 hover:text-ink">{s.title}</a>)}
                     </nav>
                     <div className="md:col-span-3 space-y-12">
                         {sections.map(s => (
                             <article key={s.id} id={s.id} className="scroll-mt-28">
                                 <h2 className="text-3xl mb-3">{s.title}</h2>
-                                <div className="space-y-3 text-navy-500 leading-relaxed">{s.body.map((p, i) => <p key={i}><Mark>{p}</Mark></p>)}</div>
+                                <div className="space-y-3 text-ink-2 leading-relaxed">{s.body.map((p, i) => <p key={i}><Mark>{p}</Mark></p>)}</div>
                             </article>
                         ))}
                     </div>
                 </section>
             </>
         );
-        // Keep these ids: the company page links to #garantia.
+
+        // Keep these ids: the studio page links to #garantia.
         const SECTIONS = [
             { id: 'empresa', title: 'Quiénes somos', body: [`${BRAND.name} es una marca de [Razón social], RFC [RFC], con domicilio en ${BRAND.address}. Contacto: ${BRAND.email}.`] },
-            { id: 'cotizaciones', title: 'Cotizaciones', body: [
-                'Los precios publicados son orientativos, por pieza, antes de IVA y a partir del pedido mínimo de cada prenda. El precio final se fija en la cotización escrita, con vigencia de [15] días naturales.',
-                'La cotización indica tela, color, bordado, tallas especiales y tiempos de entrega.' ] },
+            { id: 'precios', title: 'Precios', body: [
+                'Los precios del sitio están en pesos mexicanos e incluyen IVA. El precio de cada traje se calcula con la tela y las opciones que eliges en el configurador y se confirma por escrito antes del anticipo.',
+                'Envío dentro de México incluido. La medición a domicilio tiene el costo indicado en el carrito.' ] },
             { id: 'pedidos', title: 'Pedidos y anticipo', body: [
-                'El pedido se confirma con la cotización firmada y un anticipo del [50] %. El resto se liquida contra entrega.',
-                'Las prendas se confeccionan a la medida de cada colaborador; una vez iniciado el corte, los cambios de talla o modelo pueden tener costo.' ] },
+                'El pedido se confirma con el pago de un anticipo del [50] % mediante la liga de pago que te enviamos. El resto se liquida en la prueba, antes de la entrega.',
+                'Al ser una prenda hecha a tu medida, una vez iniciado el corte no se aceptan cancelaciones ni cambios de tela o modelo; los ajustes de medidas sí están incluidos.' ] },
+            { id: 'medidas', title: 'Medidas', body: [
+                'Si nos das tus propias medidas, las revisamos contigo antes de cortar. Las diferencias por medidas mal tomadas se corrigen en la prueba; si no es posible, el nuevo corte tiene costo.' ] },
             { id: 'entregas', title: 'Tiempos y entregas', body: [
-                'El tiempo de entrega de cada prenda se indica en su ficha y en la cotización, contado desde la recepción de medidas y anticipo.',
-                'Enviamos a toda la República. Las entregas se etiquetan por colaborador.' ] },
-            { id: 'garantia', title: 'Garantía', body: [
-                'Garantía de 1 año o 70 lavadas en casa, lo que ocurra primero, siguiendo las indicaciones de cuidado de cada tela.',
-                'Cubre costuras, cierres, botones y defectos de tela. No cubre desgaste por uso indebido, tintorería con solventes no indicados, cambios de talla del colaborador ni daños accidentales.',
-                'Para hacerla válida, escríbenos con la referencia del pedido y fotos de la prenda; reparamos o reponemos la pieza.' ] },
-            { id: 'ajustes', title: 'Ajustes', body: ['Incluimos [un] ajuste sin costo por prenda dentro de los [30] días siguientes a la entrega.'] },
+                'El tiempo de entrega de cada traje se indica en su página y cuenta desde la toma de medidas y el pago del anticipo. La entrega express está sujeta a la agenda del taller.',
+                'Si necesitas el traje para una fecha, dínoslo al hacer el pedido y te confirmamos si llegamos.' ] },
+            { id: 'garantia', title: 'Garantía y ajustes', body: [
+                'Un año de garantía en costuras, botones, cierres y defectos de tela, con el cuidado indicado para cada tela.',
+                'Incluye una prueba antes de la entrega y un ajuste sin costo dentro de los [30] días siguientes. No cubre cambios de talla posteriores, desgaste por uso, ni daños por tintorería o accidentes.',
+                'Para hacerla válida, escríbenos con tu número de pedido y fotos de la prenda.' ] },
+            { id: 'devoluciones', title: 'Devoluciones', body: ['Las prendas a la medida no admiten devolución salvo defecto de confección, conforme al artículo [verificar] de la Ley Federal de Protección al Consumidor.'] },
         ];
-        renderPage(() => <LegalPage kicker="Legal · México" title="Términos y" mark="garantía" updated="7 de octubre de 2026" sections={SECTIONS} />);
+        renderPage(() => <LegalPage kicker="Legal · México" title="Términos y" mark="garantía" updated="11 de octubre de 2026" sections={SECTIONS} />);
     </script>
 </body>
 </html>

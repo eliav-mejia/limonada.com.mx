@@ -1,29 +1,27 @@
 # public/db — base de datos simulada (Etapa 1)
 
 JSON editados a mano que sustituyen a la base de datos hasta la Etapa 2. **Son públicos**: nunca pongas aquí costos,
-márgenes, precios de distribuidor ni datos de clientes o colaboradores.
+márgenes ni datos de clientes (medidas, teléfonos).
 
 | Archivo | «Tabla» | Lo usa |
 |---|---|---|
-| `colecciones.json` | `lines`, `types` | filtros, inicio, ruta de la ficha |
-| `prendas.json` | `garments` | colecciones, fichas, cotización, inicio |
-| `telas.json` | `fabrics` (+ `colors`) | colores de cada prenda, ficha, página Empresa |
-| `distribuidores.json` | `distributors` | página Distribuidores |
+| `trajes.json` | `styles`, `occasions`, `suits` | inicio, tienda, ficha/configurador, carrito |
+| `telas.json` | `fabrics` (+ `colors`) | configurador, sala de telas (`/pages/trajes/#telas`), ilustración |
+| `opciones.json` | `groups`, `linings`, `monogram`, `delivery` | configurador y precio |
 
-## garments
+## Precio
+`base_price_mxn` es el precio del traje **en su configuración `defaults`**, IVA incluido. Cada elección suma
+(su `price_delta_mxn` − el del default). Así el precio base nunca cambia al reordenar opciones.
 
+## suits
 | Campo | Notas |
 |---|---|
-| `id` | permanente (`li-001`…); la lista de cotización lo guarda |
-| `slug` | URL `/pages/colecciones/<slug>/` |
-| `line_id` / `type_id` | de `colecciones.json` |
-| `fabric_ids` | telas en que se fabrica |
-| `color_ids` | colores ofrecidos; cada id debe existir en alguna tela de `telas.json`. El primero es el de la tarjeta |
-| `sizes` | lista de tallas en orden |
-| `min_qty` | pedido mínimo por prenda (se avisa, no se bloquea) |
-| `price_from_mxn` | precio orientativo por pieza antes de IVA; `null` = «Precio por cotización» |
-| `lead_days` | días de entrega desde medidas + anticipo |
-| `features` | lista de detalles |
-| `active` / `featured` | ocultar / destacar en el inicio |
+| `id` | permanente (`lt-001`…); el carrito lo guarda |
+| `slug` | URL `/pages/trajes/<slug>/`; tras añadir uno: `python3 tools/generar-paginas-traje.py` |
+| `defaults` | una elección por grupo de `opciones.json` + `fabric`, `color`, `lining`; el color debe existir en esa tela |
+| `occasions` / `style_id` | filtros de la tienda |
+| `monogram_included` | el monograma no se cobra |
+| `badge` | sticker de la tarjeta («Nuevo» sale en color arcilla) |
 
-Los colores se comparten entre telas por `id` (p. ej. `marino`): si cambias su `hex`, cámbialo en todas las telas.
+## fabrics
+`pattern` decide el dibujo en la ilustración: `liso`, `raya`, `cuadro`, `espiga`, `pana`, `lino` (este último pone bolsas de parche).

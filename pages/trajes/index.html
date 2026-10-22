@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trajes a la medida · Tienda · Limonada</title>
+    <meta name="description" content="Ocho modelos de traje a la medida —dos y tres piezas, cruzado, esmoquin, lino, tweed y pana— para personalizar en línea. Precios con IVA.">
+    <link rel="canonical" href="https://limonada.com.mx/pages/trajes/">
+    <meta property="og:title" content="Trajes a la medida · Tienda · Limonada">
+    <meta property="og:description" content="Ocho modelos de traje a la medida —dos y tres piezas, cruzado, esmoquin, lino, tweed y pana— para personalizar en línea. Precios con IVA.">
+    <meta property="og:url" content="https://limonada.com.mx/pages/trajes/">
+    <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#171614">
+
+    <!-- arranque.js first: sets LI_ROOT for every link and shows a message instead of a blank page if loading fails -->
+    <script src="../../js/arranque.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../js/tailwind.config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/site.css">
+
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+</head>
+<body>
+
+    <div id="root"></div>
+    <noscript><p style="padding:2rem;font-family:sans-serif">Limonada necesita JavaScript para mostrar la tienda. Escríbenos a hola@limonada.com.mx.</p></noscript>
+
+    <script type="text/babel" src="../../js/layout.jsx"></script>
+    <script type="text/babel" src="../../js/tienda.jsx"></script>
+    <script type="text/babel">
+        // Filters live in the URL (?estilo=, ?ocasion=, ?orden=) so they can be shared and the footer can link to them.
+        const SORTS = [
+            { id: 'casa', label: 'Orden de la casa', fn: (a, b) => 0 },
+            { id: 'precio-asc', label: 'Precio: menor a mayor', fn: (a, b) => a.base_price_mxn - b.base_price_mxn },
+            { id: 'precio-desc', label: 'Precio: mayor a menor', fn: (a, b) => b.base_price_mxn - a.base_price_mxn },
+        ];
+
+        const useParam = (key) => {
+            const [value, setValue] = useState(new URLSearchParams(location.search).get(key) || '');
+            const set = (v) => {
+                setValue(v);
+                const u = new URL(location.href);
+                if (v) u.searchParams.set(key, v); else u.searchParams.delete(key);
+                history.replaceState(null, '', u);
+            };
+            return [value, set];
+        };
+
+        const Shop = () => {
+            const catalog = useCatalog();
+            const [style, setStyle] = useParam('estilo');
+            const [occasion, setOccasion] = useParam('ocasion');
+            const [sort, setSort] = useParam('orden');
+            const list = catalog.suits
+                .filter(s => (!style || s.style_id === style) && (!occasion || s.occasions.includes(occasion)))
+                .sort((SORTS.find(x => x.id === sort) || SORTS[0]).fn);
+
+            return (
+                <>
+                    <PageHero kicker="La tienda · 8 modelos, miles de combinaciones" title="Elige un punto de partida." mark="Luego lo haces tuyo."
+                        intro="Cada modelo es una base: en su página cambias tela, color, solapa, botones, chaleco, forro y monograma, y ves el precio al momento." />
+
+                    <section className="max-w-7xl mx-auto px-4 md:px-8 py-10">
+                        <div className="flex flex-wrap items-center gap-2 mb-4" role="group" aria-label="Estilo">
+                            <button className="chip" aria-pressed={!style} onClick={() => setStyle('')}>Todos</button>
+                            {catalog.styles.map(s => <button key={s.id} className="chip" aria-pressed={style === s.id} onClick={() => setStyle(style === s.id ? '' : s.id)}>{s.label}</button>)}
+                        </div>
+                        <div className="flex flex-wrap items-center gap-3 mb-12 pb-6 stitch pt-4">
+                            <label className="flex items-center gap-2 text-sm"><span className="kicker text-ink-2">Ocasión</span>
+                                <select className="field !w-auto !py-2 !rounded-full" value={occasion} onChange={e => setOccasion(e.target.value)}>
+                                    <option value="">Cualquiera</option>
+                                    {catalog.occasions.map(o => <option key={o.id} value={o.id}>{o.label}</option>)}
+                                </select>
+                            </label>
+                            <label className="flex items-center gap-2 text-sm"><span className="kicker text-ink-2">Orden</span>
+                                <select className="field !w-auto !py-2 !rounded-full" value={sort || 'casa'} onChange={e => setSort(e.target.value === 'casa' ? '' : e.target.value)}>
+                                    {SORTS.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
+                                </select>
+                            </label>
+                            <p className="mono text-xs text-ink-2 ml-auto">{list.length} {list.length === 1 ? 'traje' : 'trajes'}</p>
+                        </div>
+
+                        {catalog.status === 'loading' && <GridSkeleton n={6} />}
+                        {catalog.status === 'error' && <LoadError />}
+                        {catalog.status === 'ready' && list.length === 0 && (
+                            <div className="text-center py-16">
+                                <p className="font-display text-3xl">Nada con esos filtros… todavía.</p>
+                                <p className="text-ink-2 mt-2">Cualquier modelo se puede adaptar. Escríbenos y lo diseñamos juntos.</p>
+                                <button className="btn btn-ink mt-6" onClick={() => { setStyle(''); setOccasion(''); }}>Quitar filtros</button>
+                            </div>
+                        )}
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14">
+                            {list.map(s => <SuitCard key={s.id} suit={s} catalog={catalog} index={catalog.suits.indexOf(s)} />)}
+                        </div>
+                    </section>
+
+                    <Fabrics catalog={catalog} />
+                </>
+            );
+        };
+
+        const Fabrics = ({ catalog }) => (
+            <section id="telas" className="bg-olive text-paper py-20 md:py-28 mt-16 scroll-mt-24">
+                <div className="max-w-7xl mx-auto px-4 md:px-8">
+                    <div className="mb-12 reveal">
+                        <p className="kicker text-lemon mb-3">La sala de telas</p>
+                        <h2 className="text-4xl md:text-6xl leading-[1]">{catalog.fabrics.length} telas, <span className="italic-soft text-lemon">todas con historia.</span></h2>
+                        <p className="text-paper/70 mt-5 max-w-xl">Trabajamos con molinos que conocemos. En la cita te ponemos el muestrario en las manos: la caída y el peso se sienten, no se ven.</p>
+                    </div>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {catalog.fabrics.map(f => (
+                            <article key={f.id} className="reveal rounded-[1.5rem] bg-paper text-ink p-6 border-[1.5px] border-ink">
+                                <div className="flex items-start gap-4">
+                                    <FabricSwatch catalog={catalog} fabricId={f.id} colorId={f.colors[0].id} className="w-16 h-16 shrink-0" />
+                                    <div className="min-w-0">
+                                        <h3 className="text-2xl leading-tight">{f.name}</h3>
+                                        <p className="mono text-[0.7rem] text-ink-2 mt-1">{f.origin}</p>
+                                    </div>
+                                </div>
+                                <dl className="grid grid-cols-2 gap-3 mt-5 text-sm">
+                                    <div><dt className="kicker text-ink-2">Composición</dt><dd>{f.composition}</dd></div>
+                                    <div><dt className="kicker text-ink-2">Peso</dt><dd>{f.weight}</dd></div>
+                                    <div><dt className="kicker text-ink-2">Temporada</dt><dd>{f.season}</dd></div>
+                                    <div><dt className="kicker text-ink-2">Suplemento</dt><dd className="mono">{f.price_delta_mxn ? `+${formatMXN(f.price_delta_mxn)}` : 'Incluida'}</dd></div>
+                                </dl>
+                                <div className="flex gap-1.5 mt-5">{f.colors.map(c => <span key={c.id} title={c.name} className="w-6 h-6 rounded-full border border-ink/40" style={{ background: c.hex }} />)}</div>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        );
+
+        renderPage(Shop);
+    </script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu carrito · Limonada</title>
+    <meta name="description" content="Revisa tus trajes, elige cómo te medimos y confirma tu pedido con anticipo.">
+    <link rel="canonical" href="https://limonada.com.mx/pages/carrito/">
+    <meta property="og:title" content="Tu carrito · Limonada">
+    <meta property="og:description" content="Revisa tus trajes, elige cómo te medimos y confirma tu pedido con anticipo.">
+    <meta property="og:url" content="https://limonada.com.mx/pages/carrito/">
+    <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#171614">
+
+    <!-- arranque.js first: sets LI_ROOT for every link and shows a message instead of a blank page if loading fails -->
+    <script src="../../js/arranque.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../js/tailwind.config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/site.css">
+
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+</head>
+<body>
+
+    <div id="root"></div>
+    <noscript><p style="padding:2rem;font-family:sans-serif">Limonada necesita JavaScript para mostrar la tienda. Escríbenos a hola@limonada.com.mx.</p></noscript>
+
+    <script type="text/babel" src="../../js/layout.jsx"></script>
+    <script type="text/babel" src="../../js/tienda.jsx"></script>
+    <script type="text/babel">
+        // Cart + checkout. Etapa 1: the order is confirmed by WhatsApp and the deposit link is sent by hand.
+        // Etapa 2: ORDER_ENDPOINT (js/tienda.jsx) returns a Stripe Checkout URL and we redirect to it.
+        const Line = ({ line, catalog }) => {
+            const [open, setOpen] = useState(false);
+            const summary = describeConfig(catalog, line.config);
+            return (
+                <li className="py-6 stitch grid grid-cols-[6.5rem_1fr] sm:grid-cols-[8rem_1fr] gap-5">
+                    <a href={suitHref(line.suit, { editar: line.key })} className="rounded-2xl bg-paper-2 border-[1.5px] border-ink aspect-[4/5] relative overflow-hidden">
+                        <Traje catalog={catalog} config={line.config} hanger={false} className="absolute inset-0 w-full h-full p-2" />
+                    </a>
+                    <div className="min-w-0">
+                        <div className="flex items-start justify-between gap-3">
+                            <div>
+                                <h3 className="text-2xl leading-tight">{line.suit.name}</h3>
+                                <p className="text-sm text-ink-2">{summary[0][1]}</p>
+                            </div>
+                            <p className="mono text-right whitespace-nowrap">{formatMXN(line.total)}{line.qty > 1 && <span className="block text-xs text-ink-2">{formatMXN(line.unit)} c/u</span>}</p>
+                        </div>
+                        <button className="mono text-xs underline underline-offset-4 mt-2" onClick={() => setOpen(!open)} aria-expanded={open}>{open ? 'Ocultar detalles' : 'Ver detalles'}</button>
+                        {open && <dl className="grid grid-cols-2 gap-x-4 gap-y-1 text-sm mt-3">{summary.slice(1).map(([k, v]) => <React.Fragment key={k}><dt className="text-ink-2">{k}</dt><dd>{v}</dd></React.Fragment>)}</dl>}
+                        <div className="flex flex-wrap items-center gap-3 mt-4">
+                            <div className="flex items-center border-[1.5px] border-ink rounded-full mono text-sm" role="group" aria-label="Cantidad">
+                                <button className="w-9 h-9" onClick={() => line.qty > 1 ? cart.update(line.key, { qty: line.qty - 1 }) : cart.remove(line.key)} aria-label="Uno menos">−</button>
+                                <span className="w-6 text-center">{line.qty}</span>
+                                <button className="w-9 h-9" onClick={() => cart.update(line.key, { qty: Math.min(20, line.qty + 1) })} aria-label="Uno más">+</button>
+                            </div>
+                            <a href={suitHref(line.suit, { editar: line.key })} className="chip">Editar diseño</a>
+                            <button className="chip" onClick={() => cart.remove(line.key)}>Quitar</button>
+                        </div>
+                    </div>
+                </li>
+            );
+        };
+
+        const EMPTY_CUSTOMER = { name: '', email: '', phone: '', city: 'Ciudad de México', event_date: '', notes: '' };
+
+        const Checkout = () => {
+            const catalog = useCatalog();
+            const lines = useCartLines(catalog);
+            const [customer, setCustomer] = useState(() => ({ ...EMPTY_CUSTOMER, ...store.read('li-cliente', {}) }));
+            const [method, setMethod] = useState('estudio');
+            const [measures, setMeasures] = useState({});
+            const [accept, setAccept] = useState(false);
+            const [sending, setSending] = useState(false);
+            const [done, setDone] = useState(null);
+
+            const c = (key) => ({ value: customer[key], onChange: (e) => setCustomer({ ...customer, [key]: e.target.value }) });
+            const m = MEASURE_METHODS.find(x => x.id === method);
+            const subtotal = lines.reduce((a, l) => a + l.total, 0);
+            const total = subtotal + m.price_delta_mxn;
+            const deposit = Math.round(total * DEPOSIT);
+            const count = lines.reduce((a, l) => a + l.qty, 0);
+
+            const submit = async (e) => {
+                e.preventDefault();
+                if (!lines.length || sending) return;
+                setSending(true);
+                const { notes, event_date, ...remember } = customer;
+                store.write('li-cliente', remember);   // name, email, phone, city — to prefill next time
+                const order = await db.submitOrder({
+                    customer, measure_method: method, measure_label: `${m.label}${m.price_delta_mxn ? ` (+${formatMXN(m.price_delta_mxn)})` : ''}`,
+                    measurements: method === 'propias' ? measures : null,
+                    items: lines.map(l => ({ suit_id: l.suit.id, name: l.suit.name, config: l.config, qty: l.qty, unit_mxn: l.unit })),
+                    subtotal, total, deposit,
+                });
+                const text = orderMessage(catalog, order, lines);
+                if (order.checkout_url) { cart.clear(); location.href = order.checkout_url; return; }
+                window.open(waLink(text), '_blank', 'noopener,noreferrer');
+                setDone({ order, text });
+                cart.clear();
+                setSending(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+
+            if (done) return (
+                <PageHero kicker={`Pedido ${done.order.id}`} title="¡Listo! Ya estamos" mark="afilando tijeras."
+                    intro={`Te escribimos por WhatsApp en horario del estudio para confirmar tu cita de medidas y enviarte la liga de pago del anticipo (${formatMXN(done.order.deposit)}). Nada se corta hasta que lo confirmes.`}>
+                    <div className="flex flex-wrap gap-3 mt-8">
+                        <a className="btn btn-ink" href={waLink(done.text)} target="_blank" rel="noopener noreferrer"><IconWhatsApp className="w-5 h-5" /> Abrir WhatsApp otra vez</a>
+                        <a className="btn btn-ghost" href={`mailto:${BRAND.email}?subject=${encodeURIComponent(`Pedido ${done.order.id}`)}&body=${encodeURIComponent(done.text)}`}>Enviarlo por email</a>
+                        <a className="btn btn-ghost" href={url('/')}>Volver al inicio</a>
+                    </div>
+                </PageHero>
+            );
+
+            if (catalog.status === 'loading') return <div className="max-w-6xl mx-auto px-4 py-20"><GridSkeleton n={2} /></div>;
+            if (catalog.status === 'error') return <LoadError />;
+
+            if (!lines.length) return (
+                <>
+                    <PageHero kicker="Tu carrito" title="Aquí no hay" mark="ni un hilo." intro="Elige un modelo, diséñalo a tu gusto y aparecerá aquí con su precio.">
+                        <a href={url('/pages/trajes/')} className="btn btn-ink mt-8">Ver trajes <IconArrow className="w-4 h-4" /></a>
+                    </PageHero>
+                    <section className="max-w-7xl mx-auto px-4 md:px-8 py-16">
+                        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">{catalog.suits.filter(s => s.featured).slice(0, 3).map(s => <SuitCard key={s.id} suit={s} catalog={catalog} />)}</div>
+                    </section>
+                </>
+            );
+
+            return (
+                <section className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-16">
+                    <p className="kicker text-ink-2">Tu carrito · {count} {count === 1 ? 'traje' : 'trajes'}</p>
+                    <h1 className="text-5xl md:text-7xl mt-3 leading-[0.95]">Casi <span className="italic-soft hl">tuyo.</span></h1>
+
+                    <form onSubmit={submit} className="grid lg:grid-cols-[1.25fr_1fr] gap-10 lg:gap-16 mt-10 items-start">
+                        <div>
+                            <ul>{lines.map(l => <Line key={l.key} line={l} catalog={catalog} />)}</ul>
+
+                            <fieldset className="mt-10">
+                                <legend className="text-3xl font-display">1 · ¿Cómo te medimos?</legend>
+                                <div className="grid sm:grid-cols-2 gap-3 mt-5">
+                                    {MEASURE_METHODS.map(x => (
+                                        <label key={x.id} className={`rounded-2xl border-[1.5px] p-4 cursor-pointer transition-colors ${method === x.id ? 'border-ink bg-lemon' : 'border-ink/20 hover:border-ink'}`}>
+                                            <input type="radio" name="metodo" className="sr-only" checked={method === x.id} onChange={() => setMethod(x.id)} />
+                                            <span className="flex justify-between gap-2 font-semibold">{x.label}<span className="mono font-normal text-sm">{x.price_delta_mxn ? `+${formatMXN(x.price_delta_mxn)}` : 'gratis'}</span></span>
+                                            <span className="block text-sm text-ink-2 mt-1">{x.note}</span>
+                                        </label>
+                                    ))}
+                                </div>
+                                {method === 'propias' && (
+                                    <div className="mt-5 rounded-2xl bg-paper-2 p-5">
+                                        <p className="text-sm text-ink-2 mb-4">En centímetros. ¿Dudas? <a href={url('/pages/medidas/')} target="_blank" className="underline">Guía para medirte</a>. Las revisamos contigo antes de cortar.</p>
+                                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                            {MEASURES.map(x => (
+                                                <label key={x.id} className="text-sm" title={x.how}>
+                                                    <span className="kicker text-ink-2">{x.label}</span>
+                                                    <input type="number" inputMode="decimal" min="10" max="250" step="0.5" className="field mt-1 mono" value={measures[x.label] || ''}
+                                                        onChange={e => setMeasures({ ...measures, [x.label]: e.target.value })} />
+                                                </label>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </fieldset>
+
+                            <fieldset className="mt-10">
+                                <legend className="text-3xl font-display">2 · Tus datos</legend>
+                                <div className="grid sm:grid-cols-2 gap-3 mt-5">
+                                    <input className="field" placeholder="Nombre completo" required autoComplete="name" {...c('name')} />
+                                    <input className="field" type="tel" placeholder="WhatsApp" required autoComplete="tel" {...c('phone')} />
+                                    <input className="field" type="email" placeholder="Email" required autoComplete="email" {...c('email')} />
+                                    <input className="field" placeholder="Ciudad" required autoComplete="address-level2" {...c('city')} />
+                                    <label className="sm:col-span-2 text-sm"><span className="kicker text-ink-2">¿Para cuándo lo necesitas? (opcional)</span>
+                                        <input className="field mt-1" type="date" {...c('event_date')} /></label>
+                                    <textarea className="field sm:col-span-2" rows="3" maxLength={800} placeholder="Notas para el sastre: postura, zapatos que usarás, referencias…" {...c('notes')} />
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <aside className="lg:sticky lg:top-28 rounded-[1.75rem] bg-ink text-paper p-7 shadow-[8px_8px_0_#ecdf3f]">
+                            <p className="kicker text-lemon">3 · Resumen</p>
+                            <ul className="mt-5 space-y-2 text-sm">
+                                {lines.map(l => <li key={l.key} className="flex justify-between gap-4"><span>{l.suit.name}{l.qty > 1 ? ` × ${l.qty}` : ''}</span><span className="mono">{formatMXN(l.total)}</span></li>)}
+                                <li className="flex justify-between gap-4 text-paper/70"><span>Medidas · {m.label.toLowerCase()}</span><span className="mono">{m.price_delta_mxn ? formatMXN(m.price_delta_mxn) : 'gratis'}</span></li>
+                                <li className="flex justify-between gap-4 text-paper/70"><span>Envío en México</span><span className="mono">incluido</span></li>
+                            </ul>
+                            <div className="border-t border-paper/20 mt-5 pt-5 flex justify-between items-end">
+                                <span className="text-paper/70">Total, IVA incluido</span>
+                                <span className="font-display text-4xl">{formatMXN(total)}</span>
+                            </div>
+                            <div className="mt-4 rounded-2xl bg-lemon text-ink p-4 flex justify-between items-center">
+                                <span className="text-sm"><b>Anticipo hoy</b> · {Math.round(DEPOSIT * 100)} %<br /><span className="text-xs">El resto, en tu prueba</span></span>
+                                <span className="mono text-xl">{formatMXN(deposit)}</span>
+                            </div>
+                            <label className="flex gap-3 items-start text-sm text-paper/80 mt-5">
+                                <input type="checkbox" required checked={accept} onChange={e => setAccept(e.target.checked)} className="mt-1 accent-[#ecdf3f]" />
+                                <span>Acepto los <a href={url('/pages/terminos/')} className="underline" target="_blank">términos</a> y el <a href={url('/pages/privacidad/')} className="underline" target="_blank">aviso de privacidad</a>. Entiendo que es una prenda a la medida.</span>
+                            </label>
+                            <button className="btn btn-lemon w-full mt-5" disabled={sending}>{sending ? 'Enviando…' : <><IconWhatsApp className="w-5 h-5" /> Confirmar pedido</>}</button>
+                            <p className="text-xs text-paper/55 mt-3">Te enviamos por WhatsApp la confirmación y la liga de pago segura del anticipo (tarjeta, OXXO o transferencia).</p>  {/* [verificar] métodos de pago con el cliente */}
+                        </aside>
+                    </form>
+                </section>
+            );
+        };
+
+        renderPage(Checkout);
+    </script>
+</body>
+</html>

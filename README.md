@@ -1,108 +1,64 @@
 # limonada.com.mx
 
-Limonada: uniformes ejecutivos y empresariales para dama y caballero, desde 1997. Catálogo por colecciones, telas y
-colores, lista de cotización para empresas, red de distribuidores, guía de tallas y garantía.
+Limonada: sastrería de **trajes a la medida** en la Ciudad de México, desde 1997. Tienda en línea con configurador
+(tela, color, corte, solapa, botones, aberturas, pantalón, chaleco, pañuelo, forro, monograma, entrega), precio en vivo,
+carrito y pedido con anticipo por WhatsApp. Estilo: papel crudo, tinta, limón; Fraunces + Space Grotesk + JetBrains Mono.
 
-**Variante C** de `../ARQUITECTURA-WEB-ETAPAS.md`: React + Tailwind por CDN, sin build, con datos simulados en
-`public/db/` y una sola capa de datos (`db` en `js/catalogo.jsx`). Elegida porque el negocio vende **por cotización**:
-la lista de cotización de hoy es el carrito de mañana (Etapa 2: cuentas de empresa, pedidos y anticipos).
+**Variante C** de `../ARQUITECTURA-WEB-ETAPAS.md`: React + Tailwind por CDN, sin build, datos simulados en `public/db/`
+y una sola capa de datos (`db` en `js/tienda.jsx`).
 
-**Estado: 1.0.0 · Etapa 1.** Prendas, precios orientativos, tablas de tallas, distribuidores y textos legales son de ejemplo.
-Revisar todos los `[marcadores]` y `[verificar]` con el cliente antes de publicar.
+**Estado: 2.0.0 · Etapa 1.** Modelos, telas, precios, historia y textos legales son de ejemplo: revisar todos los
+`[verificar]` y `[corchetes]` con el cliente antes de publicar.
 
 ## Probar en local
 
 ```
-py -m http.server 8126        # desde esta carpeta → http://localhost:8126
+python3 -m http.server 8126   # desde esta carpeta → http://localhost:8126  (Windows: py -m http.server 8126)
 ```
 
-## Identidad
+También funciona servido desde una carpeta superior (p. ej. `http://localhost:8000/limonada.com.mx/`): todas las rutas
+son relativas y `js/arranque.js` calcula la raíz. Abrir el archivo con doble clic (`file://`) **no** funciona —el navegador
+bloquea los scripts— y la página lo explica en vez de quedarse en blanco.
 
-| Token | Color | Uso |
-|---|---|---|
-| `white` | `#ffffff` | fondo, tarjetas |
-| `navy` | `#14213d` | texto, botones, secciones oscuras con raya diplomática (`.pinstripe`) |
-| `lemon-400` | `#f4d35e` | acento: subrayado `.mark`, botón de cotización, contador |
-| `cream` | `#faf7ee` | secciones suaves, fondo de prendas |
-| `navy-400/500` | `#5d6880` / `#4a5875` | texto secundario |
+## Pantallas en blanco (corregido en 2.0.0)
+- Causa: rutas absolutas (`/js/layout.jsx`, `/public/db/…`) que daban 404 si el sitio no estaba en la raíz del dominio.
+- Ahora: rutas relativas en el HTML y `url('/ruta/')` en el JSX (prefija `LI_ROOT`).
+- `js/arranque.js` (primer script) muestra un mensaje con la causa si `#root` sigue vacío (CDN bloqueado, error de JSX, `file://`).
+- `ErrorBoundary` en `renderPage()`: un error al pintar muestra una tarjeta con «Recargar» en vez de desmontar todo.
+- Excepción: `404.html` usa rutas absolutas, porque el hosting lo sirve en cualquier URL.
 
-Tipografías: **DM Serif Display** (títulos) · **DM Sans** (texto). Tokens en `js/tailwind.config.js` y `:root` de `css/site.css`.
-Componentes: `.btn-navy / .btn-lemon / .btn-line`, `.field`, `.kicker`, `.mark`, `.pinstripe`, `.reveal`.
-
-## Estructura de carpetas
+## Estructura
 
 ```
-limonada.com.mx/
-├── CNAME · .nojekyll · .gitignore · .env.example
-├── README.md                     este archivo
-├── index.html                    inicio: héroe, diferenciadores, líneas, favoritas, proceso, sectores, distribuidores
-├── 404.html                      página no encontrada + redirecciones (MOVED) desde el sitio anterior
-│
-├── css/site.css                  UNA hoja de estilos
-├── js/
-│   ├── tailwind.config.js        paleta y tipografías
-│   ├── layout.jsx                TODAS las páginas: BRAND, NAV_LINKS, cabecera, pie, lista de cotización (quote),
-│   │                             botón de WhatsApp, cookies, PageHero, SectionTitle, renderPage()
-│   └── catalogo.jsx              capa de datos `db`, useCatalog, Garment (prenda SVG por color), Swatch,
-│                                 GarmentCard, GarmentPage, QUOTE_ENDPOINT
-│
-├── public/db/                    BASE DE DATOS SIMULADA — ver public/db/README.md
-│   ├── colecciones.json          líneas (dama, caballero) y tipos de prenda
-│   ├── prendas.json              prendas: telas, colores, tallas, pedido mínimo, precio desde, entrega
-│   ├── telas.json                telas con composición, cuidados, lavadas y colores
-│   └── distribuidores.json       un distribuidor por estado
-├── img/favicon.svg
-├── tools/generar-paginas-prenda.py   crea pages/colecciones/<slug>/ desde prendas.json
-│
-├── pages/
-│   ├── colecciones/              /pages/colecciones/  filtros ?linea=dama|caballero, ?tipo=, tela
-│   ├── colecciones/<slug>/       ficha de prenda (generada), color en ?color=
-│   ├── cotizacion/               lista de cotización + datos de la empresa → WhatsApp
-│   ├── distribuidores/           7 estados + «quiero ser distribuidor»
-│   ├── empresa/                  historia, #telas, #garantia, #tallas (guía de medición)
-│   ├── contacto/                 formulario → WhatsApp o email; ?asunto=cotizacion|diseno|distribuidor|garantia
-│   ├── terminos/                 cotizaciones, pedidos, entregas, #garantia
-│   └── privacidad/               aviso de privacidad (LFPDPPP)
-│
-├── _docs/src/v1.0.0.html         PÚBLICO: documento de versión
-└── _interno/                     LOCAL, NO SE PUBLICA (.gitignore)
+index.html                     inicio: héroe con looks, cinta de telas, «juega con la solapa», favoritos, ocasiones
+404.html                       no encontrada + MOVED (redirige las URLs de la 1.0.0: colecciones, cotización, empresa…)
+css/site.css · js/tailwind.config.js   tokens (paper, ink, lemon, olive, clay), .btn, .chip, .sticker, .tape, .hl, grano
+js/arranque.js                 LI_ROOT + aviso si la página no carga
+js/layout.jsx                  BRAND, url(), carrito (li-carrito), cabecera, pie, WhatsApp, cookies, ErrorBoundary, renderPage()
+js/tienda.jsx                  db, useCatalog, precio, <Traje> (ilustración SVG por configuración), SuitCard, configurador,
+                               HowItWorks, mensaje del pedido, MEASURES / MEASURE_METHODS, ORDER_ENDPOINT
+public/db/                     trajes.json · telas.json · opciones.json (ver su README)
+tools/generar-paginas-traje.py crea pages/trajes/<slug>/ desde trajes.json
+pages/trajes/                  tienda (?estilo= ?ocasion= ?orden=) + #telas
+pages/trajes/<slug>/           configurador (?tela= ?color=, ?editar=<clave del carrito>)
+pages/carrito/                 carrito + checkout (medición, datos, anticipo) → WhatsApp
+pages/medidas/                 guía de 9 medidas + #cita
+pages/estudio/                 historia, detalles, #garantia, #empresas
+pages/contacto/ · terminos/ · privacidad/
 ```
-
-## Qué carga cada página
-
-| Página | layout.jsx | catalogo.jsx |
-|---|:-:|:-:|
-| `index.html`, `colecciones/`, `colecciones/<slug>/`, `cotizacion/`, `distribuidores/`, `empresa/` | ✓ | ✓ |
-| `contacto/`, `terminos/`, `privacidad/`, `404.html` | ✓ | |
-
-Orden: `tailwind.config.js` (en el `<head>`) → `layout.jsx` → `catalogo.jsx` → script de la página (`renderPage(...)`).
-
-## Cambios habituales
-
-- **Teléfono, WhatsApp, email, dirección, horario**: `BRAND` en `js/layout.jsx` (todos `[verificar]`).
-- **Menú / pie**: `NAV_LINKS` y `FOOTER_COLUMNS` en `js/layout.jsx`.
-- **Prendas, telas, colores, distribuidores**: `public/db/*.json`. Tras añadir una prenda: `python tools/generar-paginas-prenda.py`.
-- **Recibir cotizaciones también en una hoja o base de datos**: `QUOTE_ENDPOINT` en `js/catalogo.jsx`.
-- **Historia, tabla de tallas**: `MILESTONES` y `SIZE_TABLE` en `pages/empresa/index.html`.
-- **Redirecciones desde el sitio anterior**: `MOVED` en `404.html` (p. ej. `'/productos-dama': '/pages/colecciones/?linea=dama'`).
 
 ## Claves de almacenamiento local
+`li-carrito` · `li-cliente` (nombre, email, teléfono, ciudad para rellenar) · `li-pedidos` (resumen, **sin medidas**) · `li-cookies`.
 
-`li-cotizacion` (lista) · `li-solicitudes` (solicitudes enviadas desde este navegador) · `li-cookies`.
-
-## Hoja de ruta (ver `../ARQUITECTURA-WEB-ETAPAS.md`)
-
-| Etapa | Limonada |
-|---|---|
-| 1 | Este sitio. Pendiente del cliente: fotos reales por prenda y color, catálogo completo, distribuidores, tabla oficial de tallas, blog (sección «Empresa» del sitio actual) |
-| 2 | Portal de empresas en Supabase: cuentas por empresa, colaboradores con medidas (datos personales: RLS y consentimiento), cotizaciones guardadas, pedido con anticipo (Stripe / Mercado Pago) |
-| 3 | Odoo: órdenes de producción, inventario de telas, CFDI 4.0 |
-| 5 | Distribuidores con acceso propio, n8n para avisos de pedido, WhatsApp Business API |
+## Etapa 2
+`ORDER_ENDPOINT` en `js/tienda.jsx`: Edge Function que relee precios desde la base de datos, crea el pedido y devuelve
+`checkout_url` de Stripe para el anticipo; el carrito ya redirige si la recibe. Las medidas corporales son datos personales:
+RLS y borrado a petición.
 
 ## Versiones
 
-### 1.0.0 — 2026-10-07 · Primera versión (Etapa 1, Variante C)
-- 9 prendas en 2 líneas y 7 tipos, 4 telas con 13 colores; prendas ilustradas en SVG en el color elegido.
-- Lista de cotización sincronizada entre pestañas, solicitud con datos de la empresa → WhatsApp.
-- Distribuidores en los 7 estados del sitio actual (datos de contacto pendientes), guía de tallas y medición, garantía.
-- Fichas generadas con schema.org `Product` / `AggregateOffer`.
+### 2.0.0 — 2026-10-11 · Trajes a la medida
+- Giro de uniformes empresariales a tienda de trajes a la medida con configurador, carrito y checkout.
+- Arreglo de pantallas en blanco (ver arriba). Rediseño completo.
+
+### 1.0.0 — 2026-10-07 · Primera versión (uniformes ejecutivos, cotización por WhatsApp)

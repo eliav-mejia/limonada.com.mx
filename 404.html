@@ -10,13 +10,15 @@
     <meta property="og:description" content="Página no encontrada.">
     <meta property="og:url" content="https://limonada.com.mx/404.html">
     <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
-    <meta name="theme-color" content="#14213d">
+    <meta name="theme-color" content="#171614">
 
+    <!-- arranque.js first: sets LI_ROOT for every link and shows a message instead of a blank page if loading fails -->
+    <script src="/js/arranque.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/js/tailwind.config.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/site.css">
 
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
@@ -26,21 +28,27 @@
 <body>
 
     <div id="root"></div>
+    <noscript><p style="padding:2rem;font-family:sans-serif">Limonada necesita JavaScript para mostrar la tienda. Escríbenos a hola@limonada.com.mx.</p></noscript>
 
     <script type="text/babel" src="/js/layout.jsx"></script>
-
     <script type="text/babel">
-        // Old URL → new URL (e.g. pages from the previous limonada.com.mx). Add one entry per moved page.
-        const MOVED = {};
-        const target = MOVED[location.pathname];
-        if (target) location.replace(target + location.search + location.hash);
+        // Old URL → new URL. A key ending in "/" also matches everything below it (old garment pages, for example).
+        // 404.html uses absolute paths (/js/…): the host serves it at whatever URL was missing.
+        const MOVED = {
+            '/pages/colecciones/': '/pages/trajes/',
+            '/pages/cotizacion/': '/pages/carrito/',
+            '/pages/empresa/': '/pages/estudio/',
+            '/pages/distribuidores/': '/pages/estudio/#empresas',
+        };
+        const from = Object.keys(MOVED).find(k => location.pathname === k || location.pathname.startsWith(k));
+        if (from) location.replace(MOVED[from] + (MOVED[from].includes('#') ? '' : location.hash));
 
         renderPage(() => (
-            <PageHero kicker="404" title="Esta página" mark="no existe" intro="Puede que el enlace haya cambiado.">
+            <PageHero kicker="404" title="Esta página se" mark="descosió." intro="Puede que el enlace haya cambiado. Prueba por aquí:">
                 <div className="flex flex-wrap gap-3 mt-8">
-                    <a href="/" className="btn btn-navy">Inicio</a>
-                    <a href="/pages/colecciones/" className="btn btn-line">Colecciones</a>
-                    <a href="/pages/contacto/" className="btn btn-line">Contacto</a>
+                    <a href={url('/')} className="btn btn-ink">Inicio</a>
+                    <a href={url('/pages/trajes/')} className="btn btn-ghost">Trajes</a>
+                    <a href={url('/pages/contacto/')} className="btn btn-ghost">Contacto</a>
                 </div>
             </PageHero>
         ));

@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto · Limonada</title>
-    <meta name="description" content="Habla con un asesor de uniformes ejecutivos: cotizaciones, diseños especiales, distribuidores y garantía.">
+    <meta name="description" content="Escríbenos por WhatsApp o email: pedidos, citas, bodas y grupos, ajustes y garantía.">
     <link rel="canonical" href="https://limonada.com.mx/pages/contacto/">
     <meta property="og:title" content="Contacto · Limonada">
-    <meta property="og:description" content="Habla con un asesor de uniformes ejecutivos: cotizaciones, diseños especiales, distribuidores y garantía.">
+    <meta property="og:description" content="Escríbenos por WhatsApp o email: pedidos, citas, bodas y grupos, ajustes y garantía.">
     <meta property="og:url" content="https://limonada.com.mx/pages/contacto/">
-    <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
-    <meta name="theme-color" content="#14213d">
+    <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+    <meta name="theme-color" content="#171614">
 
+    <!-- arranque.js first: sets LI_ROOT for every link and shows a message instead of a blank page if loading fails -->
+    <script src="../../js/arranque.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="/js/tailwind.config.js"></script>
+    <script src="../../js/tailwind.config.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/site.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/site.css">
 
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
@@ -26,51 +28,51 @@
 <body>
 
     <div id="root"></div>
+    <noscript><p style="padding:2rem;font-family:sans-serif">Limonada necesita JavaScript para mostrar la tienda. Escríbenos a hola@limonada.com.mx.</p></noscript>
 
-    <script type="text/babel" src="/js/layout.jsx"></script>
-
+    <script type="text/babel" src="../../js/layout.jsx"></script>
     <script type="text/babel">
         const SUBJECTS = [
-            { id: 'cotizacion', label: 'Cotización de uniformes' },
-            { id: 'diseno', label: 'Diseño especial con mi imagen' },
-            { id: 'distribuidor', label: 'Quiero ser distribuidor' },
-            { id: 'garantia', label: 'Garantía o ajuste de una prenda' },
-            { id: 'otro', label: 'Otro' },
+            { id: 'pedido', label: 'Un pedido o un diseño' },
+            { id: 'cita', label: 'Cita de medidas' },
+            { id: 'grupos', label: 'Boda, grupo o empresa' },
+            { id: 'ajuste', label: 'Ajuste o garantía' },
+            { id: 'otro', label: 'Otra cosa' },
         ];
 
         const ContactPage = () => {
             const initial = new URLSearchParams(location.search).get('asunto');
-            const [form, setForm] = useState({ name: '', company: '', email: '', phone: '', subject: SUBJECTS.some(s => s.id === initial) ? initial : 'cotizacion', message: '' });
+            const [form, setForm] = useState({ name: '', email: '', phone: '', subject: SUBJECTS.some(s => s.id === initial) ? initial : 'pedido', message: '' });
             const f = (key) => ({ value: form[key], onChange: (e) => setForm({ ...form, [key]: e.target.value }) });
             const subject = SUBJECTS.find(s => s.id === form.subject).label;
-            const body = `${form.message}\n\n${form.name} · ${form.company}\n${form.email} · ${form.phone}`;
-
+            const body = `${form.message}\n\n${form.name}\n${form.email} · ${form.phone}`;
             const sendWhatsApp = (e) => { e.preventDefault(); window.open(waLink(`${subject}\n\n${body}`), '_blank', 'noopener,noreferrer'); };
 
             return (
                 <>
-                    <PageHero kicker="Contacto" title="Hablemos de tu" mark="equipo" intro="Un asesor te responde en horario laboral, normalmente el mismo día." />
+                    <PageHero kicker="Contacto" title="Cuéntanos qué" mark="traes en mente." intro="Te responde una persona del taller, normalmente el mismo día." />
                     <section className="max-w-6xl mx-auto px-4 md:px-8 py-14 grid md:grid-cols-5 gap-12">
-                        <form onSubmit={sendWhatsApp} className="md:col-span-3 space-y-4">
-                            <div className="grid sm:grid-cols-2 gap-4">
-                                <input className="field" placeholder="Nombre" required autoComplete="name" {...f('name')} />
-                                <input className="field" placeholder="Empresa" autoComplete="organization" {...f('company')} />
+                        <form onSubmit={sendWhatsApp} className="md:col-span-3 space-y-3">
+                            <div className="flex flex-wrap gap-2 mb-2" role="group" aria-label="Asunto">
+                                {SUBJECTS.map(s => <button type="button" key={s.id} className="chip" aria-pressed={form.subject === s.id} onClick={() => setForm({ ...form, subject: s.id })}>{s.label}</button>)}
+                            </div>
+                            <div className="grid sm:grid-cols-2 gap-3">
+                                <input className="field sm:col-span-2" placeholder="Nombre" required autoComplete="name" {...f('name')} />
                                 <input className="field" type="email" placeholder="Email" required autoComplete="email" {...f('email')} />
-                                <input className="field" type="tel" placeholder="Teléfono" autoComplete="tel" {...f('phone')} />
+                                <input className="field" type="tel" placeholder="WhatsApp" autoComplete="tel" {...f('phone')} />
                             </div>
-                            <select className="field" {...f('subject')}>{SUBJECTS.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}</select>
-                            <textarea className="field" rows="6" required maxLength={1500} placeholder="¿En qué te ayudamos?" {...f('message')} />
-                            <div className="flex flex-wrap gap-3">
-                                <button className="btn btn-navy"><IconWhatsApp className="w-5 h-5" /> Enviar por WhatsApp</button>
-                                <a className="btn btn-line" href={`mailto:${BRAND.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`}>Enviar por email</a>
+                            <textarea className="field" rows="6" required maxLength={1500} placeholder={form.subject === 'grupos' ? '¿Cuántas personas, para qué fecha y qué tienes en mente?' : '¿En qué te ayudamos?'} {...f('message')} />
+                            <div className="flex flex-wrap gap-3 pt-2">
+                                <button className="btn btn-ink"><IconWhatsApp className="w-5 h-5" /> Enviar por WhatsApp</button>
+                                <a className="btn btn-ghost" href={`mailto:${BRAND.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`}>Enviar por email</a>
                             </div>
-                            <p className="text-xs text-navy-400">Al enviar aceptas el <a href="/pages/privacidad/" className="underline">aviso de privacidad</a>.</p>
+                            <p className="text-xs text-ink-2">Al enviar aceptas el <a href={url('/pages/privacidad/')} className="underline">aviso de privacidad</a>.</p>
                         </form>
-                        <aside className="md:col-span-2 space-y-6">
-                            {[['Teléfono', BRAND.phone], ['Email', BRAND.email], ['Horario', BRAND.hours], ['Showroom', BRAND.address]].map(([k, v]) => (
-                                <div key={k} className="border-b border-navy-line pb-4"><p className="kicker text-navy-400">{k}</p><p className="mt-1">{v}</p></div>
+                        <aside className="md:col-span-2 space-y-5">
+                            {[['WhatsApp / teléfono', BRAND.phone], ['Email', BRAND.email], ['Instagram', `@${BRAND.instagram}`], ['Horario', BRAND.hours], ['Estudio', BRAND.address]].map(([k, v]) => (
+                                <div key={k} className="border-b-[1.5px] border-ink pb-4"><p className="kicker text-ink-2">{k}</p><p className="mt-1 font-display text-xl">{v}</p></div>
                             ))}
-                            <a href="/pages/distribuidores/" className="btn btn-lemon">Ver distribuidores</a>
+                            <a href={url('/pages/medidas/#cita')} className="btn btn-lemon">Agenda cita de medidas</a>
                         </aside>
                     </section>
                 </>
