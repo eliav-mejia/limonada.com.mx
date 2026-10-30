@@ -3,6 +3,7 @@
 /* ── Logotipo ─────────────────────────────────────────── */
 .logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
 .logo__name { font: 400 clamp(22px, 5.5vw, 28px)/1 var(--serif); letter-spacing: -.01em; }
+.logo__img { height: clamp(30px, 5vw, 42px); width: auto; }
 .logo__dot { color: var(--gold); }
 .logo__name i { color: var(--olive); font-style: normal; }
 
