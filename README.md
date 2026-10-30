@@ -6,7 +6,7 @@ uniformes ejecutivos para empresas y organizaciones.
 **Variante B** de `../ARQUITECTURA-WEB-ETAPAS.md`: **portafolio editorial estático** (HTML + CSS + JS vanilla, sin build),
 con reglas de servidor en `_headers` y señales de derechos (`robots.txt`, `.well-known/tdmrep.json`).
 
-Estilo: gaceta de sastrería retro: papel crudo, tinta marino `#14213d`, limón `#f4d35e`; DM Serif Display + DM Sans +
+Estilo: gaceta de sastrería retro. Fondos solo crema `#ede2cd` (acentos amarillo `#f3c12c` y verde `#7a7229`) o blanco (acentos azul `#133951` y `#6a95b1`), alternados por sección con `.scheme-warm` / `.scheme-blue`; DM Serif Display + DM Sans +
 DM Mono. Las láminas I–VIII usan fotografías del catálogo de limonada.com.mx (caballeros y colecciones dama). Logotipo: solo tipografía «limonada.com.mx».
 
 **Estado: 3.0.0 · Etapa 1.** Publicado en <https://eliav-mejia.github.io/limonada.com.mx/> (GitHub Pages, rama `main`, raíz).

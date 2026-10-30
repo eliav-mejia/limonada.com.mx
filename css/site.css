@@ -1,15 +1,12 @@
 /* Limonada · capa 1: tokens y base. Estructura en layout.css, componentes de marca en brand.css. */
 :root {
-  --ink: #14213d;
-  --ink-700: #22325a;
-  --ink-500: #4a5875;
-  --paper: #faf7ee;
-  --paper-2: #f2ecdc;
-  --lemon: #f4d35e;
-  --lemon-50: #fffbea;
-  --lemon-600: #c9a72a;
-  --wine: #5e1f2b;
-  --line: rgba(20, 33, 61, .18);
+  --navy: #133951;
+  --sky: #6a95b1;
+  --gold: #f3c12c;
+  --olive: #7a7229;
+  --cream: #ede2cd;
+  --white: #fff;
+  --ink: var(--navy);
 
   --serif: 'DM Serif Display', Georgia, 'Times New Roman', serif;
   --sans: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -22,11 +19,22 @@
   color-scheme: light;
 }
 
+/* Esquemas por sección: fondo crema con acentos amarillo y verde, o fondo blanco con acentos azules.
+   --fill/--on-fill: relleno de etiquetas y botón principal; --accent-strong: líneas y sombras. */
+:root, .scheme-warm { --bg: var(--cream); --accent: var(--gold); --accent-strong: var(--olive); --fill: var(--gold); --on-fill: var(--navy); }
+.scheme-blue { --bg: var(--white); --accent: var(--sky); --accent-strong: var(--navy); --fill: var(--navy); --on-fill: var(--white); }
+:root, .scheme-warm, .scheme-blue {
+  --ink-700: color-mix(in srgb, var(--ink) 88%, var(--bg));
+  --ink-500: color-mix(in srgb, var(--ink) 76%, var(--bg));
+  --line: color-mix(in srgb, var(--ink) 20%, transparent);
+}
+.scheme-warm, .scheme-blue { background: var(--bg); color: var(--ink); }
+
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 84px; }
 body {
   margin: 0;
-  background: var(--paper);
+  background: var(--bg);
   color: var(--ink);
   font: 400 17px/1.6 var(--sans);
   -webkit-font-smoothing: antialiased;
@@ -40,15 +48,15 @@ body::before {
 
 img, svg { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .2em; }
-a:hover { text-decoration-color: var(--lemon-600); }
-:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; box-shadow: 0 0 0 5px var(--lemon); }
-::selection { background: var(--lemon); color: var(--ink); }
+a:hover { text-decoration-color: var(--accent-strong); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; box-shadow: 0 0 0 5px var(--accent); }
+::selection { background: var(--accent); color: var(--ink); }
 
 h1, h2, h3, h4 { font-family: var(--serif); font-weight: 400; line-height: 1.02; letter-spacing: -.01em; margin: 0; text-wrap: balance; }
 p { margin: 0 0 1em; text-wrap: pretty; }
 em { font-style: italic; }
 
-.skip-link { position: absolute; left: -999px; top: 8px; background: var(--ink); color: var(--paper); padding: .6em 1em; z-index: 200; }
+.skip-link { position: absolute; left: -999px; top: 8px; background: var(--ink); color: var(--white); padding: .6em 1em; z-index: 200; }
 .skip-link:focus { left: 8px; }
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 

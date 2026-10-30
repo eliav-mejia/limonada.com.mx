@@ -2,32 +2,32 @@
 .container { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
 .section { padding-block: clamp(64px, 10vw, 128px); }
 .section--tight { padding-block: clamp(40px, 6vw, 72px); }
-.rule { border: 0; border-top: 1px solid var(--ink); margin: 0; }
-.rule--double { height: 5px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.rule { border: 0; border-top: 1px solid var(--accent-strong); margin: 0; }
+.rule--double { height: 5px; border-top: 1px solid var(--accent-strong); border-bottom: 1px solid var(--accent-strong); }
 
 /* ── Cabecera ─────────────────────────────────────────── */
 .topline {
   font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase;
-  border-bottom: 1px solid var(--line); background: var(--ink); color: var(--paper);
+  border-bottom: 1px solid var(--line); background: var(--navy); color: var(--white);
 }
 .topline .container { display: flex; justify-content: space-between; gap: 16px; padding-block: 9px; }
 .topline a { text-decoration: none; }
 .topline span:nth-child(2) { display: none; }
 @media (min-width: 720px) { .topline span:nth-child(2) { display: inline; } }
 
-.site-header { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--ink); }
+.site-header { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 94%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--accent-strong); }
 .nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 68px; }
 .nav-links { display: flex; gap: clamp(16px, 2.4vw, 32px); list-style: none; margin: 0; padding: 0; font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
 .nav-links a { text-decoration: none; padding-block: 8px; border-bottom: 2px solid transparent; }
-.nav-links a:hover, .nav-links a[aria-current="page"] { border-bottom-color: var(--lemon); }
-.nav-toggle { display: none; background: none; border: 1px solid var(--ink); width: 44px; height: 40px; padding: 10px; cursor: pointer; }
+.nav-links a:hover, .nav-links a[aria-current="page"] { border-bottom-color: var(--accent); }
+.nav-toggle { display: none; background: none; border: 1px solid var(--accent-strong); width: 44px; height: 40px; padding: 10px; cursor: pointer; }
 .nav-toggle span { display: block; height: 1.5px; background: var(--ink); margin: 4px 0; transition: transform .25s var(--ease), opacity .2s; }
 
 @media (max-width: 860px) {
   .nav-toggle { display: block; }
   .nav-links {
-    position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; gap: 0; background: var(--paper);
-    border-bottom: 1px solid var(--ink); padding: 8px var(--gutter) 20px; display: none;
+    position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; gap: 0; background: var(--bg);
+    border-bottom: 1px solid var(--accent-strong); padding: 8px var(--gutter) 20px; display: none;
   }
   .nav-links a { display: block; padding-block: 14px; border-bottom: 1px solid var(--line); font-size: 13px; }
   .nav-open .nav-links { display: flex; }
@@ -47,12 +47,12 @@
 }
 
 /* ── Pie ──────────────────────────────────────────────── */
-.site-footer { background: var(--ink); color: var(--paper); padding-block: 72px 32px; }
+.site-footer { padding-block: 72px 32px; border-top: 1px solid var(--accent-strong); }
 .site-footer a { text-decoration: none; }
-.site-footer a:hover { color: var(--lemon); }
+.site-footer a:hover { text-decoration: underline; text-decoration-color: var(--accent-strong); }
 .footer-grid { display: grid; gap: 40px; }
 @media (min-width: 800px) { .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; } }
-.footer-base { margin-top: 56px; padding-top: 20px; border-top: 1px solid rgba(250, 247, 238, .2); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font: 400 11px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; opacity: .75; }
+.footer-base { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font: 400 11px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; opacity: .75; }
 
 /* Móvil: sin desbordes horizontales por sombras y sello; línea superior y folio compactos */
 body { overflow-x: clip; }
