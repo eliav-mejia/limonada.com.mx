@@ -3,8 +3,8 @@
 /* ── Logotipo ─────────────────────────────────────────── */
 .logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
 .logo__name { font: 400 clamp(22px, 5.5vw, 28px)/1 var(--serif); letter-spacing: -.01em; }
-.logo__dot { color: var(--olive); }
-.logo__name i { color: var(--gold); font-style: normal; }
+.logo__dot { color: var(--gold); }
+.logo__name i { color: var(--olive); font-style: normal; }
 
 /* ── Tipografía editorial ─────────────────────────────── */
 .eyebrow { font: 500 11px/1.2 var(--mono); letter-spacing: .2em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 10px; }
