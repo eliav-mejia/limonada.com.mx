@@ -25,7 +25,9 @@ calcula su `<base>` con un script porque GitHub Pages lo sirve en cualquier URL.
 ```
 index.html                  inicio: héroe + lámina I, cinta, adelanto del portafolio, manifiesto, garantías, tecnología (video),
                             oficio, servicios (etiqueta personalizada), contacto (formulario → correo a ventas@)
-portafolio/index.html       8 láminas con ficha (piezas, tela, corte, ocasión) y filtro ?linea=caballero|dama
+portafolio/index.html       índice sin scroll: dos columnas animadas que llevan a caballero/ y dama/
+portafolio/caballero/       láminas I–IV con ficha (piezas, tela, corte, ocasión)
+portafolio/dama/            láminas V–VIII con ficha
 privacidad/index.html       aviso de privacidad (texto base: revisar con asesoría legal)
 404.html                    no encontrada
 css/site.css                capa 1: tokens y base

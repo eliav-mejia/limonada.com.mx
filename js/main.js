@@ -1,4 +1,4 @@
-/* Limonada · menú, aparición al desplazar, filtro del portafolio y formulario por correo. Sin dependencias. */
+/* Limonada · menú, aparición al desplazar y formulario por correo. Sin dependencias. */
 (function () {
   'use strict';
   var root = document.documentElement;
@@ -36,29 +36,6 @@
       items.forEach(function (el) { io.observe(el); });
     } else {
       items.forEach(function (el) { el.classList.add('is-in'); });
-    }
-
-    // Filtro del portafolio (?linea=caballero|dama)
-    var chips = document.querySelectorAll('[data-filter]');
-    if (chips.length) {
-      var looks = document.querySelectorAll('[data-linea]');
-      var apply = function (val) {
-        chips.forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.filter === val ? 'true' : 'false'); });
-        looks.forEach(function (l) {
-          l.hidden = val !== 'todos' && l.dataset.linea !== val;
-          if (!l.hidden) l.classList.add('is-in');
-        });
-      };
-      chips.forEach(function (c) {
-        c.addEventListener('click', function () {
-          apply(c.dataset.filter);
-          var url = new URL(location.href);
-          if (c.dataset.filter === 'todos') url.searchParams.delete('linea'); else url.searchParams.set('linea', c.dataset.filter);
-          history.replaceState(null, '', url);
-        });
-      });
-      var initial = new URLSearchParams(location.search).get('linea');
-      if (initial === 'caballero' || initial === 'dama') apply(initial);
     }
 
     // Formulario: arma un correo a ventas@ (sitio estático, sin servidor)
