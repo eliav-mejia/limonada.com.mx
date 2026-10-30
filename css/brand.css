@@ -2,10 +2,8 @@
 
 /* ── Logotipo ─────────────────────────────────────────── */
 .logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
-.logo__mark { width: 40px; height: 40px; flex: none; }
-.logo__name { font: 400 30px/1 var(--serif); letter-spacing: -.01em; }
+.logo__name { font: 400 clamp(22px, 5.5vw, 28px)/1 var(--serif); letter-spacing: -.01em; }
 .logo__name i { color: var(--lemon-600); font-style: normal; }
-.logo__tag { display: block; font: 500 9px/1 var(--mono); letter-spacing: .24em; text-transform: uppercase; margin-top: 4px; opacity: .7; }
 
 /* ── Tipografía editorial ─────────────────────────────── */
 .eyebrow { font: 500 11px/1.2 var(--mono); letter-spacing: .2em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 10px; }
@@ -48,7 +46,7 @@
 .plate { margin: 0; position: relative; }
 .plate__frame { background: var(--paper); border: 1px solid var(--ink); padding: 10px; box-shadow: 10px 10px 0 var(--ink); transition: transform .4s var(--ease), box-shadow .4s var(--ease); }
 a.plate:hover .plate__frame, .plate:hover .plate__frame { transform: translate(-3px, -3px); box-shadow: 13px 13px 0 var(--lemon); }
-.plate__frame img { width: 100%; aspect-ratio: 600 / 540; }
+.plate__frame img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; }
 .plate__num {
   position: absolute; top: -18px; left: 18px; background: var(--lemon); border: 1px solid var(--ink);
   font: 500 11px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; padding: 8px 12px;
