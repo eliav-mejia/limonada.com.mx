@@ -33,6 +33,8 @@ privacidad/index.html       aviso de privacidad (texto base: revisar con asesor�
 css/site.css                capa 1: tokens y base
 css/layout.css              capa 2: estructura (contenedor, cabecera, rejillas, pie)
 css/brand.css               capa 3: componentes de marca (láminas, sello, cinta, garantías, etiqueta…)
+css/moderno.css             estilo alterno «Moderno» (sans, esquinas redondeadas, sombras suaves) bajo [data-style="moderno"];
+                            el botón Editorial/Moderno del menú lo activa y se guarda en localStorage (limonada-estilo)
 js/main.js                  menú, aparición al desplazar, filtro del portafolio, formulario por mailto
 img/fotos/*.jpg             fotografías de las láminas (de limonada.com.mx/caballeros y /colecciones-dama)
 tools/laminas.py            generaba los figurines SVG anteriores (ya no se usan)

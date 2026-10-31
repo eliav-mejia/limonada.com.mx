@@ -1,0 +1,68 @@
+/* Limonada · estilo «Moderno»: misma estructura, contenido y paleta que el editorial, con tipografía sans,
+   esquinas redondeadas, sombras suaves y sin inclinaciones. Se activa con <html data-style="moderno">. */
+[data-style="moderno"] {
+  --serif: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --radius: 16px;
+  --soft: 0 24px 48px -24px color-mix(in srgb, var(--navy) 45%, transparent);
+  --soft-hover: 0 32px 64px -24px color-mix(in srgb, var(--navy) 55%, transparent);
+}
+
+/* Tipografía */
+[data-style="moderno"] :is(h1, h2, h3, h4, .display, .h2, .h3, .split__title, .footer-sign, .manifesto blockquote,
+  .warranty__big, .hero__meta b, .ticker__track span, .contact-list a, .contact-list address, .label-tag__brand) {
+  font-weight: 600; letter-spacing: -.035em;
+}
+[data-style="moderno"] :is(.display em, .h2 em, .manifesto blockquote em, .footer-sign em) { font-style: normal; }
+[data-style="moderno"] :is(.eyebrow, .folio, .mono, .btn, .nav-links, .chip, .plate__num, .plate figcaption span,
+  .spec dt, .hero__meta span, .service li, .field label, .site-footer h4, .footer-base, .style-toggle) {
+  letter-spacing: .06em;
+}
+[data-style="moderno"] .eyebrow::before { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+[data-style="moderno"] .craft li::before { font-style: normal; font-weight: 600; }
+[data-style="moderno"] .dropcap::first-letter { font-weight: 600; }
+
+/* Líneas más suaves */
+[data-style="moderno"] :is(.folio, .look, .craft li, .services, .service, .contact, .hero__meta, .site-header, .site-footer,
+  .split__panel + .split__panel, .rule, .spec, .spec dt, .spec dd) {
+  border-color: var(--line);
+}
+[data-style="moderno"] .ticker { border: 0; }
+
+/* Botones y etiquetas */
+[data-style="moderno"] .btn { border-radius: 999px; }
+[data-style="moderno"] .btn--lemon { box-shadow: var(--soft); border-color: transparent; }
+[data-style="moderno"] .btn--lemon:hover { transform: translateY(-2px); box-shadow: var(--soft-hover); }
+[data-style="moderno"] .plate__num { border: 0; border-radius: 999px; top: 14px; left: 14px; z-index: 1; }
+
+/* Láminas y fotos */
+[data-style="moderno"] :is(.plate__frame, .split__plate) {
+  border: 0; padding: 0; border-radius: var(--radius); overflow: hidden; box-shadow: var(--soft);
+}
+[data-style="moderno"] a.plate:hover .plate__frame, [data-style="moderno"] .plate:hover .plate__frame {
+  transform: translateY(-6px); box-shadow: var(--soft-hover);
+}
+[data-style="moderno"] .split__stack { border-radius: var(--radius); }
+[data-style="moderno"] :is(.hero .plate, .split__panel:nth-child(2) .split__plate, .split__panel:nth-child(3) .split__plate,
+  .label-tag, .stamp) {
+  transform: none;
+}
+[data-style="moderno"] :is(.split__panel:hover .split__plate, .split__panel:focus-visible .split__plate) {
+  transform: translateY(-6px); box-shadow: var(--soft-hover);
+}
+[data-style="moderno"] .stamp { border: 0; box-shadow: var(--soft); }
+
+/* Tarjetas, servicios, formulario y video */
+[data-style="moderno"] .warranty__card,
+[data-style="moderno"] .warranty__card:nth-child(2) { border: 0; border-radius: var(--radius); box-shadow: var(--soft); background: var(--white); }
+[data-style="moderno"] .services { border: 0; gap: 16px; }
+[data-style="moderno"] .service { border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+[data-style="moderno"] .service li { border-radius: 999px; }
+[data-style="moderno"] .label-tag { border: 0; border-radius: var(--radius); box-shadow: var(--soft); }
+[data-style="moderno"] .form { border: 0; border-radius: var(--radius); box-shadow: var(--soft); }
+[data-style="moderno"] :is(.field input, .field select, .field textarea) {
+  border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: var(--white);
+}
+[data-style="moderno"] :is(.field input, .field select, .field textarea):focus { border-color: var(--accent-strong); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 45%, transparent); }
+[data-style="moderno"] .video__frame { border: 0; border-radius: var(--radius); overflow: hidden; box-shadow: var(--soft); }
+[data-style="moderno"] .manifesto__year { -webkit-text-stroke: 0; color: color-mix(in srgb, var(--accent-strong) 8%, transparent); }
