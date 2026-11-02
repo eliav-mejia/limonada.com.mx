@@ -1,5 +1,5 @@
 # Limonada — https://limonada.com.mx/robots.txt
-# Los buscadores pueden indexar el sitio. Los rastreadores de entrenamiento de IA no pueden usar sus textos ni láminas.
+# Fase interna (v1.x): las páginas llevan <meta name="robots" content="noindex, follow"> (no se bloquean aquí para que el buscador lo vea). Los rastreadores de entrenamiento de IA no pueden usar sus textos ni láminas.
 # robots.txt es una petición, no un candado.
 
 User-agent: GPTBot
@@ -20,4 +20,4 @@ Disallow: /tools/
 Disallow: /_docs/
 Allow: /
 
-Sitemap: https://limonada.com.mx/sitemap.xml
+# Sin Sitemap durante la v1.x (regla S3): se vuelve a declarar en la v2.0.0.

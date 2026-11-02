@@ -66,3 +66,13 @@
 [data-style="moderno"] :is(.field input, .field select, .field textarea):focus { border-color: var(--accent-strong); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 45%, transparent); }
 [data-style="moderno"] .video__frame { border: 0; border-radius: var(--radius); overflow: hidden; box-shadow: var(--soft); }
 [data-style="moderno"] .manifesto__year { -webkit-text-stroke: 0; color: color-mix(in srgb, var(--accent-strong) 8%, transparent); }
+
+/* WhatsApp con filtro (v1.2.0) */
+[data-style="moderno"] :is(.lwa-fab, .lwa) { --lwa-radius: 14px; }
+[data-style="moderno"] .lwa-fab { border-radius: 999px; box-shadow: var(--soft); letter-spacing: .04em; }
+[data-style="moderno"] .lwa-fab:hover { transform: translateY(-2px); box-shadow: var(--soft-hover); }
+[data-style="moderno"] .lwa { box-shadow: var(--soft-hover); border-color: var(--line); border-radius: 20px; }
+[data-style="moderno"] :is(.lwa__go, .lwa__option:hover, .lwa__option:focus-visible) { box-shadow: var(--soft); }
+[data-style="moderno"] .lwa__go:hover { transform: translateY(-1px); box-shadow: var(--soft-hover); }
+[data-style="moderno"] .lwa__chip label { border-radius: 999px; }
+[data-style="moderno"] .lwa__title { font-weight: 600; letter-spacing: -.035em; }

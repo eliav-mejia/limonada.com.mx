@@ -9,7 +9,7 @@ con reglas de servidor en `_headers` y señales de derechos (`robots.txt`, `.wel
 Estilo: gaceta de sastrería retro. Fondos solo crema `#ede2cd` (acentos amarillo `#f3c12c` y verde `#7a7229`) o blanco (acentos azul `#133951` y `#6a95b1`), alternados por sección con `.scheme-warm` / `.scheme-blue`; DM Serif Display + DM Sans +
 DM Mono. Las láminas I–VIII usan fotografías del catálogo de limonada.com.mx (caballeros y colecciones dama). Logotipo: solo tipografía «limonada.com.mx».
 
-**Estado: 3.0.0 · Etapa 1.** Publicado en <https://eliav-mejia.github.io/limonada.com.mx/> (GitHub Pages, rama `main`, raíz).
+**Estado: v1.2.0 · fase interna** (numeración en `_interno/README.md`; la base «3.0.0» equivale a v1.0.0). Publicado en <https://eliav-mejia.github.io/limonada.com.mx/> (GitHub Pages, rama `main`, raíz).
 
 ## Probar en local
 
@@ -36,6 +36,10 @@ css/brand.css               capa 3: componentes de marca (láminas, sello, cinta
 css/moderno.css             estilo alterno «Moderno» (sans, esquinas redondeadas, sombras suaves) bajo [data-style="moderno"];
                             el botón Editorial/Moderno del menú lo activa y se guarda en localStorage (limonada-estilo)
 js/main.js                  menú, aparición al desplazar, filtro del portafolio, formulario por mailto
+js/whatsapp.js              v1.2.0: botón flotante + pop-up de dos pasos → n8n (opcional) → wa.me/5215614800424 con «Ref LIM-XXXX»;
+                            eventos GA4 (whatsapp_click, lead_filter_view, lead_filter_step2, generate_lead, lead_filter_skip,
+                            whatsapp_open) si hay gtag/dataLayer. Webhook: data-webhook en la etiqueta <script> (vacío = no envía)
+tools/wpcode.py             empaqueta el mismo CSS + JS como fragmento de WPCode → tools/wordpress/whatsapp-wpcode.html
 img/fotos/*.jpg             fotografías de las láminas (de limonada.com.mx/caballeros y /colecciones-dama)
 tools/laminas.py            generaba los figurines SVG anteriores (ya no se usan)
 tools/paginas.py            genera portafolio/, privacidad/ y 404.html con la cabecera y el pie de index.html
@@ -53,6 +57,16 @@ del portafolio viven en `LOOKS` dentro de `tools/paginas.py`.
 - Formulario: hoy abre el correo del visitante. Etapa 2: endpoint (Worker o Apps Script) que reciba la solicitud.
 
 ## Versiones
+
+### v1.2.0 — 2026-11-02 · WhatsApp con filtro y reglas S1–S3
+- Botón de WhatsApp propio (sin scripts externos) al +52 1 56 1480 0424, con pop-up de dos pasos: interés (empresa, caballero,
+  dama, arreglos, distribuidor, otro) y calificación (personas, ocasión, lugar, plazo, estado). «Prefiero ir directo a WhatsApp»
+  siempre visible; el mensaje prellenado lleva la referencia `LIM-XXXX`. Registro a n8n por `sendBeacon` (form-urlencoded, sin
+  preflight) cuando se configure el webhook. Estilos en `css/brand.css` (bloque autocontenido) y `css/moderno.css`.
+- Fragmento para WordPress con `python3 tools/wpcode.py <URL_WEBHOOK>`; instalar el mismo día que se retira GetButton.io.
+- S1: `noindex, follow` en todas las páginas · S2: sin canónicas hacia limonada.com.mx · S3: `robots.txt` sin `Sitemap`.
+- Aviso de privacidad: respuestas del filtro (12 meses) y medición.
+- Pendiente: URL del webhook de n8n (y `connect-src` en `_headers`), ID de GA4 «desarrollo».
 
 ### 3.0.0 — 2026-10-22 · Variante B, portafolio editorial
 - Marca retro y corporativa (gaceta de sastrería); portafolio de 8 láminas caballero y dama; garantías, oficio y servicios.

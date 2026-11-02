@@ -234,3 +234,90 @@ a.plate { text-decoration: none; display: block; }
 .split__panel .btn--lemon { pointer-events: none; }
 .split__panel:hover .btn--lemon .arrow { transform: translateX(4px); }
 @media (max-height: 560px) and (min-width: 720px) { .split__panel { flex-direction: row; } .split__plate { height: 52dvh; } }
+
+/* ── WhatsApp con filtro (v1.2.0) ─────────────────────── */
+/* Autocontenido: usa los tokens del sitio si existen y valores propios si no (el mismo bloque va a WordPress con tools/wpcode.py). */
+.lwa-fab, .lwa {
+  --lwa-navy: var(--navy, #133951); --lwa-cream: var(--cream, #ede2cd); --lwa-gold: var(--gold, #f3c12c); --lwa-olive: var(--olive, #7a7229);
+  --lwa-sky: var(--sky, #6a95b1); --lwa-line: color-mix(in srgb, var(--lwa-navy) 22%, transparent);
+  --lwa-serif: var(--serif, 'DM Serif Display', Georgia, 'Times New Roman', serif);
+  --lwa-sans: var(--sans, 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif);
+  --lwa-mono: var(--mono, 'DM Mono', ui-monospace, Menlo, monospace);
+  --lwa-radius: var(--radius, 0px);
+  box-sizing: border-box;
+}
+.lwa *, .lwa *::before, .lwa *::after { box-sizing: border-box; }
+.lwa-fab {
+  position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 90;
+  display: inline-flex; align-items: center; gap: 10px; min-height: 56px; min-width: 56px; padding: 0 16px; margin: 0;
+  background: var(--lwa-navy); color: #fff; border: 1px solid var(--lwa-navy); border-radius: var(--lwa-radius);
+  box-shadow: 4px 4px 0 var(--lwa-gold); cursor: pointer; font: 500 12px/1 var(--lwa-mono); letter-spacing: .12em; text-transform: uppercase;
+  transition: transform .2s, box-shadow .2s;
+}
+.lwa-fab:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--lwa-gold); }
+.lwa-fab:focus-visible { outline: 2px solid var(--lwa-navy); outline-offset: 3px; box-shadow: 0 0 0 5px var(--lwa-gold); }
+.lwa-fab svg { flex: none; color: #25d366; }
+.lwa-fab__label { display: none; }
+@media (min-width: 720px) { .lwa-fab__label { display: inline; } }
+html.lwa-open { overflow: hidden; }
+
+.lwa {
+  width: min(560px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); margin: auto; padding: 0; overflow: auto;
+  background: var(--lwa-cream); color: var(--lwa-navy); border: 1px solid var(--lwa-navy); border-radius: var(--lwa-radius);
+  box-shadow: 10px 10px 0 var(--lwa-navy); font: 400 16px/1.5 var(--lwa-sans); text-align: left;
+}
+.lwa:not([open]) { display: none; }
+.lwa[open]:not(:modal) { position: fixed; inset: 0; z-index: 1000; }
+.lwa::backdrop { background: color-mix(in srgb, #133951 55%, transparent); }
+.lwa__panel { position: relative; padding: clamp(22px, 5vw, 36px); }
+.lwa__close {
+  position: absolute; top: 8px; right: 8px; width: 44px; height: 44px; padding: 0; margin: 0; border: 0; background: transparent;
+  color: inherit; font: 400 30px/1 var(--lwa-sans); cursor: pointer;
+}
+.lwa__step { margin: 0 0 10px; font: 500 11px/1.2 var(--lwa-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--lwa-olive); }
+.lwa__step:empty { display: none; }
+.lwa__title { margin: 0 44px 8px 0; font: 400 clamp(28px, 6vw, 38px)/1.02 var(--lwa-serif); letter-spacing: -.01em; color: inherit; text-transform: none; }
+.lwa__desc { margin: 0 0 20px; color: color-mix(in srgb, var(--lwa-navy) 85%, var(--lwa-cream)); }
+.lwa__options { display: grid; gap: 8px; }
+.lwa__option, .lwa__go, .lwa__back, .lwa__skip { font: 500 15px/1.25 var(--lwa-sans); cursor: pointer; margin: 0; text-transform: none; letter-spacing: 0; }
+.lwa__option {
+  display: block; width: 100%; min-height: 48px; padding: 12px 16px; text-align: left; background: #fff; color: var(--lwa-navy);
+  border: 1px solid var(--lwa-line); border-radius: var(--lwa-radius); transition: border-color .15s, box-shadow .15s;
+}
+.lwa__option:hover, .lwa__option:focus-visible { border-color: var(--lwa-navy); box-shadow: 3px 3px 0 var(--lwa-gold); outline: none; }
+.lwa__skip {
+  display: block; margin-top: 18px; min-height: 44px; padding: 10px 0; background: none; border: 0; color: var(--lwa-navy);
+  text-decoration: underline; text-underline-offset: .2em;
+}
+.lwa__skip[hidden] { display: none; }
+.lwa__form { display: grid; gap: 16px; }
+.lwa__group { margin: 0; padding: 0; border: 0; min-width: 0; }
+.lwa__group legend, .lwa__field label { padding: 0; margin-bottom: 8px; font: 500 11px/1.3 var(--lwa-mono); letter-spacing: .14em; text-transform: uppercase; color: inherit; }
+.lwa__field { display: grid; }
+.lwa__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.lwa__chip { position: relative; display: inline-flex; }
+.lwa__chip input { position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; }
+.lwa__chip label {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 8px 14px; margin: 0; cursor: pointer; background: #fff;
+  border: 1px solid var(--lwa-line); border-radius: var(--lwa-radius); font: 400 15px/1.2 var(--lwa-sans); letter-spacing: 0; text-transform: none;
+}
+.lwa__chip input:checked + label { background: var(--lwa-navy); color: #fff; border-color: var(--lwa-navy); }
+.lwa__chip input:focus-visible + label { outline: 2px solid var(--lwa-navy); outline-offset: 2px; }
+.lwa select, .lwa textarea {
+  width: 100%; min-height: 44px; padding: 10px 12px; margin: 0; background: #fff; color: var(--lwa-navy);
+  border: 1px solid var(--lwa-line); border-radius: var(--lwa-radius); font: 400 16px/1.4 var(--lwa-sans);
+}
+.lwa textarea { resize: vertical; }
+.lwa__hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.lwa__actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 4px; }
+.lwa__back { min-height: 44px; padding: 10px 0; background: none; border: 0; color: var(--lwa-navy); }
+.lwa__go {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 14px 22px; text-decoration: none;
+  background: var(--lwa-navy); color: #fff; border: 1px solid var(--lwa-navy); border-radius: var(--lwa-radius); box-shadow: 4px 4px 0 var(--lwa-gold);
+}
+.lwa__go:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--lwa-gold); color: #fff; }
+.lwa__legal { margin: 0; font-size: 13px; color: color-mix(in srgb, var(--lwa-navy) 80%, var(--lwa-cream)); }
+.lwa__legal a { color: inherit; }
+.lwa :focus-visible { outline: 2px solid var(--lwa-navy); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .lwa-fab, .lwa__go { transition: none; } }
+/* ── fin WhatsApp ── */
