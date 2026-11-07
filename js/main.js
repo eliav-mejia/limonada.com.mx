@@ -1,19 +1,28 @@
-/* Limonada · estilo (editorial / moderno / premium), menú, aparición al desplazar y formulario por correo. Sin dependencias. */
+/* Limonada · estilo (retro / moderno / premium) × color (limonada / terracota / blanco), menú, aparición al desplazar y
+   formulario por correo. Sin dependencias. */
 (function () {
   'use strict';
   var root = document.documentElement;
   root.classList.remove('no-js');
   root.classList.add('js');
 
-  // Estilo guardado: se aplica antes de pintar para evitar el parpadeo
-  var STYLE_KEY = 'limonada-estilo';
-  var STYLES = ['editorial', 'moderno', 'premium'];   // editorial = sin data-style
-  var NAMES = { editorial: 'Editorial', moderno: 'Moderno', premium: 'Premium' };
-  var setStyle = function (s) { if (s === 'editorial' || STYLES.indexOf(s) < 0) delete root.dataset.style; else root.dataset.style = s; };
-  try { setStyle(localStorage.getItem(STYLE_KEY)); } catch (e) {}
-  // ?estilo=premium (o moderno / editorial) abre el sitio en ese estilo y lo recuerda: útil para enviar a la clienta
-  var pedido = (location.search.match(/[?&]estilo=(editorial|moderno|premium)\b/) || [])[1];
-  if (pedido) { setStyle(pedido); try { localStorage.setItem(STYLE_KEY, pedido); } catch (e) {} }
+  // Estilo (botones + tipografía) y color, cada uno con tres opciones: 9 combinaciones. Se aplican antes de pintar.
+  // Retro y Limonada son la base (sin atributo). Se recuerdan en localStorage; ?estilo=…&color=… los fija desde un enlace.
+  var EJES = {
+    estilo: { attr: 'style', key: 'limonada-estilo', base: 'retro', valores: ['retro', 'moderno', 'premium'] },
+    color:  { attr: 'color', key: 'limonada-color',  base: 'limonada', valores: ['limonada', 'terracota', 'blanco'] }
+  };
+  var poner = function (eje, v) {
+    var e = EJES[eje];
+    if (v === 'editorial') v = 'retro';   // nombre anterior del estilo Retro (v1.2.x)
+    if (e.valores.indexOf(v) < 0 || v === e.base) delete root.dataset[e.attr]; else root.dataset[e.attr] = v;
+  };
+  var actual = function (eje) { return root.dataset[EJES[eje].attr] || EJES[eje].base; };
+  Object.keys(EJES).forEach(function (eje) {
+    try { poner(eje, localStorage.getItem(EJES[eje].key)); } catch (e) {}
+    var pedido = (location.search.match(new RegExp('[?&]' + eje + '=([a-z]+)')) || [])[1];
+    if (pedido) { poner(eje, pedido); try { localStorage.setItem(EJES[eje].key, actual(eje)); } catch (e) {} }
+  });
 
   document.addEventListener('DOMContentLoaded', function () {
     // Menú móvil
@@ -32,27 +41,20 @@
       });
     }
 
-    // Selector de estilo: Editorial → Moderno → Premium (misma estructura y contenido, otra hoja de estilos).
-    // Clic en una opción la elige; clic en el botón fuera de las opciones pasa a la siguiente.
-    var styleToggles = document.querySelectorAll('[data-style-toggle]');
-    var current = function () { return root.dataset.style || 'editorial'; };
-    var syncStyle = function () {
-      var s = current(), next = STYLES[(STYLES.indexOf(s) + 1) % STYLES.length];
-      styleToggles.forEach(function (b) {
-        b.querySelectorAll('[data-style-name]').forEach(function (sp) { sp.classList.toggle('is-on', sp.dataset.styleName === s); });
-        b.setAttribute('aria-label', 'Estilo del sitio: ' + NAMES[s] + '. Cambiar a ' + NAMES[next]);
-      });
+    // Selectores de estilo y color (misma estructura y contenido; cambian las hojas que aplican)
+    var sincronizar = function () {
+      document.querySelectorAll('[data-set-style]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.setStyle === actual('estilo'))); });
+      document.querySelectorAll('[data-set-color]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.setColor === actual('color'))); });
     };
-    styleToggles.forEach(function (b) {
-      b.addEventListener('click', function (ev) {
-        var picked = ev.target.closest && ev.target.closest('[data-style-name]');
-        var s = picked ? picked.dataset.styleName : STYLES[(STYLES.indexOf(current()) + 1) % STYLES.length];
-        setStyle(s);
-        try { localStorage.setItem(STYLE_KEY, s); } catch (e) {}
-        syncStyle();
-      });
+    document.addEventListener('click', function (ev) {
+      var b = ev.target.closest && ev.target.closest('[data-set-style], [data-set-color]');
+      if (!b) return;
+      var eje = b.dataset.setStyle ? 'estilo' : 'color';
+      poner(eje, b.dataset.setStyle || b.dataset.setColor);
+      try { localStorage.setItem(EJES[eje].key, actual(eje)); } catch (e) {}
+      sincronizar();
     });
-    syncStyle();
+    sincronizar();
 
     // Año del pie
     document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });

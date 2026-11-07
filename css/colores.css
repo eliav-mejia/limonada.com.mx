@@ -1,0 +1,45 @@
+/* Limonada · variantes de COLOR (v1.2.2). Eje independiente del estilo (Retro / Moderno / Premium): 3 × 3 = 9 combinaciones.
+   <html data-color="terracota|blanco">; sin atributo = «Limonada» (crema, amarillo, azul marino; tokens de site.css).
+   Cada variante solo reasigna los tokens base: los esquemas .scheme-warm / .scheme-blue, la cinta, el pop-up de WhatsApp
+   y los tres estilos los leen de aquí.
+   --lujo / --lujo-claro: color fuerte y suave que usa el estilo Premium (botón principal, cinta, WhatsApp). */
+
+:root {
+  --lujo: #133951;        /* Limonada: azul marino */
+  --lujo-claro: #f3c12c;  /* Limonada: amarillo */
+}
+
+/* Terracota · paleta de Limonada Premium */
+:root[data-color="terracota"] {
+  --cream: #EFEBE4;   /* crema: fondo de las secciones cálidas */
+  --white: #F7F2EB;   /* crema clara: fondo de las secciones claras y de los marcos */
+  --gold:  #CD8D77;   /* terracota claro: acento y relleno (texto tinta encima: 5.7:1) */
+  --olive: #8C432C;   /* terracota profundo: líneas y cursivas (6.0:1 sobre crema) */
+  --navy:  #2B211C;   /* tinta: texto, línea superior, cinta */
+  --sky:   #A6927F;   /* taupe: acento de las secciones claras */
+  --lujo: #8C432C;
+  --lujo-claro: #CD8D77;
+}
+
+/* Blanco · blanco, grafito y plata: el color que mejor deja ver las fotos de fondo blanco */
+:root[data-color="blanco"] {
+  --cream: #F2F1EE;   /* gris cálido muy claro */
+  --white: #FFFFFF;
+  --gold:  #D6D3CC;   /* plata cálida: acento y relleno (texto grafito encima: 12.2:1) */
+  --olive: #5E5C58;   /* gris oscuro: líneas y cursivas (5.9:1 sobre #F2F1EE) */
+  --navy:  #151515;   /* grafito */
+  --sky:   #A3A19C;
+  --lujo: #151515;
+  --lujo-claro: #BDBAB3;
+}
+
+:root[data-color] { color-scheme: light; }
+
+/* Fotos de fondo blanco: el blanco toma el color del marco o del fondo en las nueve combinaciones */
+.plate__frame img, .split__stack, .lookbook__marco img { mix-blend-mode: multiply; }
+
+/* Muestras del selector de color (fijas: enseñan la paleta aunque esté activa otra) */
+.muestra { display: block; width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.18); }
+.muestra--limonada  { background: conic-gradient(#ede2cd 0 50%, #f3c12c 0 75%, #133951 0); }
+.muestra--terracota { background: conic-gradient(#EFEBE4 0 50%, #CD8D77 0 75%, #8C432C 0); }
+.muestra--blanco    { background: conic-gradient(#FFFFFF 0 50%, #D6D3CC 0 75%, #151515 0); }

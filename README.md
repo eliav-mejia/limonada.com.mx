@@ -9,7 +9,7 @@ con reglas de servidor en `_headers` y señales de derechos (`robots.txt`, `.wel
 Estilo: gaceta de sastrería retro. Fondos solo crema `#ede2cd` (acentos amarillo `#f3c12c` y verde `#7a7229`) o blanco (acentos azul `#133951` y `#6a95b1`), alternados por sección con `.scheme-warm` / `.scheme-blue`; DM Serif Display + DM Sans +
 DM Mono. Las láminas I–VIII usan fotografías del catálogo de limonada.com.mx (caballeros y colecciones dama). Logotipo: solo tipografía «limonada.com.mx».
 
-**Estado: v1.2.1 · fase interna** (numeración en `_interno/README.md`; la base «3.0.0» equivale a v1.0.0). Publicado en <https://eliav-mejia.github.io/limonada.com.mx/> (GitHub Pages, rama `main`, raíz).
+**Estado: v1.2.2 · fase interna** (numeración en `_interno/README.md`; la base «3.0.0» equivale a v1.0.0). Publicado en <https://eliav-mejia.github.io/limonada.com.mx/> (GitHub Pages, rama `main`, raíz).
 
 ## Probar en local
 
@@ -35,18 +35,20 @@ css/layout.css              capa 2: estructura (contenedor, cabecera, rejillas, 
 css/brand.css               capa 3: componentes de marca (láminas, sello, cinta, garantías, etiqueta…)
 css/moderno.css             estilo alterno «Moderno» (sans, esquinas redondeadas, sombras suaves) bajo [data-style="moderno"];
                             el botón Editorial/Moderno del menú lo activa y se guarda en localStorage (limonada-estilo)
-css/premium.css             v1.2.1: tercer estilo «Premium» (lujo) bajo [data-style="premium"]: paleta terracota de Limonada Premium,
-                            Cormorant Garamond + Plus Jakarta Sans, láminas en arco, pie oscuro. COMPILADO con Tailwind CSS v4
-                            desde tools/estilo-premium/premium.src.css (no editar a mano); muestra .solo-premium (héroe de
-                            estilo de vida y lookbook «Dama Premium» con las 6 fotos dama)
-js/main.js                  menú, selector Editorial / Moderno / Premium (localStorage limonada-estilo; ?estilo=premium abre en ese
-                            estilo), aparición al desplazar, filtro del portafolio, formulario por mailto
+css/colores.css             v1.2.2: las tres variantes de COLOR (Limonada · Terracota · Blanco) como tokens bajo [data-color];
+                            fotos con mix-blend-multiply (el blanco toma el color de cada paleta); muestras del selector
+css/premium.css             estilo «Premium» (botones y tipografía de lujo) bajo [data-style="premium"], sin colores propios.
+                            COMPILADO con Tailwind CSS v4 desde tools/estilo-premium/premium.src.css (no editar a mano);
+                            muestra .solo-premium (lookbook «Dama Premium» con las cuatro láminas dama)
+js/main.js                  menú, selectores Estilo (Retro / Moderno / Premium) × Color (Limonada / Terracota / Blanco) = 9
+                            combinaciones (localStorage limonada-estilo y limonada-color; ?estilo=premium&color=blanco las fija),
+                            aparición al desplazar, filtro del portafolio, formulario por mailto
 js/whatsapp.js              v1.2.0: botón flotante + pop-up de dos pasos → n8n (opcional) → wa.me/5215614800424 con «Ref LIM-XXXX»;
                             eventos GA4 (whatsapp_click, lead_filter_view, lead_filter_step2, generate_lead, lead_filter_skip,
                             whatsapp_open) si hay gtag/dataLayer. Webhook: data-webhook en la etiqueta <script> (vacío = no envía)
 tools/wpcode.py             empaqueta el mismo CSS + JS como fragmento de WPCode → tools/wordpress/whatsapp-wpcode.html
-img/fotos/*.jpg             fotografías de las láminas (de limonada.com.mx/caballeros y /colecciones-dama); 09-terraza y 10-rosa
-                            (v1.2.1, estilo Premium) llegan de la carpeta de imágenes de limonada-b2c-premium vía builds/
+img/fotos/*.jpg             SOLO fotos de fondo blanco (v1.2.2): 02-consejo, 03-tres-piezas (caballero) y 05–08 (dama).
+                            Retiradas: 01-ejecutivo (degradado lila), 04-gala (muro de piedra), 09-terraza y 10-rosa (exteriores)
 tools/estilo-premium/       fuente Tailwind del estilo Premium: cd tools/estilo-premium && npm install && npm run build
 tools/laminas.py            generaba los figurines SVG anteriores (ya no se usan)
 tools/paginas.py            genera portafolio/, privacidad/ y 404.html con la cabecera y el pie de index.html
@@ -64,6 +66,15 @@ del portafolio viven en `LOOKS` dentro de `tools/paginas.py`.
 - Formulario: hoy abre el correo del visitante. Etapa 2: endpoint (Worker o Apps Script) que reciba la solicitud.
 
 ## Versiones
+
+### v1.2.2 — 2026-11-06 · 3 estilos × 3 colores = 9 combinaciones, solo fotos de fondo blanco
+- Dos selectores en el menú de todas las páginas: **Estilo** (botones y tipografía: Retro · Moderno · Premium; «Editorial»
+  pasa a llamarse Retro) y **Color** (Limonada · Terracota · Blanco). Se combinan libremente y se recuerdan por separado;
+  `?estilo=…&color=…` abre una combinación concreta.
+- `css/colores.css`: las paletas solo reasignan los tokens base (--cream, --white, --gold, --olive, --navy, --sky, --lujo);
+  Premium se recompiló sin colores propios para combinar con las tres. Contraste AA revisado en las tres paletas.
+- Solo fotos de fondo blanco: se retiran 01, 04, 09 y 10. El portafolio queda en seis láminas (Caballero I–II, Dama III–VI);
+  héroe = Tres Piezas; adelanto del inicio = Consejo, Directora, Funda, Junta; lookbook Premium = cuatro láminas dama.
 
 ### v1.2.1 — 2026-11-06 · Tercer estilo «Premium» (lujo)
 - Selector de estilo de tres opciones en todas las páginas: Editorial · Moderno · Premium. `?estilo=premium` abre el sitio en

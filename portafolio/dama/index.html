@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../../css/layout.css">
   <link rel="stylesheet" href="../../css/brand.css">
   <link rel="stylesheet" href="../../css/moderno.css">
+  <link rel="stylesheet" href="../../css/colores.css">
   <link rel="stylesheet" href="../../css/premium.css">
   <script src="../../js/main.js"></script>
   <script src="../../js/whatsapp.js" defer></script>
@@ -43,7 +44,7 @@
         <li><a href="../../#garantias">Garantías</a></li>
         <li><a href="../../#servicios">Servicios</a></li>
         <li><a href="../../#contacto">Contacto</a></li>
-        <li class="nav-style"><button class="style-toggle" type="button" data-style-toggle aria-label="Estilo del sitio: Editorial. Cambiar a Moderno"><span data-style-name="editorial" class="is-on">Editorial</span><span data-style-name="moderno">Moderno</span><span data-style-name="premium">Premium</span></button></li>
+        <li class="nav-style"><div class="selector" role="group" aria-label="Estilo: botones y tipografía"><button type="button" data-set-style="retro" aria-pressed="true">Retro</button><button type="button" data-set-style="moderno" aria-pressed="false">Moderno</button><button type="button" data-set-style="premium" aria-pressed="false">Premium</button></div><div class="selector selector--color" role="group" aria-label="Color"><button type="button" data-set-color="limonada" aria-pressed="true" title="Limonada"><span class="muestra muestra--limonada" aria-hidden="true"></span><span class="visually-hidden">Color Limonada</span></button><button type="button" data-set-color="terracota" aria-pressed="false" title="Terracota"><span class="muestra muestra--terracota" aria-hidden="true"></span><span class="visually-hidden">Color Terracota</span></button><button type="button" data-set-color="blanco" aria-pressed="false" title="Blanco"><span class="muestra muestra--blanco" aria-hidden="true"></span><span class="visually-hidden">Color Blanco</span></button></div></li>
       </ul>
     </nav>
   </header>
@@ -51,7 +52,7 @@
   <main id="main">
     <section class="hero scheme-warm">
       <div class="container">
-        <div class="folio"><span>Gaceta Nº 29</span><span>Portafolio · Dama</span><span>Láminas V – VIII</span></div>
+        <div class="folio"><span>Gaceta Nº 29</span><span>Portafolio · Dama</span><span>Láminas III – VI</span></div>
         <div class="section-head" style="margin-top:56px;margin-bottom:40px">
           <div>
             <p class="eyebrow">Portafolio editorial</p>
@@ -65,11 +66,11 @@
         </div>
         <article class="look reveal" id="directora" data-linea="dama">
           <figure class="plate">
-            <span class="plate__num">Lámina V</span>
+            <span class="plate__num">Lámina III</span>
             <div class="plate__frame"><img src="../../img/fotos/05-directora.jpg" alt="Saco entallado sin solapa de un botón en textura café y pantalón recto café" width="640" height="960" loading="lazy"></div>
           </figure>
           <div>
-            <p class="eyebrow">Dama · Lámina V</p>
+            <p class="eyebrow">Dama · Lámina III</p>
             <h2 class="h2">La Directora</h2>
             <p class="lede">Saco entallado sin solapa, de un botón, con pantalón recto. Hombro definido, cintura marcada y libertad de movimiento.</p>
             <dl class="spec"><dt>Piezas</dt><dd>Saco y pantalón recto</dd><dt>Tela</dt><dd>Textura café</dd><dt>Corte</dt><dd>Entallado, sin solapa, un botón</dd><dt>Ocasión</dt><dd>Dirección · oficina</dd></dl>
@@ -78,11 +79,11 @@
         </article>
         <article class="look reveal scheme-blue" id="junta" data-linea="dama">
           <figure class="plate">
-            <span class="plate__num">Lámina VI</span>
+            <span class="plate__num">Lámina IV</span>
             <div class="plate__frame"><img src="../../img/fotos/06-junta.jpg" alt="Saco entallado de tres botones en cuadro gris y falda lápiz negra con abertura" width="640" height="960" loading="lazy"></div>
           </figure>
           <div>
-            <p class="eyebrow">Dama · Lámina VI</p>
+            <p class="eyebrow">Dama · Lámina IV</p>
             <h2 class="h2">La Junta</h2>
             <p class="lede">Cuadro fino gris con camisa blanca. Saco de tres botones y falda lápiz negra con abertura.</p>
             <dl class="spec"><dt>Piezas</dt><dd>Saco y falda lápiz</dd><dt>Tela</dt><dd>Cuadro gris, falda negra</dd><dt>Corte</dt><dd>Entallado, tres botones</dd><dt>Ocasión</dt><dd>Juntas · atención a clientes</dd></dl>
@@ -91,11 +92,11 @@
         </article>
         <article class="look reveal" id="funda" data-linea="dama">
           <figure class="plate">
-            <span class="plate__num">Lámina VII</span>
+            <span class="plate__num">Lámina V</span>
             <div class="plate__frame"><img src="../../img/fotos/07-funda.jpg" alt="Vestido funda gris carbón sin mangas con cortes princesa" width="640" height="960" loading="lazy"></div>
           </figure>
           <div>
-            <p class="eyebrow">Dama · Lámina VII</p>
+            <p class="eyebrow">Dama · Lámina V</p>
             <h2 class="h2">La Funda</h2>
             <p class="lede">Vestido funda sin mangas con cortes princesa. Una sola pieza, impecable de la mañana a la recepción.</p>
             <dl class="spec"><dt>Piezas</dt><dd>Vestido</dd><dt>Tela</dt><dd>Gris carbón</dd><dt>Corte</dt><dd>Funda, cortes princesa</dd><dt>Ocasión</dt><dd>Recepción · eventos</dd></dl>
@@ -104,11 +105,11 @@
         </article>
         <article class="look reveal scheme-blue" id="sucursal" data-linea="dama">
           <figure class="plate">
-            <span class="plate__num">Lámina VIII</span>
+            <span class="plate__num">Lámina VI</span>
             <div class="plate__frame"><img src="../../img/fotos/08-sucursal.jpg" alt="Saco fucsia de dos botones con solapa, bolsillos y puños en pata de gallo y pantalón negro" width="640" height="960" loading="lazy"></div>
           </figure>
           <div>
-            <p class="eyebrow">Dama · Lámina VIII</p>
+            <p class="eyebrow">Dama · Lámina VI</p>
             <h2 class="h2">La Sucursal</h2>
             <p class="lede">El uniforme ejecutivo de piso de venta: fucsia con vivos en pata de gallo y pantalón negro. Lavable y con etiqueta personalizada.</p>
             <dl class="spec"><dt>Piezas</dt><dd>Saco y pantalón</dd><dt>Tela</dt><dd>Fucsia, pata de gallo</dd><dt>Corte</dt><dd>Entallado, dos botones</dd><dt>Ocasión</dt><dd>Sucursal · atención al público</dd></dl>

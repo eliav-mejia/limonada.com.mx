@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../../css/layout.css">
   <link rel="stylesheet" href="../../css/brand.css">
   <link rel="stylesheet" href="../../css/moderno.css">
+  <link rel="stylesheet" href="../../css/colores.css">
   <link rel="stylesheet" href="../../css/premium.css">
   <script src="../../js/main.js"></script>
   <script src="../../js/whatsapp.js" defer></script>
@@ -43,7 +44,7 @@
         <li><a href="../../#garantias">Garantías</a></li>
         <li><a href="../../#servicios">Servicios</a></li>
         <li><a href="../../#contacto">Contacto</a></li>
-        <li class="nav-style"><button class="style-toggle" type="button" data-style-toggle aria-label="Estilo del sitio: Editorial. Cambiar a Moderno"><span data-style-name="editorial" class="is-on">Editorial</span><span data-style-name="moderno">Moderno</span><span data-style-name="premium">Premium</span></button></li>
+        <li class="nav-style"><div class="selector" role="group" aria-label="Estilo: botones y tipografía"><button type="button" data-set-style="retro" aria-pressed="true">Retro</button><button type="button" data-set-style="moderno" aria-pressed="false">Moderno</button><button type="button" data-set-style="premium" aria-pressed="false">Premium</button></div><div class="selector selector--color" role="group" aria-label="Color"><button type="button" data-set-color="limonada" aria-pressed="true" title="Limonada"><span class="muestra muestra--limonada" aria-hidden="true"></span><span class="visually-hidden">Color Limonada</span></button><button type="button" data-set-color="terracota" aria-pressed="false" title="Terracota"><span class="muestra muestra--terracota" aria-hidden="true"></span><span class="visually-hidden">Color Terracota</span></button><button type="button" data-set-color="blanco" aria-pressed="false" title="Blanco"><span class="muestra muestra--blanco" aria-hidden="true"></span><span class="visually-hidden">Color Blanco</span></button></div></li>
       </ul>
     </nav>
   </header>
@@ -51,38 +52,25 @@
   <main id="main">
     <section class="hero scheme-warm">
       <div class="container">
-        <div class="folio"><span>Gaceta Nº 29</span><span>Portafolio · Caballero</span><span>Láminas I – IV</span></div>
+        <div class="folio"><span>Gaceta Nº 29</span><span>Portafolio · Caballero</span><span>Láminas I – II</span></div>
         <div class="section-head" style="margin-top:56px;margin-bottom:40px">
           <div>
             <p class="eyebrow">Portafolio editorial</p>
             <h1 class="display" style="margin-top:20px">Caballero<em>.</em></h1>
           </div>
-          <p class="lede">Cuatro modelos de la temporada. Todos se cortan a la medida, en la tela y el color de tu empresa, con etiquetas personalizadas por colaborador.</p>
+          <p class="lede">Dos modelos de la temporada. Todos se cortan a la medida, en la tela y el color de tu empresa, con etiquetas personalizadas por colaborador.</p>
         </div>
         <div class="actions" style="margin-bottom:56px">
           <a class="btn" href="../"><span class="arrow" aria-hidden="true">←</span> Portafolio</a>
           <a class="btn" href="../dama/">Ver dama <span class="arrow" aria-hidden="true">→</span></a>
         </div>
-        <article class="look reveal" id="ejecutivo" data-linea="caballero">
-          <figure class="plate">
-            <span class="plate__num">Lámina I</span>
-            <div class="plate__frame"><img src="../../img/fotos/01-ejecutivo.jpg" alt="Saco de dos botones y pantalón en raya diplomática azul marino con camisa blanca" width="400" height="500" loading="lazy"></div>
-          </figure>
-          <div>
-            <p class="eyebrow">Caballero · Lámina I</p>
-            <h2 class="h2">El Ejecutivo</h2>
-            <p class="lede">El traje que abre la temporada: dos botones, solapa de muesca y raya diplomática fina. Línea limpia para la oficina de todos los días.</p>
-            <dl class="spec"><dt>Piezas</dt><dd>Saco y pantalón</dd><dt>Tela</dt><dd>Raya diplomática, azul marino</dd><dt>Corte</dt><dd>Dos botones, solapa de muesca</dd><dt>Ocasión</dt><dd>Oficina · uniforme directivo</dd></dl>
-            <div class="actions" style="margin-top:32px"><a class="btn" href="../../#contacto">Cotizar esta lámina <span class="arrow" aria-hidden="true">→</span></a></div>
-          </div>
-        </article>
         <article class="look reveal scheme-blue" id="consejo" data-linea="caballero">
           <figure class="plate">
-            <span class="plate__num">Lámina II</span>
+            <span class="plate__num">Lámina I</span>
             <div class="plate__frame"><img src="../../img/fotos/02-consejo.jpg" alt="Saco de dos botones gris carbón con pañuelo de bolsillo y corbata de lunares" width="400" height="500" loading="lazy"></div>
           </figure>
           <div>
-            <p class="eyebrow">Caballero · Lámina II</p>
+            <p class="eyebrow">Caballero · Lámina I</p>
             <h2 class="h2">El Consejo</h2>
             <p class="lede">Gris carbón de dos botones con pañuelo de bolsillo. Autoridad sin estridencia para la sala de consejo y las presentaciones.</p>
             <dl class="spec"><dt>Piezas</dt><dd>Saco y pantalón</dd><dt>Tela</dt><dd>Gris carbón</dd><dt>Corte</dt><dd>Dos botones, solapa de muesca</dd><dt>Ocasión</dt><dd>Consejo · presentaciones</dd></dl>
@@ -91,27 +79,14 @@
         </article>
         <article class="look reveal" id="tres-piezas" data-linea="caballero">
           <figure class="plate">
-            <span class="plate__num">Lámina III</span>
+            <span class="plate__num">Lámina II</span>
             <div class="plate__frame"><img src="../../img/fotos/03-tres-piezas.jpg" alt="Chaleco de cinco botones y pantalón en raya diplomática gris oxford; saco al hombro" width="400" height="500" loading="lazy"></div>
           </figure>
           <div>
-            <p class="eyebrow">Caballero · Lámina III</p>
+            <p class="eyebrow">Caballero · Lámina II</p>
             <h2 class="h2">Tres Piezas</h2>
             <p class="lede">Raya diplomática gris oxford con chaleco de cinco botones. Un guiño clásico para los meses fríos y los equipos con carácter.</p>
             <dl class="spec"><dt>Piezas</dt><dd>Saco, chaleco y pantalón</dd><dt>Tela</dt><dd>Raya diplomática, gris oxford</dd><dt>Corte</dt><dd>Dos botones, chaleco de cinco</dd><dt>Ocasión</dt><dd>Otoño · invierno</dd></dl>
-            <div class="actions" style="margin-top:32px"><a class="btn" href="../../#contacto">Cotizar esta lámina <span class="arrow" aria-hidden="true">→</span></a></div>
-          </div>
-        </article>
-        <article class="look reveal scheme-blue" id="gala" data-linea="caballero">
-          <figure class="plate">
-            <span class="plate__num">Lámina IV</span>
-            <div class="plate__frame"><img src="../../img/fotos/04-gala.jpg" alt="Traje negro de solapa de muesca con camisa blanca y corbata roja" width="400" height="500" loading="lazy"></div>
-          </figure>
-          <div>
-            <p class="eyebrow">Caballero · Lámina IV</p>
-            <h2 class="h2">La Gala</h2>
-            <p class="lede">Negro liso, solapa de muesca y camisa blanca. El traje de noche para la cena anual, la premiación o el evento de la marca.</p>
-            <dl class="spec"><dt>Piezas</dt><dd>Saco y pantalón</dd><dt>Tela</dt><dd>Negro noche</dd><dt>Corte</dt><dd>Dos botones, solapa de muesca</dd><dt>Ocasión</dt><dd>Eventos · gala</dd></dl>
             <div class="actions" style="margin-top:32px"><a class="btn" href="../../#contacto">Cotizar esta lámina <span class="arrow" aria-hidden="true">→</span></a></div>
           </div>
         </article>

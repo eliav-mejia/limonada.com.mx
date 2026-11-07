@@ -23,14 +23,21 @@
 .nav-toggle { display: none; background: none; border: 1px solid var(--accent-strong); width: 44px; height: 40px; padding: 10px; cursor: pointer; }
 .nav-toggle span { display: block; height: 1.5px; background: var(--ink); margin: 4px 0; transition: transform .25s var(--ease), opacity .2s; }
 
-/* Selector de estilo: Editorial / Moderno / Premium (js/main.js marca la opción activa con .is-on) */
-.nav-links .nav-style { display: flex; align-items: center; }
-.style-toggle {
-  display: inline-flex; padding: 3px; gap: 2px; border: 1px solid var(--accent-strong); border-radius: 999px; background: var(--bg);
-  font: 500 10px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); cursor: pointer;
+/* Selectores de Estilo (Retro / Moderno / Premium) y Color (Limonada / Terracota / Blanco): 3 × 3 combinaciones.
+   js/main.js marca la opción activa con aria-pressed="true". */
+.nav-links .nav-style { display: flex; align-items: center; gap: 8px; }
+.selector {
+  display: inline-flex; align-items: center; padding: 3px; gap: 2px; border: 1px solid var(--accent-strong); border-radius: 999px;
+  background: var(--bg); font: 500 10px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink);
 }
-.style-toggle span { padding: 7px 10px; border-radius: 999px; transition: background .25s var(--ease), color .25s var(--ease); }
-.style-toggle span.is-on { background: var(--fill); color: var(--on-fill); }
+.selector button {
+  font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit; background: transparent; border: 0; margin: 0;
+  padding: 7px 10px; border-radius: 999px; cursor: pointer; transition: background .25s var(--ease), color .25s var(--ease);
+}
+.selector [aria-pressed="true"] { background: var(--fill); color: var(--on-fill); }
+.selector--color button { padding: 4px; }
+.selector--color [aria-pressed="true"] { background: transparent; box-shadow: 0 0 0 2px var(--accent-strong); }
+@media (min-width: 861px) and (max-width: 1180px) { .nav-links { gap: 14px; align-items: center; } .nav-links .nav-style { flex-direction: column; align-items: flex-end; gap: 4px; } }
 
 @media (max-width: 860px) {
   .nav-toggle { display: block; }

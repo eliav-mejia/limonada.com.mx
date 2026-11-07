@@ -15,7 +15,7 @@
 }
 [data-style="moderno"] :is(.display em, .h2 em, .manifesto blockquote em, .footer-sign em) { font-style: normal; }
 [data-style="moderno"] :is(.eyebrow, .folio, .mono, .btn, .nav-links, .chip, .plate__num, .plate figcaption span,
-  .spec dt, .hero__meta span, .service li, .field label, .site-footer h4, .footer-base, .style-toggle) {
+  .spec dt, .hero__meta span, .service li, .field label, .site-footer h4, .footer-base, .selector) {
   letter-spacing: .06em;
 }
 [data-style="moderno"] .eyebrow::before { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }

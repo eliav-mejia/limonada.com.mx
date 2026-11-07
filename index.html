@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/brand.css">
   <link rel="stylesheet" href="css/moderno.css">
+  <link rel="stylesheet" href="css/colores.css">
   <link rel="stylesheet" href="css/premium.css">
   <script src="js/main.js"></script>
   <script src="js/whatsapp.js" defer></script>
@@ -66,7 +67,7 @@
         <li><a href="#garantias">Garantías</a></li>
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#contacto">Contacto</a></li>
-        <li class="nav-style"><button class="style-toggle" type="button" data-style-toggle aria-label="Estilo del sitio: Editorial. Cambiar a Moderno"><span data-style-name="editorial" class="is-on">Editorial</span><span data-style-name="moderno">Moderno</span><span data-style-name="premium">Premium</span></button></li>
+        <li class="nav-style"><div class="selector" role="group" aria-label="Estilo: botones y tipografía"><button type="button" data-set-style="retro" aria-pressed="true">Retro</button><button type="button" data-set-style="moderno" aria-pressed="false">Moderno</button><button type="button" data-set-style="premium" aria-pressed="false">Premium</button></div><div class="selector selector--color" role="group" aria-label="Color"><button type="button" data-set-color="limonada" aria-pressed="true" title="Limonada"><span class="muestra muestra--limonada" aria-hidden="true"></span><span class="visually-hidden">Color Limonada</span></button><button type="button" data-set-color="terracota" aria-pressed="false" title="Terracota"><span class="muestra muestra--terracota" aria-hidden="true"></span><span class="visually-hidden">Color Terracota</span></button><button type="button" data-set-color="blanco" aria-pressed="false" title="Blanco"><span class="muestra muestra--blanco" aria-hidden="true"></span><span class="visually-hidden">Color Blanco</span></button></div></li>
       </ul>
     </nav>
   </header>
@@ -91,16 +92,12 @@
               <div><b>70</b><span>Lavadas en casa</span></div>
             </div>
           </div>
-          <a class="plate" href="portafolio/caballero/#ejecutivo">
-            <span class="plate__num">Lámina I</span>
-            <div class="plate__frame"><img src="img/fotos/01-ejecutivo.jpg" alt="Saco de dos botones y pantalón en raya diplomática azul marino con camisa blanca" width="400" height="500"></div>
-            <figcaption><h3>El Ejecutivo</h3><span>Raya diplomática<br>Caballero</span></figcaption>
+          <a class="plate" href="portafolio/caballero/#tres-piezas">
+            <span class="plate__num">Lámina II</span>
+            <div class="plate__frame"><img src="img/fotos/03-tres-piezas.jpg" alt="Chaleco de cinco botones y pantalón en raya diplomática gris oxford; saco al hombro" width="400" height="500"></div>
+            <figcaption><h3>Tres Piezas</h3><span>Raya · chaleco<br>Caballero</span></figcaption>
             <span class="stamp" aria-hidden="true"><span><b>’97</b>Hecho<br>a la medida</span></span>
           </a>
-          <figure class="hero-lujo solo-premium">
-            <span class="hero-lujo__marco"><img src="img/fotos/09-terraza.jpg" alt="Ejecutiva con traje rosa y chaleco gris, sentada en una terraza con vista a la Ciudad de México" width="800" height="1114" loading="lazy"></span>
-            <figcaption><b>Dama Premium</b><span>Traje rosa · chaleco gris<br>A la medida</span></figcaption>
-          </figure>
         </div>
       </div>
     </section>
@@ -119,53 +116,50 @@
         <div class="section-head">
           <div>
             <p class="eyebrow">Portafolio editorial</p>
-            <h2 class="h2" id="portafolio-titulo" style="margin-top:18px">Ocho láminas, <em>dos siluetas</em>.</h2>
+            <h2 class="h2" id="portafolio-titulo" style="margin-top:18px">Seis láminas, <em>dos siluetas</em>.</h2>
           </div>
           <p class="lede">Modelos de la temporada para caballero y dama: del dos botones de consejo al vestido funda de recepción. Cada lámina se corta a tu medida y en la tela de tu empresa.</p>
         </div>
         <div class="gallery">
           <a class="plate reveal" href="portafolio/caballero/#consejo">
-            <span class="plate__num">Lámina II</span>
+            <span class="plate__num">Lámina I</span>
             <div class="plate__frame"><img src="img/fotos/02-consejo.jpg" alt="Saco de dos botones gris carbón con pañuelo de bolsillo y corbata de lunares" width="400" height="500" loading="lazy"></div>
             <figcaption><h3>El Consejo</h3><span>Dos botones · carbón<br>Caballero</span></figcaption>
           </a>
           <a class="plate reveal" href="portafolio/dama/#directora">
-            <span class="plate__num">Lámina V</span>
+            <span class="plate__num">Lámina III</span>
             <div class="plate__frame"><img src="img/fotos/05-directora.jpg" alt="Saco entallado sin solapa de un botón en textura café y pantalón recto café" width="640" height="960" loading="lazy"></div>
             <figcaption><h3>La Directora</h3><span>Entallado · café<br>Dama</span></figcaption>
           </a>
-          <a class="plate reveal" href="portafolio/caballero/#tres-piezas">
-            <span class="plate__num">Lámina III</span>
-            <div class="plate__frame"><img src="img/fotos/03-tres-piezas.jpg" alt="Chaleco de cinco botones y pantalón en raya diplomática gris oxford; saco al hombro" width="400" height="500" loading="lazy"></div>
-            <figcaption><h3>Tres Piezas</h3><span>Raya · chaleco<br>Caballero</span></figcaption>
+          <a class="plate reveal" href="portafolio/dama/#funda">
+            <span class="plate__num">Lámina V</span>
+            <div class="plate__frame"><img src="img/fotos/07-funda.jpg" alt="Vestido funda gris carbón sin mangas con cortes princesa" width="640" height="960" loading="lazy"></div>
+            <figcaption><h3>La Funda</h3><span>Gris carbón<br>Dama</span></figcaption>
           </a>
           <a class="plate reveal" href="portafolio/dama/#junta">
-            <span class="plate__num">Lámina VI</span>
+            <span class="plate__num">Lámina IV</span>
             <div class="plate__frame"><img src="img/fotos/06-junta.jpg" alt="Saco entallado de tres botones en cuadro gris y falda lápiz negra con abertura" width="640" height="960" loading="lazy"></div>
             <figcaption><h3>La Junta</h3><span>Cuadro gris<br>Dama</span></figcaption>
           </a>
         </div>
         <div class="actions" style="justify-content:center;margin-top:80px">
-          <a class="btn" href="portafolio/">Ver las ocho láminas <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn" href="portafolio/">Ver las seis láminas <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
 
-    <!-- Dama Premium: solo con el estilo Premium (lookbook con las seis fotografías de la línea dama) -->
+    <!-- Dama Premium: solo con el estilo Premium (lookbook con las cuatro láminas dama, fotos de fondo blanco) -->
     <section class="section scheme-warm lookbook solo-premium" id="dama-premium" aria-labelledby="dama-premium-titulo">
       <div class="container">
         <div class="section-head">
           <div>
             <p class="eyebrow">Dama Premium</p>
-            <h2 class="h2" id="dama-premium-titulo" style="margin-top:18px">Seis maneras de <em>dirigir</em>.</h2>
+            <h2 class="h2" id="dama-premium-titulo" style="margin-top:18px">Cuatro maneras de <em>dirigir</em>.</h2>
           </div>
-          <p class="lede">Trajes sastre, vestidos y blusas a la medida para la mujer ejecutiva: de la junta de consejo a la terraza de la tarde, cortados a tus medidas en nuestro taller de la Ciudad de México.</p>
+          <p class="lede">Trajes sastre, vestidos y blusas a la medida para la mujer ejecutiva: de la junta de consejo a la recepción de la noche, cortados a tus medidas en nuestro taller de la Ciudad de México.</p>
         </div>
         <div class="lookbook__grid">
-          <figure class="lookbook__principal reveal">
-            <span class="hero-lujo__marco"><img src="img/fotos/10-rosa.jpg" alt="Ejecutiva sonriente con traje rosa de saco y pantalón y blusa gris" width="800" height="1280" loading="lazy"></span>
-          </figure>
-          <div class="lookbook__piezas">
+          <div class="lookbook__piezas lookbook__piezas--fila">
             <a class="lookbook__pieza reveal" href="portafolio/dama/#directora"><span class="lookbook__marco"><img src="img/fotos/05-directora.jpg" alt="Saco entallado sin solapa en textura café y pantalón recto café" width="640" height="960" loading="lazy"></span><b>La Directora</b><span>Entallado · café</span></a>
             <a class="lookbook__pieza reveal" href="portafolio/dama/#junta"><span class="lookbook__marco"><img src="img/fotos/06-junta.jpg" alt="Saco de tres botones en cuadro gris y falda lápiz negra" width="640" height="960" loading="lazy"></span><b>La Junta</b><span>Cuadro gris</span></a>
             <a class="lookbook__pieza reveal" href="portafolio/dama/#funda"><span class="lookbook__marco"><img src="img/fotos/07-funda.jpg" alt="Vestido funda gris carbón sin mangas con cortes princesa" width="640" height="960" loading="lazy"></span><b>La Funda</b><span>Gris carbón</span></a>

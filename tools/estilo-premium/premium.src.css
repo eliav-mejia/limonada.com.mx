@@ -1,181 +1,143 @@
-/* Limonada · estilo «Premium» (lujo): tercer estilo del selector Editorial / Moderno / Premium.
+/* Limonada · estilo «Premium» (lujo): botones y tipografía. Uno de los tres estilos (Retro / Moderno / Premium).
    Fuente Tailwind CSS v4 → ../../css/premium.css   (cd tools/estilo-premium && npm install && npm run build)
 
-   - Sin preflight ni utilidades escaneadas: solo el tema y @apply. Así no toca Editorial ni Moderno.
-   - Todo va bajo [data-style="premium"] (lo pone js/main.js en <html>), salvo .solo-premium, que se oculta en los otros dos.
-   - Paleta y tipografía de Limonada Premium (limonada-b2c-premium): crema, arena, terracota, taupe, lana + tinta. */
+   v1.2.2: el COLOR ya no vive aquí. Todo color sale de los tokens (--bg, --ink, --accent, --accent-strong, --lujo…) que
+   define css/colores.css para Limonada, Terracota o Blanco, así Premium combina con las tres paletas (9 combinaciones).
+   - Sin preflight ni utilidades escaneadas: solo @apply de forma y tipografía, bajo [data-style="premium"].
+   - .solo-premium (lookbook «Dama Premium») se oculta en Retro y Moderno. */
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities) source(none);
 
 @theme {
-  --color-crema: #EFEBE4;
-  --color-arena: #E3D1BE;
-  --color-terracota-claro: #CD8D77;
-  --color-terracota: #AD5C43;
-  --color-terracota-profundo: #8C432C;
-  --color-taupe: #A6927F;
-  --color-lana: #8F7D71;
-  --color-tinta: #2B211C;
   --font-display: "Cormorant Garamond", "Times New Roman", serif;
   --font-jakarta: "Plus Jakarta Sans", system-ui, sans-serif;
   --ease-sastre: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-/* ── Piezas que solo existen en Premium (héroe de estilo de vida y lookbook Dama Premium) ── */
 .solo-premium { display: none; }
 [data-style="premium"] .solo-premium { display: block; }
 
-/* ── Tokens: el sitio entero se pinta con variables; aquí se reasignan ── */
+/* ── Tokens de forma y letra (no de color) ── */
 :root[data-style="premium"] {
-  --ink: var(--color-tinta);
-  --cream: var(--color-crema);
-  --navy: var(--color-tinta);
-  --gold: var(--color-terracota-claro);
-  --olive: var(--color-terracota-profundo);
-  --sky: var(--color-taupe);
-  --white: #FBF8F4;
   --serif: var(--font-display);
   --sans: var(--font-jakarta);
   --mono: var(--font-jakarta);
   --radius: 22px;
   --measure: 58ch;
-  --lujo-sombra: 0 30px 60px -36px color-mix(in srgb, var(--color-tinta) 45%, transparent);
+  --lujo-sombra: 0 30px 60px -36px color-mix(in srgb, var(--navy) 45%, transparent);
+  --arco: 999px 999px 18px 18px;
 }
-:root[data-style="premium"], [data-style="premium"] .scheme-warm {
-  --bg: var(--color-crema); --accent: var(--color-terracota-claro); --accent-strong: var(--color-terracota-profundo);
-  --fill: var(--color-terracota-profundo); --on-fill: var(--color-crema);
+[data-style="premium"] :is(.scheme-warm, .scheme-blue) {
+  --line: color-mix(in srgb, var(--ink) 16%, transparent);
+  --marco: color-mix(in srgb, var(--accent) 22%, var(--bg));   /* fondo de los arcos: acento suave de cada paleta */
 }
-[data-style="premium"] .scheme-blue {
-  --bg: color-mix(in srgb, var(--color-arena) 55%, var(--color-crema)); --accent: var(--color-taupe);
-  --accent-strong: var(--color-tinta); --fill: var(--color-tinta); --on-fill: var(--color-crema);
-}
-[data-style="premium"] :is(.scheme-warm, .scheme-blue) { --line: color-mix(in srgb, var(--color-taupe) 45%, transparent); }
 
 /* ── Base: sin grano de papel, tipografía de lujo ── */
 [data-style="premium"] body { @apply antialiased; font-size: 16.5px; letter-spacing: .005em; }
 [data-style="premium"] body::before { display: none; }
 [data-style="premium"] :is(h1, h2, h3, h4) { @apply font-medium; letter-spacing: -.005em; line-height: 1.04; }
 [data-style="premium"] .display { font-size: clamp(46px, 7.4vw, 108px); line-height: .98; font-weight: 400; }
-[data-style="premium"] :is(.display em, .h2 em, .manifesto blockquote em, .footer-sign em, .split__title em) { @apply italic text-terracota-profundo; }
+[data-style="premium"] :is(.display em, .h2 em, .manifesto blockquote em, .footer-sign em, .split__title em) { @apply italic; color: var(--accent-strong); }
 [data-style="premium"] .h2 { font-weight: 400; }
 [data-style="premium"] .lede { @apply font-light; }
-[data-style="premium"] .hl { background: linear-gradient(transparent 62%, color-mix(in srgb, var(--color-terracota-claro) 45%, transparent) 62%); }
+[data-style="premium"] .hl { background: linear-gradient(transparent 62%, color-mix(in srgb, var(--accent) 55%, transparent) 62%); }
 [data-style="premium"] :is(.eyebrow, .folio, .mono, .nav-links, .plate__num, .plate figcaption span, .spec dt, .hero__meta span,
-  .service li, .field label, .site-footer h4, .footer-base, .style-toggle, .btn, .topline, .warranty__big small, .stamp) {
+  .service li, .field label, .site-footer h4, .footer-base, .selector, .btn, .topline, .warranty__big small, .stamp) {
   @apply font-semibold; letter-spacing: .24em;
 }
-[data-style="premium"] .eyebrow { @apply text-terracota-profundo; font-size: 10.5px; }
-[data-style="premium"] .eyebrow::before { @apply bg-terracota-claro; width: 36px; }
+[data-style="premium"] .eyebrow { font-size: 10.5px; color: var(--accent-strong); }
+[data-style="premium"] .eyebrow::before { width: 36px; background: var(--accent); }
 
 /* ── Cabecera ── */
-[data-style="premium"] .topline { @apply bg-tinta text-arena; font-size: 10px; }
-[data-style="premium"] .site-header { border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--color-crema) 92%, transparent); }
+[data-style="premium"] .topline { font-size: 10px; }
+[data-style="premium"] .site-header { border-bottom: 1px solid var(--line); }
 [data-style="premium"] .nav-links { font-size: 10.5px; }
-[data-style="premium"] .nav-links a:hover, [data-style="premium"] .nav-links a[aria-current="page"] { @apply border-b-terracota-claro; }
-[data-style="premium"] .nav-toggle { @apply rounded-full border-taupe; }
+[data-style="premium"] .nav-toggle { @apply rounded-full; }
 
-/* ── Botones ── */
-[data-style="premium"] .btn { @apply rounded-full border-terracota-profundo text-terracota-profundo; padding: 15px 28px; font-size: 10.5px; }
-[data-style="premium"] .btn:hover { @apply bg-terracota-profundo text-crema; }
-[data-style="premium"] .btn--lemon { @apply bg-terracota-profundo text-crema border-transparent; box-shadow: var(--lujo-sombra); }
-[data-style="premium"] .btn--lemon:hover { @apply bg-tinta text-crema; transform: translateY(-2px); box-shadow: var(--lujo-sombra); }
+/* ── Botones: píldora; principal en el color fuerte de la paleta ── */
+[data-style="premium"] .btn { @apply rounded-full; padding: 15px 28px; font-size: 10.5px; border-color: var(--lujo); color: var(--lujo); }
+[data-style="premium"] .btn:hover { background: var(--lujo); color: var(--white); }
+[data-style="premium"] .btn--lemon { @apply border-transparent; background: var(--lujo); color: var(--white); box-shadow: var(--lujo-sombra); }
+[data-style="premium"] .btn--lemon:hover { background: var(--navy); color: var(--white); transform: translateY(-2px); box-shadow: var(--lujo-sombra); }
 
-/* ── Héroe y láminas: arcos sin marco ni sombra desplazada ── */
-[data-style="premium"] .folio { border-color: var(--line); @apply text-lana; }
+/* ── Láminas: arcos sin marco ni sombra desplazada ── */
+[data-style="premium"] .folio { border-color: var(--line); color: var(--ink-500); }
 [data-style="premium"] .hero__meta { border-top-color: var(--line); }
-[data-style="premium"] .hero__meta b { @apply text-terracota-profundo; font-weight: 400; }
-[data-style="premium"] .hero .plate { display: none; }
+[data-style="premium"] .hero__meta b { font-weight: 400; color: var(--accent-strong); }
+[data-style="premium"] .hero .plate { transform: none; }
 [data-style="premium"] :is(.plate__frame, .split__plate) {
-  @apply border-0 p-0 overflow-hidden bg-arena; border-radius: 999px 999px 18px 18px; box-shadow: none;
+  @apply border-0 p-0 overflow-hidden; border-radius: var(--arco); box-shadow: none; background: var(--marco);
 }
-[data-style="premium"] .plate__frame img { @apply mix-blend-multiply; aspect-ratio: 4 / 5; transition: transform .9s var(--ease-sastre); }
+[data-style="premium"] .plate__frame img { aspect-ratio: 4 / 5; transition: transform .9s var(--ease-sastre); }
 [data-style="premium"] :is(a.plate:hover, .plate:hover) .plate__frame { transform: none; box-shadow: var(--lujo-sombra); }
 [data-style="premium"] :is(a.plate:hover, .plate:hover) .plate__frame img { transform: scale(1.04); }
-[data-style="premium"] .plate__num { @apply static mb-4 inline-block border-0 bg-transparent p-0 text-lana; font-size: 10px; }
+[data-style="premium"] .plate__num { @apply static mb-4 inline-block border-0 bg-transparent p-0; font-size: 10px; color: var(--ink-500); }
 [data-style="premium"] .plate figcaption h3 { font-weight: 500; }
 [data-style="premium"] .gallery > :nth-child(even) { margin-top: 64px; }
-[data-style="premium"] .stamp { @apply bg-transparent text-terracota-profundo border border-terracota-claro; transform: none; }
-[data-style="premium"] .stamp b { @apply text-terracota-profundo italic; }
-[data-style="premium"] .split__stack { @apply mix-blend-multiply; }  /* el fundido entre fotos se mezcla completo, sin fantasmas */
+[data-style="premium"] .stamp { @apply bg-transparent border; border-color: var(--accent); color: var(--accent-strong); transform: none; }
+[data-style="premium"] .stamp b { @apply italic; color: var(--accent-strong); }
 [data-style="premium"] :is(.split__panel:nth-child(2) .split__plate, .split__panel:nth-child(3) .split__plate) { transform: none; }
 [data-style="premium"] :is(.split__panel:hover .split__plate, .split__panel:focus-visible .split__plate) { transform: translateY(-6px); box-shadow: var(--lujo-sombra); }
-[data-style="premium"] .split__panel + .split__panel { border-color: var(--line); }
-[data-style="premium"] .look { border-top-color: var(--line); }
-[data-style="premium"] .spec { border-top-color: var(--line); }
-
-/* Héroe de estilo de vida (solo Premium) */
-[data-style="premium"] .hero-lujo { @apply relative m-0; }
-.hero-lujo__marco { @apply block overflow-hidden bg-arena; border-radius: 999px 999px 24px 24px; aspect-ratio: 4 / 5; box-shadow: var(--lujo-sombra); }
-.hero-lujo__marco img { @apply h-full w-full object-cover; object-position: 40% 30%; }
-.hero-lujo figcaption { @apply mt-5 flex items-baseline justify-between gap-4; }
-.hero-lujo figcaption b { font: 500 22px/1.1 var(--font-display); }
-.hero-lujo figcaption span { @apply text-lana; font: 600 10px/1.4 var(--font-jakarta); letter-spacing: .22em; text-transform: uppercase; text-align: right; }
+[data-style="premium"] :is(.split__panel + .split__panel, .look, .spec, .spec dt, .spec dd) { border-color: var(--line); }
 
 /* ── Cinta ── */
-[data-style="premium"] .ticker { @apply bg-terracota-profundo text-crema border-terracota-profundo; }
+[data-style="premium"] .ticker { background: var(--lujo); color: var(--white); border-color: var(--lujo); }
 [data-style="premium"] .ticker__track span { @apply italic; font-size: clamp(22px, 2.4vw, 30px); }
 [data-style="premium"] .ticker__track span::after { content: "·"; margin-inline: 34px; }
 
 /* ── Tarjetas, oficio, servicios, etiqueta, video ── */
 [data-style="premium"] .warranty__card,
-[data-style="premium"] .warranty__card:nth-child(2) { @apply rounded-3xl border bg-crema; border-color: var(--line); box-shadow: var(--lujo-sombra); }
-[data-style="premium"] .warranty__big { @apply text-terracota-profundo; font-weight: 300; }
+[data-style="premium"] .warranty__card:nth-child(2) { @apply rounded-3xl border; border-color: var(--line); background: var(--bg); box-shadow: var(--lujo-sombra); }
+[data-style="premium"] .warranty__big { font-weight: 300; color: var(--accent-strong); }
 [data-style="premium"] .craft li { border-color: var(--line) !important; }
-[data-style="premium"] .craft li::before { @apply text-terracota; }
 [data-style="premium"] .services { @apply border-0 gap-4; }
-[data-style="premium"] .service { @apply rounded-3xl border bg-crema; border-color: var(--line); }
-[data-style="premium"] .service:hover { background: color-mix(in srgb, var(--color-arena) 45%, var(--color-crema)); }
-[data-style="premium"] .service li { @apply rounded-full border-taupe/40 bg-transparent; }
+[data-style="premium"] .service { @apply rounded-3xl border; border-color: var(--line); background: var(--bg); }
+[data-style="premium"] .service:hover { background: var(--marco); }
+[data-style="premium"] .service li { @apply rounded-full bg-transparent; border-color: var(--line); }
 [data-style="premium"] .label-tag { @apply rounded-2xl border-0; transform: none; box-shadow: var(--lujo-sombra); }
 [data-style="premium"] .label-tag__brand { border-bottom-style: solid; border-color: var(--line); }
 [data-style="premium"] .video__frame { @apply rounded-3xl overflow-hidden border-0; box-shadow: var(--lujo-sombra); }
-[data-style="premium"] .manifesto__year { -webkit-text-stroke: 0; color: color-mix(in srgb, var(--color-terracota-claro) 18%, transparent); }
-[data-style="premium"] .dropcap::first-letter { @apply text-terracota-profundo; font-weight: 400; }
+[data-style="premium"] .manifesto__year { -webkit-text-stroke: 0; color: color-mix(in srgb, var(--accent) 22%, transparent); }
+[data-style="premium"] .dropcap::first-letter { font-weight: 400; }
 
 /* ── Contacto y formulario ── */
 [data-style="premium"] .contact { border-top-color: var(--line); }
-[data-style="premium"] .contact-list a, [data-style="premium"] .contact-list address { font-weight: 500; }
-[data-style="premium"] .form { @apply rounded-3xl border bg-crema; border-color: var(--line); box-shadow: var(--lujo-sombra); }
-[data-style="premium"] :is(.field input, .field select, .field textarea) { @apply border-b-taupe; }
-[data-style="premium"] :is(.field input, .field select, .field textarea):focus { @apply border-b-terracota-profundo; box-shadow: 0 1px 0 var(--color-terracota-profundo); }
+[data-style="premium"] :is(.contact-list a, .contact-list address) { font-weight: 500; }
+[data-style="premium"] .form { @apply rounded-3xl border; border-color: var(--line); background: var(--bg); box-shadow: var(--lujo-sombra); }
+[data-style="premium"] :is(.field input, .field select, .field textarea) { border-bottom-color: var(--line); }
+[data-style="premium"] :is(.field input, .field select, .field textarea):focus { border-bottom-color: var(--lujo); box-shadow: 0 1px 0 var(--lujo); }
 
-/* ── Pie oscuro ── */
+/* ── Pie oscuro (en el color de texto de la paleta) ── */
 [data-style="premium"] .site-footer.scheme-warm {
-  --bg: var(--color-tinta); --ink: var(--color-crema); --accent: var(--color-terracota-claro); --accent-strong: var(--color-terracota-claro);
-  --line: color-mix(in srgb, var(--color-crema) 18%, transparent);
+  --bg: var(--navy); --ink: var(--cream); --accent: var(--gold); --accent-strong: var(--gold);
+  --line: color-mix(in srgb, var(--cream) 18%, transparent);
   border-top: 0;
 }
-[data-style="premium"] .site-footer h4 { @apply text-taupe border-b border-terracota-claro; font-size: 10px; }
+[data-style="premium"] .site-footer h4 { @apply border-b; font-size: 10px; border-color: var(--gold); }
 [data-style="premium"] .footer-sign { font-weight: 300; }
-[data-style="premium"] .logo__dot, [data-style="premium"] .logo__name i { @apply text-terracota-claro; }
 
-/* ── Selector de estilo ── */
-[data-style="premium"] .style-toggle { border-color: var(--line); font-size: 9.5px; }
-[data-style="premium"] .style-toggle span.is-on { @apply bg-terracota-profundo text-crema; }
+/* ── Selectores de estilo y color ── */
+[data-style="premium"] .selector { border-color: var(--line); font-size: 9.5px; }
+[data-style="premium"] .selector:not(.selector--color) [aria-pressed="true"] { background: var(--lujo); color: var(--white); }
 
-/* ── Lookbook «Dama Premium» (solo Premium) ── */
-.lookbook__grid { @apply grid gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-14; align-items: start; }
-.lookbook__principal { @apply m-0; }
-.lookbook__principal .hero-lujo__marco { aspect-ratio: 5 / 8; }
-.lookbook__piezas { @apply grid grid-cols-2 gap-x-5 gap-y-10; }
+/* ── Lookbook «Dama Premium» (solo Premium): cuatro láminas dama de fondo blanco ── */
+.lookbook__piezas { @apply grid grid-cols-2 gap-x-5 gap-y-10 lg:grid-cols-4; }
 .lookbook__pieza { @apply block no-underline; color: inherit; }
 .lookbook__pieza:nth-child(even) { @apply lg:mt-14; }
-.lookbook__marco { @apply block overflow-hidden bg-arena; border-radius: 999px 999px 14px 14px; aspect-ratio: 2 / 3; }
-.lookbook__marco img { @apply h-full w-full object-cover mix-blend-multiply; object-position: center top; transition: transform .9s var(--ease-sastre); }
+.lookbook__marco { @apply block overflow-hidden; border-radius: 999px 999px 14px 14px; aspect-ratio: 2 / 3; background: var(--marco, var(--white)); }
+.lookbook__marco img { @apply h-full w-full object-cover; object-position: center top; transition: transform .9s var(--ease-sastre); }
 .lookbook__pieza:hover .lookbook__marco img { transform: scale(1.05); }
 .lookbook__pieza b { @apply mt-3 block; font: 500 21px/1.15 var(--font-display); }
-.lookbook__pieza span { @apply text-lana; font: 600 9.5px/1.5 var(--font-jakarta); letter-spacing: .2em; text-transform: uppercase; }
+.lookbook__pieza span { font: 600 9.5px/1.5 var(--font-jakarta); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-500); }
 .lookbook .actions { @apply mt-12; }
 
-/* ── WhatsApp con filtro: misma pieza, paleta de lujo ── */
+/* ── WhatsApp con filtro: misma pieza, colores de la paleta activa ── */
 [data-style="premium"] :is(.lwa-fab, .lwa) {
-  --lwa-navy: var(--color-terracota-profundo); --lwa-gold: var(--color-terracota-claro); --lwa-cream: var(--color-crema);
-  --lwa-olive: var(--color-terracota); --lwa-radius: 18px;
-  --lwa-serif: var(--font-display); --lwa-sans: var(--font-jakarta); --lwa-mono: var(--font-jakarta);
+  --lwa-navy: var(--lujo); --lwa-gold: var(--lujo-claro); --lwa-cream: var(--cream); --lwa-olive: var(--accent-strong);
+  --lwa-radius: 18px; --lwa-serif: var(--font-display); --lwa-sans: var(--font-jakarta); --lwa-mono: var(--font-jakarta);
 }
 [data-style="premium"] .lwa-fab { @apply rounded-full; box-shadow: var(--lujo-sombra); }
 [data-style="premium"] .lwa-fab:hover { transform: translateY(-2px); box-shadow: var(--lujo-sombra); }
 [data-style="premium"] .lwa { border-color: var(--line); border-radius: 26px; box-shadow: var(--lujo-sombra); }
 [data-style="premium"] :is(.lwa__go, .lwa__option:hover, .lwa__option:focus-visible) { box-shadow: none; }
-[data-style="premium"] .lwa__go { @apply rounded-full; }
-[data-style="premium"] .lwa__chip label { @apply rounded-full; }
+[data-style="premium"] :is(.lwa__go, .lwa__chip label) { @apply rounded-full; }
