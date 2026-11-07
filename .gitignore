@@ -11,3 +11,6 @@ _interno/
 
 # Herramienta del estilo Premium (tools/estilo-premium): dependencias locales
 node_modules/
+
+# Originales pesados de animaciones (el sitio usa img/banner/*.mp4|webm)
+img/gifs/

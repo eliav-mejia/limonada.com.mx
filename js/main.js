@@ -56,6 +56,10 @@
     });
     sincronizar();
 
+    // Banner: sin movimiento si el sistema pide reducirlo (queda el cartel fijo)
+    var banner = document.querySelector('.banner__video');
+    if (banner && window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { banner.removeAttribute('autoplay'); banner.pause(); }
+
     // Año del pie
     document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 

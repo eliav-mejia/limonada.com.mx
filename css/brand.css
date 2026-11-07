@@ -32,6 +32,29 @@
 .btn:hover .arrow { transform: translateX(4px); }
 .actions { display: flex; flex-wrap: wrap; gap: 14px; }
 
+/* ── Banner principal (inicio): video en bucle a pantalla completa, botón para bajar en la capa superior ── */
+.banner { position: relative; height: calc(100svh - 100px); min-height: 420px; max-height: 920px; overflow: hidden; background: var(--navy); isolation: isolate; }
+.banner__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.banner::after {   /* velo inferior: da contraste al botón sobre cualquier fotograma */
+  content: ""; position: absolute; inset: auto 0 0; height: 45%; z-index: 1; pointer-events: none;
+  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--navy) 70%, transparent));
+}
+.banner__bajar {
+  position: absolute; left: 50%; bottom: clamp(20px, 5vh, 44px); z-index: 2; transform: translateX(-50%);
+  display: inline-flex; flex-direction: column; align-items: center; gap: 12px; padding: 6px 10px;
+  color: #fff; text-decoration: none; font: 500 11px/1 var(--mono); letter-spacing: .22em; text-transform: uppercase;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, .35);
+}
+.banner__flecha {
+  display: grid; place-items: center; width: 48px; height: 48px; font: 400 20px/1 var(--sans); letter-spacing: 0;
+  border: 1px solid currentColor; background: color-mix(in srgb, var(--navy) 35%, transparent);
+  transition: background .25s var(--ease), color .25s var(--ease); animation: banner-bote 2.2s var(--ease) infinite;
+}
+.banner__bajar:hover .banner__flecha, .banner__bajar:focus-visible .banner__flecha { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+.banner__bajar:focus-visible { outline: 2px solid #fff; outline-offset: 4px; box-shadow: none; }
+@keyframes banner-bote { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+@media (max-width: 520px) { .banner { height: calc(100svh - 90px); min-height: 360px; } }
+
 /* ── Héroe ────────────────────────────────────────────── */
 .hero { padding-block: clamp(32px, 5vw, 56px) clamp(56px, 8vw, 96px); }
 .hero__grid { display: grid; gap: clamp(32px, 5vw, 64px); margin-top: clamp(32px, 5vw, 56px); }

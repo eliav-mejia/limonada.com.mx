@@ -9,7 +9,7 @@ con reglas de servidor en `_headers` y señales de derechos (`robots.txt`, `.wel
 Estilo: gaceta de sastrería retro. Fondos solo crema `#ede2cd` (acentos amarillo `#f3c12c` y verde `#7a7229`) o blanco (acentos azul `#133951` y `#6a95b1`), alternados por sección con `.scheme-warm` / `.scheme-blue`; DM Serif Display + DM Sans +
 DM Mono. Las láminas I–VIII usan fotografías del catálogo de limonada.com.mx (caballeros y colecciones dama). Logotipo: solo tipografía «limonada.com.mx».
 
-**Estado: v1.2.2 · fase interna** (numeración en `_interno/README.md`; la base «3.0.0» equivale a v1.0.0). Publicado en <https://eliav-mejia.github.io/limonada.com.mx/> (GitHub Pages, rama `main`, raíz).
+**Estado: v1.2.3 · fase interna** (numeración en `_interno/README.md`; la base «3.0.0» equivale a v1.0.0). Publicado en <https://eliav-mejia.github.io/limonada.com.mx/> (GitHub Pages, rama `main`, raíz).
 
 ## Probar en local
 
@@ -23,7 +23,7 @@ calcula su `<base>` con un script porque GitHub Pages lo sirve en cualquier URL.
 ## Estructura
 
 ```
-index.html                  inicio: héroe + lámina I, cinta, adelanto del portafolio, manifiesto, garantías, tecnología (video),
+index.html                  inicio: banner (video en bucle + botón «Descubre» para bajar), héroe + lámina I, cinta, adelanto del portafolio, manifiesto, garantías, tecnología (video),
                             oficio, servicios (etiqueta personalizada), contacto (formulario → correo a ventas@)
 portafolio/index.html       índice sin scroll: dos columnas animadas que llevan a caballero/ y dama/
 portafolio/caballero/       láminas I–IV con ficha (piezas, tela, corte, ocasión)
@@ -47,6 +47,9 @@ js/whatsapp.js              v1.2.0: botón flotante + pop-up de dos pasos → n8
                             eventos GA4 (whatsapp_click, lead_filter_view, lead_filter_step2, generate_lead, lead_filter_skip,
                             whatsapp_open) si hay gtag/dataLayer. Webhook: data-webhook en la etiqueta <script> (vacío = no envía)
 tools/wpcode.py             empaqueta el mismo CSS + JS como fragmento de WPCode → tools/wordpress/whatsapp-wpcode.html
+img/banner/                 v1.2.3: banner del inicio. banner.webm (0.96 MB) + banner.mp4 (1.2 MB) + banner-poster.jpg, sin sonido,
+                            recortados de img/gifs/Diseno-sin-titulo-1.gif (32 MB, original FUERA de Git por .gitignore):
+                            ffmpeg -i <gif> -vf "crop=1152:520:0:64" (quita las franjas negras) → libx264 crf 26 / vp9 crf 38
 img/fotos/*.jpg             SOLO fotos de fondo blanco (v1.2.2): 02-consejo, 03-tres-piezas (caballero) y 05–08 (dama).
                             Retiradas: 01-ejecutivo (degradado lila), 04-gala (muro de piedra), 09-terraza y 10-rosa (exteriores)
 tools/estilo-premium/       fuente Tailwind del estilo Premium: cd tools/estilo-premium && npm install && npm run build
@@ -66,6 +69,13 @@ del portafolio viven en `LOOKS` dentro de `tools/paginas.py`.
 - Formulario: hoy abre el correo del visitante. Etapa 2: endpoint (Worker o Apps Script) que reciba la solicitud.
 
 ## Versiones
+
+### v1.2.3 — 2026-11-06 · Banner principal animado
+- Arriba del inicio, bajo la cabecera: la animación del taller (`Diseno-sin-titulo-1.gif`) como video en bucle, sin sonido y a
+  pantalla completa (`100svh` menos cabecera), con el botón «Descubre ↓» en la capa superior que baja al héroe (`#inicio`).
+- 32 MB de GIF → ~1 MB de video (WebM + MP4) y cartel JPG; se recortan las franjas negras de 64 px. Con «reducir movimiento»
+  el video se detiene y queda el cartel.
+- El botón sigue el estilo activo: Retro (cuadro y mono), Moderno (círculo esmerilado), Premium (círculo fino y cursiva).
 
 ### v1.2.2 — 2026-11-06 · 3 estilos × 3 colores = 9 combinaciones, solo fotos de fondo blanco
 - Dos selectores en el menú de todas las páginas: **Estilo** (botones y tipografía: Retro · Moderno · Premium; «Editorial»

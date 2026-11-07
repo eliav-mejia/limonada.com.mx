@@ -76,3 +76,8 @@
 [data-style="moderno"] .lwa__go:hover { transform: translateY(-1px); box-shadow: var(--soft-hover); }
 [data-style="moderno"] .lwa__chip label { border-radius: 999px; }
 [data-style="moderno"] .lwa__title { font-weight: 600; letter-spacing: -.035em; }
+
+/* Banner principal (v1.2.3): botón circular con cristal esmerilado */
+[data-style="moderno"] .banner__bajar { font-family: var(--sans); font-weight: 600; letter-spacing: .08em; }
+[data-style="moderno"] .banner__flecha { border: 0; border-radius: 50%; width: 52px; height: 52px; background: rgba(255,255,255,.18); backdrop-filter: blur(10px); box-shadow: var(--soft); }
+

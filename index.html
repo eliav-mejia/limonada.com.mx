@@ -73,8 +73,18 @@
   </header>
 
   <main id="main">
+    <!-- Banner principal: animación del taller (Diseno-sin-titulo-1.gif convertido a video en bucle, sin sonido) con botón
+         para bajar en la capa superior. Original de 32 MB fuera de Git (img/gifs/); se publica img/banner/ (~1 MB). -->
+    <section class="banner" aria-label="Taller Limonada: telas, corte y confección">
+      <video class="banner__video" autoplay muted loop playsinline preload="auto" poster="img/banner/banner-poster.jpg" aria-hidden="true" tabindex="-1">
+        <source src="img/banner/banner.webm" type="video/webm">
+        <source src="img/banner/banner.mp4" type="video/mp4">
+      </video>
+      <a class="banner__bajar" href="#inicio" aria-label="Bajar al contenido"><span class="banner__texto">Descubre</span><span class="banner__flecha" aria-hidden="true">↓</span></a>
+    </section>
+
     <!-- Héroe -->
-    <section class="hero scheme-warm">
+    <section class="hero scheme-warm" id="inicio">
       <div class="container">
         <div class="folio"><span>Gaceta Nº 29</span><span>Otoño · Invierno 2026</span><span>Caballero &amp; Dama</span></div>
         <div class="hero__grid">
