@@ -23,14 +23,14 @@
 .nav-toggle { display: none; background: none; border: 1px solid var(--accent-strong); width: 44px; height: 40px; padding: 10px; cursor: pointer; }
 .nav-toggle span { display: block; height: 1.5px; background: var(--ink); margin: 4px 0; transition: transform .25s var(--ease), opacity .2s; }
 
-/* Selector de estilo: Editorial / Moderno */
+/* Selector de estilo: Editorial / Moderno / Premium (js/main.js marca la opción activa con .is-on) */
 .nav-links .nav-style { display: flex; align-items: center; }
 .style-toggle {
   display: inline-flex; padding: 3px; gap: 2px; border: 1px solid var(--accent-strong); border-radius: 999px; background: var(--bg);
   font: 500 10px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); cursor: pointer;
 }
 .style-toggle span { padding: 7px 10px; border-radius: 999px; transition: background .25s var(--ease), color .25s var(--ease); }
-.style-toggle[aria-pressed="false"] span:first-child, .style-toggle[aria-pressed="true"] span:last-child { background: var(--fill); color: var(--on-fill); }
+.style-toggle span.is-on { background: var(--fill); color: var(--on-fill); }
 
 @media (max-width: 860px) {
   .nav-toggle { display: block; }

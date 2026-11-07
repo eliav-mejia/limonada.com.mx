@@ -9,7 +9,7 @@ con reglas de servidor en `_headers` y señales de derechos (`robots.txt`, `.wel
 Estilo: gaceta de sastrería retro. Fondos solo crema `#ede2cd` (acentos amarillo `#f3c12c` y verde `#7a7229`) o blanco (acentos azul `#133951` y `#6a95b1`), alternados por sección con `.scheme-warm` / `.scheme-blue`; DM Serif Display + DM Sans +
 DM Mono. Las láminas I–VIII usan fotografías del catálogo de limonada.com.mx (caballeros y colecciones dama). Logotipo: solo tipografía «limonada.com.mx».
 
-**Estado: v1.2.0 · fase interna** (numeración en `_interno/README.md`; la base «3.0.0» equivale a v1.0.0). Publicado en <https://eliav-mejia.github.io/limonada.com.mx/> (GitHub Pages, rama `main`, raíz).
+**Estado: v1.2.1 · fase interna** (numeración en `_interno/README.md`; la base «3.0.0» equivale a v1.0.0). Publicado en <https://eliav-mejia.github.io/limonada.com.mx/> (GitHub Pages, rama `main`, raíz).
 
 ## Probar en local
 
@@ -35,12 +35,19 @@ css/layout.css              capa 2: estructura (contenedor, cabecera, rejillas, 
 css/brand.css               capa 3: componentes de marca (láminas, sello, cinta, garantías, etiqueta…)
 css/moderno.css             estilo alterno «Moderno» (sans, esquinas redondeadas, sombras suaves) bajo [data-style="moderno"];
                             el botón Editorial/Moderno del menú lo activa y se guarda en localStorage (limonada-estilo)
-js/main.js                  menú, aparición al desplazar, filtro del portafolio, formulario por mailto
+css/premium.css             v1.2.1: tercer estilo «Premium» (lujo) bajo [data-style="premium"]: paleta terracota de Limonada Premium,
+                            Cormorant Garamond + Plus Jakarta Sans, láminas en arco, pie oscuro. COMPILADO con Tailwind CSS v4
+                            desde tools/estilo-premium/premium.src.css (no editar a mano); muestra .solo-premium (héroe de
+                            estilo de vida y lookbook «Dama Premium» con las 6 fotos dama)
+js/main.js                  menú, selector Editorial / Moderno / Premium (localStorage limonada-estilo; ?estilo=premium abre en ese
+                            estilo), aparición al desplazar, filtro del portafolio, formulario por mailto
 js/whatsapp.js              v1.2.0: botón flotante + pop-up de dos pasos → n8n (opcional) → wa.me/5215614800424 con «Ref LIM-XXXX»;
                             eventos GA4 (whatsapp_click, lead_filter_view, lead_filter_step2, generate_lead, lead_filter_skip,
                             whatsapp_open) si hay gtag/dataLayer. Webhook: data-webhook en la etiqueta <script> (vacío = no envía)
 tools/wpcode.py             empaqueta el mismo CSS + JS como fragmento de WPCode → tools/wordpress/whatsapp-wpcode.html
-img/fotos/*.jpg             fotografías de las láminas (de limonada.com.mx/caballeros y /colecciones-dama)
+img/fotos/*.jpg             fotografías de las láminas (de limonada.com.mx/caballeros y /colecciones-dama); 09-terraza y 10-rosa
+                            (v1.2.1, estilo Premium) llegan de la carpeta de imágenes de limonada-b2c-premium vía builds/
+tools/estilo-premium/       fuente Tailwind del estilo Premium: cd tools/estilo-premium && npm install && npm run build
 tools/laminas.py            generaba los figurines SVG anteriores (ya no se usan)
 tools/paginas.py            genera portafolio/, privacidad/ y 404.html con la cabecera y el pie de index.html
 _headers                    cabeceras y CSP (Cloudflare Pages / Netlify; GitHub Pages lo ignora)
@@ -57,6 +64,16 @@ del portafolio viven en `LOOKS` dentro de `tools/paginas.py`.
 - Formulario: hoy abre el correo del visitante. Etapa 2: endpoint (Worker o Apps Script) que reciba la solicitud.
 
 ## Versiones
+
+### v1.2.1 — 2026-11-06 · Tercer estilo «Premium» (lujo)
+- Selector de estilo de tres opciones en todas las páginas: Editorial · Moderno · Premium. `?estilo=premium` abre el sitio en
+  ese estilo (para enviar a la clienta).
+- Premium: paleta y tipografía de Limonada Premium (crema, arena, terracota, taupe, lana + tinta; Cormorant Garamond y Plus
+  Jakarta Sans), arcos en lugar de marcos con sombra desplazada, sin grano de papel, botones redondos, pie oscuro, WhatsApp
+  con la misma paleta. CSS compilado con Tailwind CSS 4.3.3 solo con `@apply` (sin preflight): Editorial y Moderno no cambian.
+- Solo en Premium: héroe de estilo de vida (09-terraza) y lookbook «Dama Premium» (10-rosa + láminas V–VIII) en el inicio.
+- Pendiente: confirmar con la clienta el uso de 09 y 10 (parecen generadas con IA); `tools/paginas.py` sigue desfasado
+  (no regenerar páginas con él: perdería el selector de tres opciones).
 
 ### v1.2.0 — 2026-11-02 · WhatsApp con filtro y reglas S1–S3
 - Botón de WhatsApp propio (sin scripts externos) al +52 1 56 1480 0424, con pop-up de dos pasos: interés (empresa, caballero,

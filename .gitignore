@@ -8,3 +8,6 @@ _interno/
 .env
 .env.*
 !.env.example
+
+# Herramienta del estilo Premium (tools/estilo-premium): dependencias locales
+node_modules/

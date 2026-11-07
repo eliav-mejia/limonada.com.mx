@@ -1,0 +1,14 @@
+{
+  "name": "limonada-estilo-premium",
+  "private": true,
+  "version": "1.3.0",
+  "description": "Compila css/premium.css (tercer estilo de limonada.com.mx) con Tailwind CSS v4. El sitio sigue sin build: el CSS compilado se versiona.",
+  "scripts": {
+    "build": "tailwindcss -i premium.src.css -o ../../css/premium.css --minify",
+    "watch": "tailwindcss -i premium.src.css -o ../../css/premium.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.3",
+    "tailwindcss": "4.3.3"
+  }
+}

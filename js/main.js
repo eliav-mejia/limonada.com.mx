@@ -1,4 +1,4 @@
-/* Limonada · estilo (editorial / moderno), menú, aparición al desplazar y formulario por correo. Sin dependencias. */
+/* Limonada · estilo (editorial / moderno / premium), menú, aparición al desplazar y formulario por correo. Sin dependencias. */
 (function () {
   'use strict';
   var root = document.documentElement;
@@ -7,7 +7,13 @@
 
   // Estilo guardado: se aplica antes de pintar para evitar el parpadeo
   var STYLE_KEY = 'limonada-estilo';
-  try { if (localStorage.getItem(STYLE_KEY) === 'moderno') root.dataset.style = 'moderno'; } catch (e) {}
+  var STYLES = ['editorial', 'moderno', 'premium'];   // editorial = sin data-style
+  var NAMES = { editorial: 'Editorial', moderno: 'Moderno', premium: 'Premium' };
+  var setStyle = function (s) { if (s === 'editorial' || STYLES.indexOf(s) < 0) delete root.dataset.style; else root.dataset.style = s; };
+  try { setStyle(localStorage.getItem(STYLE_KEY)); } catch (e) {}
+  // ?estilo=premium (o moderno / editorial) abre el sitio en ese estilo y lo recuerda: útil para enviar a la clienta
+  var pedido = (location.search.match(/[?&]estilo=(editorial|moderno|premium)\b/) || [])[1];
+  if (pedido) { setStyle(pedido); try { localStorage.setItem(STYLE_KEY, pedido); } catch (e) {} }
 
   document.addEventListener('DOMContentLoaded', function () {
     // Menú móvil
@@ -26,16 +32,23 @@
       });
     }
 
-    // Selector de estilo (misma estructura y contenido, otra hoja de estilos)
+    // Selector de estilo: Editorial → Moderno → Premium (misma estructura y contenido, otra hoja de estilos).
+    // Clic en una opción la elige; clic en el botón fuera de las opciones pasa a la siguiente.
     var styleToggles = document.querySelectorAll('[data-style-toggle]');
+    var current = function () { return root.dataset.style || 'editorial'; };
     var syncStyle = function () {
-      var on = root.dataset.style === 'moderno';
-      styleToggles.forEach(function (b) { b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+      var s = current(), next = STYLES[(STYLES.indexOf(s) + 1) % STYLES.length];
+      styleToggles.forEach(function (b) {
+        b.querySelectorAll('[data-style-name]').forEach(function (sp) { sp.classList.toggle('is-on', sp.dataset.styleName === s); });
+        b.setAttribute('aria-label', 'Estilo del sitio: ' + NAMES[s] + '. Cambiar a ' + NAMES[next]);
+      });
     };
     styleToggles.forEach(function (b) {
-      b.addEventListener('click', function () {
-        if (root.dataset.style === 'moderno') delete root.dataset.style; else root.dataset.style = 'moderno';
-        try { localStorage.setItem(STYLE_KEY, root.dataset.style || 'editorial'); } catch (e) {}
+      b.addEventListener('click', function (ev) {
+        var picked = ev.target.closest && ev.target.closest('[data-style-name]');
+        var s = picked ? picked.dataset.styleName : STYLES[(STYLES.indexOf(current()) + 1) % STYLES.length];
+        setStyle(s);
+        try { localStorage.setItem(STYLE_KEY, s); } catch (e) {}
         syncStyle();
       });
     });

@@ -14,11 +14,12 @@
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/site.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/brand.css">
   <link rel="stylesheet" href="css/moderno.css">
+  <link rel="stylesheet" href="css/premium.css">
   <script src="js/main.js"></script>
   <script src="js/whatsapp.js" defer></script>
   <script type="application/ld+json">
@@ -65,7 +66,7 @@
         <li><a href="#garantias">Garantías</a></li>
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#contacto">Contacto</a></li>
-        <li class="nav-style"><button class="style-toggle" type="button" data-style-toggle aria-pressed="false" aria-label="Estilo moderno"><span>Editorial</span><span>Moderno</span></button></li>
+        <li class="nav-style"><button class="style-toggle" type="button" data-style-toggle aria-label="Estilo del sitio: Editorial. Cambiar a Moderno"><span data-style-name="editorial" class="is-on">Editorial</span><span data-style-name="moderno">Moderno</span><span data-style-name="premium">Premium</span></button></li>
       </ul>
     </nav>
   </header>
@@ -96,6 +97,10 @@
             <figcaption><h3>El Ejecutivo</h3><span>Raya diplomática<br>Caballero</span></figcaption>
             <span class="stamp" aria-hidden="true"><span><b>’97</b>Hecho<br>a la medida</span></span>
           </a>
+          <figure class="hero-lujo solo-premium">
+            <span class="hero-lujo__marco"><img src="img/fotos/09-terraza.jpg" alt="Ejecutiva con traje rosa y chaleco gris, sentada en una terraza con vista a la Ciudad de México" width="800" height="1114" loading="lazy"></span>
+            <figcaption><b>Dama Premium</b><span>Traje rosa · chaleco gris<br>A la medida</span></figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -142,6 +147,34 @@
         </div>
         <div class="actions" style="justify-content:center;margin-top:80px">
           <a class="btn" href="portafolio/">Ver las ocho láminas <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dama Premium: solo con el estilo Premium (lookbook con las seis fotografías de la línea dama) -->
+    <section class="section scheme-warm lookbook solo-premium" id="dama-premium" aria-labelledby="dama-premium-titulo">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Dama Premium</p>
+            <h2 class="h2" id="dama-premium-titulo" style="margin-top:18px">Seis maneras de <em>dirigir</em>.</h2>
+          </div>
+          <p class="lede">Trajes sastre, vestidos y blusas a la medida para la mujer ejecutiva: de la junta de consejo a la terraza de la tarde, cortados a tus medidas en nuestro taller de la Ciudad de México.</p>
+        </div>
+        <div class="lookbook__grid">
+          <figure class="lookbook__principal reveal">
+            <span class="hero-lujo__marco"><img src="img/fotos/10-rosa.jpg" alt="Ejecutiva sonriente con traje rosa de saco y pantalón y blusa gris" width="800" height="1280" loading="lazy"></span>
+          </figure>
+          <div class="lookbook__piezas">
+            <a class="lookbook__pieza reveal" href="portafolio/dama/#directora"><span class="lookbook__marco"><img src="img/fotos/05-directora.jpg" alt="Saco entallado sin solapa en textura café y pantalón recto café" width="640" height="960" loading="lazy"></span><b>La Directora</b><span>Entallado · café</span></a>
+            <a class="lookbook__pieza reveal" href="portafolio/dama/#junta"><span class="lookbook__marco"><img src="img/fotos/06-junta.jpg" alt="Saco de tres botones en cuadro gris y falda lápiz negra" width="640" height="960" loading="lazy"></span><b>La Junta</b><span>Cuadro gris</span></a>
+            <a class="lookbook__pieza reveal" href="portafolio/dama/#funda"><span class="lookbook__marco"><img src="img/fotos/07-funda.jpg" alt="Vestido funda gris carbón sin mangas con cortes princesa" width="640" height="960" loading="lazy"></span><b>La Funda</b><span>Gris carbón</span></a>
+            <a class="lookbook__pieza reveal" href="portafolio/dama/#sucursal"><span class="lookbook__marco"><img src="img/fotos/08-sucursal.jpg" alt="Saco fucsia de dos botones con puños en pata de gallo y pantalón negro" width="640" height="960" loading="lazy"></span><b>La Sucursal</b><span>Fucsia · pata de gallo</span></a>
+          </div>
+        </div>
+        <div class="actions">
+          <a class="btn btn--lemon" href="portafolio/dama/">Ver la línea dama <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn" href="#contacto">Agendar medición</a>
         </div>
       </div>
     </section>
