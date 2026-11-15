@@ -1,4 +1,4 @@
-/* Limonada · estilo (retro / moderno / premium) × color (limonada / terracota / blanco), menú, aparición al desplazar y
+/* Limonada · estilo Premium (único, fijo en <html data-style="premium">) × 9 paletas grises/oscuras, menú, aparición al desplazar y
    formulario por correo. Sin dependencias. */
 (function () {
   'use strict';
@@ -6,15 +6,15 @@
   root.classList.remove('no-js');
   root.classList.add('js');
 
-  // Estilo (botones + tipografía) y color, cada uno con tres opciones: 9 combinaciones. Se aplican antes de pintar.
-  // Retro y Limonada son la base (sin atributo). Se recuerdan en localStorage; ?estilo=…&color=… los fija desde un enlace.
+  // v1.2.6: solo el estilo Premium (data-style="premium" fijo en cada página; sin menú de estilos).
+  // Color (v1.2.7): nueve paletas solo grises y oscuras. Grafito es la base (sin atributo). Se recuerda en localStorage; ?color=… la fija desde un enlace.
+  root.dataset.style = 'premium';
   var EJES = {
-    estilo: { attr: 'style', key: 'limonada-estilo', base: 'retro', valores: ['retro', 'moderno', 'premium'] },
-    color:  { attr: 'color', key: 'limonada-color',  base: 'limonada', valores: ['limonada', 'terracota', 'blanco'] }
+    color: { attr: 'color', key: 'limonada-color', base: 'grafito',
+             valores: ['acero', 'musgo', 'tormenta', 'pizarra', 'humo', 'grafito', 'carbon', 'plomo', 'onix'] }
   };
   var poner = function (eje, v) {
     var e = EJES[eje];
-    if (v === 'editorial') v = 'retro';   // nombre anterior del estilo Retro (v1.2.x)
     if (e.valores.indexOf(v) < 0 || v === e.base) delete root.dataset[e.attr]; else root.dataset[e.attr] = v;
   };
   var actual = function (eje) { return root.dataset[EJES[eje].attr] || EJES[eje].base; };
@@ -41,16 +41,15 @@
       });
     }
 
-    // Selectores de estilo y color (misma estructura y contenido; cambian las hojas que aplican)
+    // Selector de color (nueve paletas)
     var sincronizar = function () {
-      document.querySelectorAll('[data-set-style]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.setStyle === actual('estilo'))); });
       document.querySelectorAll('[data-set-color]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.setColor === actual('color'))); });
     };
     document.addEventListener('click', function (ev) {
-      var b = ev.target.closest && ev.target.closest('[data-set-style], [data-set-color]');
+      var b = ev.target.closest && ev.target.closest('[data-set-color]');
       if (!b) return;
-      var eje = b.dataset.setStyle ? 'estilo' : 'color';
-      poner(eje, b.dataset.setStyle || b.dataset.setColor);
+      var eje = 'color';
+      poner(eje, b.dataset.setColor);
       try { localStorage.setItem(EJES[eje].key, actual(eje)); } catch (e) {}
       sincronizar();
     });

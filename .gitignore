@@ -1,5 +1,7 @@
 # Documentación interna y capturas de revisión: nunca en el repositorio ni en el sitio.
 _interno/
+# Documentos de versión (_docs/src): privados, igual que _interno/
+_docs/
 
 # Configuración local del editor / agente
 .claude/

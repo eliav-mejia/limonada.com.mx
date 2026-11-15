@@ -23,7 +23,7 @@
 .nav-toggle { display: none; background: none; border: 1px solid var(--accent-strong); width: 44px; height: 40px; padding: 10px; cursor: pointer; }
 .nav-toggle span { display: block; height: 1.5px; background: var(--ink); margin: 4px 0; transition: transform .25s var(--ease), opacity .2s; }
 
-/* Selectores de Estilo (Retro / Moderno / Premium) y Color (Limonada / Terracota / Blanco): 3 × 3 combinaciones.
+/* Selector de Color (nueve paletas; v1.2.6 solo estilo Premium, sin selector de estilo).
    js/main.js marca la opción activa con aria-pressed="true". */
 .nav-links .nav-style { display: flex; align-items: center; gap: 8px; }
 .selector {
@@ -35,6 +35,7 @@
   padding: 7px 10px; border-radius: 999px; cursor: pointer; transition: background .25s var(--ease), color .25s var(--ease);
 }
 .selector [aria-pressed="true"] { background: var(--fill); color: var(--on-fill); }
+.selector--color { flex-wrap: wrap; justify-content: flex-end; }
 .selector--color button { padding: 4px; }
 .selector--color [aria-pressed="true"] { background: transparent; box-shadow: 0 0 0 2px var(--accent-strong); }
 @media (min-width: 861px) and (max-width: 1180px) { .nav-links { gap: 14px; align-items: center; } .nav-links .nav-style { flex-direction: column; align-items: flex-end; gap: 4px; } }

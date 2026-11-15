@@ -1,45 +1,78 @@
-/* Limonada · variantes de COLOR (v1.2.2). Eje independiente del estilo (Retro / Moderno / Premium): 3 × 3 = 9 combinaciones.
-   <html data-color="terracota|blanco">; sin atributo = «Limonada» (crema, amarillo, azul marino; tokens de site.css).
-   Cada variante solo reasigna los tokens base: los esquemas .scheme-warm / .scheme-blue, la cinta, el pop-up de WhatsApp
-   y los tres estilos los leen de aquí.
-   --lujo / --lujo-claro: color fuerte y suave que usa el estilo Premium (botón principal, cinta, WhatsApp). */
+/* Limonada · paletas de COLOR (v1.2.7): nueve paletas, SOLO grises y tonos oscuros. El estilo es solo Premium.
+   Sin atributo = «Grafito» (estos tokens en :root sustituyen la crema/amarillo/azul de site.css).
+   <html data-color="plomo|onix|carbon|humo|pizarra|tormenta|musgo|acero">.
+   Cada paleta solo reasigna los tokens base: los esquemas .scheme-warm / .scheme-blue, la cinta, el pop-up de WhatsApp
+   y el estilo Premium los leen de aquí. Nombres heredados: --cream = fondo de secciones cálidas, --white = fondo claro,
+   --gold = relleno/acento, --olive = líneas y cursivas, --navy = texto y cinta, --lujo / --lujo-claro = Premium.
+   Contraste WCAG AA en las nueve: texto/fondo ≥ 10.3:1, texto/relleno ≥ 5.3:1, líneas/fondo ≥ 7.0:1, claro/lujo ≥ 10.3:1. */
 
+/* Grafito · gris neutro claro y negro grafito (base) */
 :root {
-  --lujo: #133951;        /* Limonada: azul marino */
-  --lujo-claro: #f3c12c;  /* Limonada: amarillo */
+  --cream: #DCDCDA; --white: #EBEBEA; --gold: #A9A9A6; --olive: #3E3E3C; --navy: #1B1B1B; --sky: #8C8C89;
+  --lujo: #262626; --lujo-claro: #A9A9A6;
 }
 
-/* Terracota · paleta de Limonada Premium */
-:root[data-color="terracota"] {
-  --cream: #EFEBE4;   /* crema: fondo de las secciones cálidas */
-  --white: #F7F2EB;   /* crema clara: fondo de las secciones claras y de los marcos */
-  --gold:  #CD8D77;   /* terracota claro: acento y relleno (texto tinta encima: 5.7:1) */
-  --olive: #8C432C;   /* terracota profundo: líneas y cursivas (6.0:1 sobre crema) */
-  --navy:  #2B211C;   /* tinta: texto, línea superior, cinta */
-  --sky:   #A6927F;   /* taupe: acento de las secciones claras */
-  --lujo: #8C432C;
-  --lujo-claro: #CD8D77;
+/* Plomo · gris plomo medio */
+:root[data-color="plomo"] {
+  --cream: #C9CACA; --white: #DADBDB; --gold: #8F9191; --olive: #2F3131; --navy: #121313; --sky: #6F7272;
+  --lujo: #1E2020; --lujo-claro: #8F9191;
 }
 
-/* Blanco · blanco, grafito y plata: el color que mejor deja ver las fotos de fondo blanco */
-:root[data-color="blanco"] {
-  --cream: #F2F1EE;   /* gris cálido muy claro */
-  --white: #FFFFFF;
-  --gold:  #D6D3CC;   /* plata cálida: acento y relleno (texto grafito encima: 12.2:1) */
-  --olive: #5E5C58;   /* gris oscuro: líneas y cursivas (5.9:1 sobre #F2F1EE) */
-  --navy:  #151515;   /* grafito */
-  --sky:   #A3A19C;
-  --lujo: #151515;
-  --lujo-claro: #BDBAB3;
+/* Ónix · el más oscuro: gris piedra y negro */
+:root[data-color="onix"] {
+  --cream: #BCBCBA; --white: #CDCDCB; --gold: #858583; --olive: #222222; --navy: #0B0B0B; --sky: #676765;
+  --lujo: #151515; --lujo-claro: #858583;
+}
+
+/* Carbón · gris cálido oscuro */
+:root[data-color="carbon"] {
+  --cream: #C8C5C1; --white: #D9D7D4; --gold: #9C968F; --olive: #3A3530; --navy: #14120F; --sky: #7E7871;
+  --lujo: #211E1A; --lujo-claro: #9C968F;
+}
+
+/* Humo · gris humo cálido, topo */
+:root[data-color="humo"] {
+  --cream: #DEDAD5; --white: #ECE9E5; --gold: #B2AAA0; --olive: #4A433B; --navy: #1F1B17; --sky: #958D83;
+  --lujo: #3A332C; --lujo-claro: #B2AAA0;
+}
+
+/* Pizarra · gris azulado */
+:root[data-color="pizarra"] {
+  --cream: #D5DADE; --white: #E5E8EB; --gold: #9BA6AF; --olive: #34414B; --navy: #141B21; --sky: #7F8B95;
+  --lujo: #22303A; --lujo-claro: #9BA6AF;
+}
+
+/* Tormenta · gris violáceo */
+:root[data-color="tormenta"] {
+  --cream: #D8D6DD; --white: #E7E6EB; --gold: #A39FAD; --olive: #3D3947; --navy: #17151C; --sky: #88849A;
+  --lujo: #2A2633; --lujo-claro: #A39FAD;
+}
+
+/* Musgo · gris verdoso (eco del logo) */
+:root[data-color="musgo"] {
+  --cream: #D5D9D3; --white: #E5E8E3; --gold: #9EA899; --olive: #36402F; --navy: #161B13; --sky: #828C7D;
+  --lujo: #2B3526; --lujo-claro: #9EA899;
+}
+
+/* Acero · gris acero frío, verdiazul */
+:root[data-color="acero"] {
+  --cream: #D2D9D8; --white: #E2E8E7; --gold: #97A5A3; --olive: #2E403E; --navy: #101A19; --sky: #7A8987;
+  --lujo: #1F302E; --lujo-claro: #97A5A3;
 }
 
 :root[data-color] { color-scheme: light; }
 
-/* Fotos de fondo blanco: el blanco toma el color del marco o del fondo en las nueve combinaciones */
-.plate__frame img, .split__stack, .lookbook__marco img { mix-blend-mode: multiply; }
+/* Fotos de fondo blanco: el blanco toma el gris del marco o del fondo en las nueve paletas */
+.plate__frame img, .split__stack, .tarjeta__foto img { mix-blend-mode: multiply; }
 
 /* Muestras del selector de color (fijas: enseñan la paleta aunque esté activa otra) */
-.muestra { display: block; width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.18); }
-.muestra--limonada  { background: conic-gradient(#ede2cd 0 50%, #f3c12c 0 75%, #133951 0); }
-.muestra--terracota { background: conic-gradient(#EFEBE4 0 50%, #CD8D77 0 75%, #8C432C 0); }
-.muestra--blanco    { background: conic-gradient(#FFFFFF 0 50%, #D6D3CC 0 75%, #151515 0); }
+.muestra { display: block; width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.25); }
+.muestra--acero    { background: conic-gradient(#D2D9D8 0 50%, #97A5A3 0 75%, #1F302E 0); }
+.muestra--musgo    { background: conic-gradient(#D5D9D3 0 50%, #9EA899 0 75%, #2B3526 0); }
+.muestra--tormenta { background: conic-gradient(#D8D6DD 0 50%, #A39FAD 0 75%, #2A2633 0); }
+.muestra--pizarra  { background: conic-gradient(#D5DADE 0 50%, #9BA6AF 0 75%, #22303A 0); }
+.muestra--humo     { background: conic-gradient(#DEDAD5 0 50%, #B2AAA0 0 75%, #3A332C 0); }
+.muestra--grafito  { background: conic-gradient(#DCDCDA 0 50%, #A9A9A6 0 75%, #262626 0); }
+.muestra--carbon   { background: conic-gradient(#C8C5C1 0 50%, #9C968F 0 75%, #211E1A 0); }
+.muestra--plomo    { background: conic-gradient(#C9CACA 0 50%, #8F9191 0 75%, #1E2020 0); }
+.muestra--onix     { background: conic-gradient(#BCBCBA 0 50%, #858583 0 75%, #151515 0); }

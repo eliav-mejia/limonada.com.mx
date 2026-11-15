@@ -1,10 +1,11 @@
-/* Limonada · estilo «Premium» (lujo): botones y tipografía. Uno de los tres estilos (Retro / Moderno / Premium).
+/* Limonada · estilo «Premium» (lujo): botones y tipografía. Uno de los cuatro estilos (Retro / Moderno / Premium / Corporativo).
    Fuente Tailwind CSS v4 → ../../css/premium.css   (cd tools/estilo-premium && npm install && npm run build)
 
    v1.2.2: el COLOR ya no vive aquí. Todo color sale de los tokens (--bg, --ink, --accent, --accent-strong, --lujo…) que
-   define css/colores.css para Limonada, Terracota o Blanco, así Premium combina con las tres paletas (9 combinaciones).
+   define css/colores.css para Limonada, Terracota, Blanco o Verde, así Premium combina con las cuatro paletas.
    - Sin preflight ni utilidades escaneadas: solo @apply de forma y tipografía, bajo [data-style="premium"].
-   - .solo-premium (lookbook «Dama Premium») se oculta en Retro y Moderno. */
+   - v1.2.5: no hay línea premium, solo estilizado premium. Se quitó .solo-premium (lookbook «Dama Premium»): el índice
+     muestra la misma información en los cuatro estilos, con el banner de trajes ejecutivos (4 tarjetas, brand.css). */
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities) source(none);
 
@@ -13,9 +14,6 @@
   --font-jakarta: "Plus Jakarta Sans", system-ui, sans-serif;
   --ease-sastre: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-
-.solo-premium { display: none; }
-[data-style="premium"] .solo-premium { display: block; }
 
 /* ── Tokens de forma y letra (no de color) ── */
 :root[data-style="premium"] {
@@ -120,16 +118,17 @@
 [data-style="premium"] .selector { border-color: var(--line); font-size: 9.5px; }
 [data-style="premium"] .selector:not(.selector--color) [aria-pressed="true"] { background: var(--lujo); color: var(--white); }
 
-/* ── Lookbook «Dama Premium» (solo Premium): cuatro láminas dama de fondo blanco ── */
-.lookbook__piezas { @apply grid grid-cols-2 gap-x-5 gap-y-10 lg:grid-cols-4; }
-.lookbook__pieza { @apply block no-underline; color: inherit; }
-.lookbook__pieza:nth-child(even) { @apply lg:mt-14; }
-.lookbook__marco { @apply block overflow-hidden; border-radius: 999px 999px 14px 14px; aspect-ratio: 2 / 3; background: var(--marco, var(--white)); }
-.lookbook__marco img { @apply h-full w-full object-cover; object-position: center top; transition: transform .9s var(--ease-sastre); }
-.lookbook__pieza:hover .lookbook__marco img { transform: scale(1.05); }
-.lookbook__pieza b { @apply mt-3 block; font: 500 21px/1.15 var(--font-display); }
-.lookbook__pieza span { font: 600 9.5px/1.5 var(--font-jakarta); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-500); }
-.lookbook .actions { @apply mt-12; }
+/* ── Trajes ejecutivos (v1.2.5): las cuatro tarjetas con foto en arco, sin marco, alternadas ── */
+[data-style="premium"] .tarjeta { @apply border-0; background: transparent; box-shadow: none; }
+[data-style="premium"] :is(.tarjeta:hover, .tarjeta:focus-visible) { transform: none; box-shadow: none; }
+[data-style="premium"] .tarjeta__foto { @apply border-0; border-radius: 999px 999px 14px 14px; aspect-ratio: 2 / 3; background: var(--marco); }
+[data-style="premium"] .tarjeta__foto img { transition: transform .9s var(--ease-sastre); }
+[data-style="premium"] .tarjeta:hover .tarjeta__foto { box-shadow: var(--lujo-sombra); }
+[data-style="premium"] .tarjeta__cuerpo { @apply px-0; }
+[data-style="premium"] .tarjeta__titulo { font: 500 23px/1.12 var(--font-display); }
+[data-style="premium"] :is(.tarjeta__linea, .tarjeta__ir) { @apply font-semibold; font-size: 9.5px; letter-spacing: .22em; }
+[data-style="premium"] .tarjeta__texto { @apply font-light; }
+@media (min-width: 960px) { [data-style="premium"] .tarjetas > li:nth-child(even) { margin-top: 56px; } }
 
 /* ── WhatsApp con filtro: misma pieza, colores de la paleta activa ── */
 [data-style="premium"] :is(.lwa-fab, .lwa) {
